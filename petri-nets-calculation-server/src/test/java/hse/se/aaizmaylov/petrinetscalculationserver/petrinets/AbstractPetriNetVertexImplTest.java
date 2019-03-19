@@ -1,114 +1,124 @@
 package hse.se.aaizmaylov.petrinetscalculationserver.petrinets;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class AbstractPetriNetVertexImplTest {
+@SuppressWarnings("unchecked")
+class AbstractPetriNetVertexImplTest {
 
     @Test
-    public void addInput() {
-        Place place = new PlaceImpl(1);
-        Transition transition = new TransitionImpl();
+    void getInputsUnmodifiable() {
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
 
-        boolean res = place.addInput(transition);
+        assertTrue(vertex.getInputs().isEmpty());
 
-        assertTrue(res);
-
-        assertTrue(transition.getOutputs().contains(place));
-        assertTrue(place.getInputs().contains(transition));
-
-        res = place.addInput(transition);
-
-        assertFalse(res);
+        assertThrows(UnsupportedOperationException.class, () -> vertex.getInputs().add(null));
     }
 
     @Test
-    public void addOutput() {
-        Place place = new PlaceImpl(1);
-        Transition transition = new TransitionImpl();
+    void getOutputsUnmodifiable() {
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
 
-        boolean res = place.addOutput(transition);
+        assertTrue(vertex.getOutputs().isEmpty());
 
-        assertTrue(res);
-
-        assertTrue(transition.getInputs().contains(place));
-        assertTrue(place.getOutputs().contains(transition));
-
-        res = place.addOutput(transition);
-
-        assertFalse(res);
+        assertThrows(UnsupportedOperationException.class, () -> vertex.getOutputs().add(null));
     }
 
     @Test
-    public void removeInput() {
-        Place place = new PlaceImpl(1);
-        Transition transition = new TransitionImpl();
+    void addOutput() {
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
 
-        place.addOutput(transition);
+        vertex1.addOutput(genEdge(vertex1, vertex2));
 
-        boolean res = transition.removeInput(place);
-
-        assertTrue(res);
-
-        assertFalse(transition.getInputs().contains(place));
-        assertFalse(place.getOutputs().contains(transition));
-
-        res = transition.removeInput(place);
-
-        assertFalse(res);
+        assertEquals(1, vertex1.getOutputs().size());
+        assertEquals(1, vertex2.getInputs().size());
     }
 
     @Test
-    public void removeOutput() {
-        Place place = new PlaceImpl(1);
-        Transition transition = new TransitionImpl();
+    void removeOutput() {
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
 
-        place.addInput(transition);
+        Edge edge = genEdge(vertex1, vertex2);
 
-        boolean res = transition.removeOutput(place);
+        vertex1.addOutput(edge);
 
-        assertTrue(res);
+        assertEquals(1, vertex1.getOutputs().size());
+        assertEquals(1, vertex2.getInputs().size());
 
-        assertFalse(transition.getOutputs().contains(place));
-        assertFalse(place.getInputs().contains(transition));
+        vertex1.removeOutput(edge);
 
-        res = transition.removeOutput(place);
-
-        assertFalse(res);
+        assertTrue(vertex1.getOutputs().isEmpty());
+        assertTrue(vertex2.getInputs().isEmpty());
     }
 
     @Test
-    public void getInputs() {
-        Place place = new PlaceImpl(1);
-        place.addInput(new TransitionImpl());
-        place.addInput(new TransitionImpl());
-        place.addInput(new TransitionImpl());
+    void removeInput() {
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
 
-        assertEquals(3, place.getInputs().size());
+        Edge edge = genEdge(vertex2, vertex1);
+
+        vertex1.addInput(edge);
+
+        assertEquals(1, vertex1.getInputs().size());
+        assertEquals(1, vertex2.getOutputs().size());
+
+        vertex1.removeInput(edge);
+
+        assertTrue(vertex1.getInputs().isEmpty());
+        assertTrue(vertex2.getOutputs().isEmpty());
     }
 
     @Test
-    public void getOutputs() {
-        Place place = new PlaceImpl(1);
-        place.addOutput(new TransitionImpl());
-        place.addOutput(new TransitionImpl());
-        place.addOutput(new TransitionImpl());
+    void emptyRemove() {
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
+        Edge edge = genEdge(vertex, vertex);
 
-        assertEquals(3, place.getOutputs().size());
+        assertFalse(vertex.removeInput(edge));
+        assertFalse(vertex.removeOutput(edge));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void getInputsImmutable() {
-        Place place = new PlaceImpl(1);
+    @Test
+    void nullChecking() {
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
 
-        place.getInputs().add(new TransitionImpl());
+        assertThrows(NullPointerException.class, () -> vertex.addInput(null));
+        assertThrows(NullPointerException.class, () -> vertex.addOutput(null));
+        assertThrows(NullPointerException.class, () -> vertex.removeInput(null));
+        assertThrows(NullPointerException.class, () -> vertex.removeOutput(null));
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void getOutputsImmutable() {
-        Place place = new PlaceImpl(1);
+    @Test
+    void addInput() {
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
 
-        place.getOutputs().add(new TransitionImpl());
+        vertex1.addInput(genEdge(vertex2, vertex1));
+
+        assertEquals(1, vertex1.getInputs().size());
+        assertEquals(1, vertex2.getOutputs().size());
+    }
+
+    private Edge genEdge(Object vertex1, Object vertex2) {
+        return new Edge() {
+            @Override
+            public Object getInput() {
+                return vertex1;
+            }
+
+            @Override
+            public Object getOutput() {
+                return vertex2;
+            }
+
+            @Override
+            public void getTokensFrom(Object tokens) { }
+
+            @Override
+            public void putTokensTo(Object tokens) { }
+        };
     }
 }

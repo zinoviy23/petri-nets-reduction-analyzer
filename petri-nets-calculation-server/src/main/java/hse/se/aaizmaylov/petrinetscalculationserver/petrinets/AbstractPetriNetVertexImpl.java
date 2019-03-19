@@ -1,69 +1,71 @@
 package hse.se.aaizmaylov.petrinetscalculationserver.petrinets;
 
+import lombok.NonNull;
+
 import java.util.*;
 
-/**
- * Implementation for PetriNetVertex
- * @param <TSelf> type of current vertex. (Must be parent of class, which extends {@link AbstractPetriNetVertexImpl})
- * @param <T> type of neighbours
- */
-abstract class AbstractPetriNetVertexImpl<TSelf extends PetriNetVertex<TSelf, T>, T extends PetriNetVertex<T, TSelf>>
-        implements PetriNetVertex<TSelf, T> {
+public abstract class AbstractPetriNetVertexImpl<
+        TTokenContainer,
+        TSelf extends PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput>,
+        TNeighbours extends PetriNetVertex<TTokenContainer, TNeighbours, TSelf, TOutput, TInput>,
+        TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
+        TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>>
+        implements PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput> {
 
-    private Set<T> inputs = new LinkedHashSet<>();
-    private Set<T> outputs = new LinkedHashSet<>();
+    private Set<TInput> inputs = new LinkedHashSet<>();
+    private Set<TOutput> outputs = new LinkedHashSet<>();
 
     @Override
-    public Set<T> getInputs() {
+    public Set<TInput> getInputs() {
         return Collections.unmodifiableSet(inputs);
     }
 
     @Override
-    public Set<T> getOutputs() {
+    public Set<TOutput> getOutputs() {
         return Collections.unmodifiableSet(outputs);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public boolean removeOutput(T output) {
-        boolean result = outputs.remove(output);
+    public boolean addOutput(@NonNull TOutput outputEdge) {
+        boolean insertionResult = outputs.add(outputEdge);
 
-        if (result)
-            output.removeInput((TSelf) this);
+        if (insertionResult) {
+            outputEdge.getOutput().addInput(outputEdge);
+        }
 
-        return result;
+        return insertionResult;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public boolean addOutput(T output) {
-        boolean result = outputs.add(output);
+    public boolean removeOutput(@NonNull TOutput outputEdge) {
+        boolean insertionResult = outputs.remove(outputEdge);
 
-        if (result)
-            output.addInput((TSelf) this);
+        if (insertionResult) {
+            outputEdge.getOutput().removeInput(outputEdge);
+        }
 
-        return result;
+        return insertionResult;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public boolean removeInput(T input) {
-        boolean result = inputs.remove(input);
+    public boolean removeInput(@NonNull TInput inputEdge) {
+        boolean insertionResult = inputs.remove(inputEdge);
 
-        if (result)
-            input.removeOutput((TSelf) this);
+        if (insertionResult) {
+            inputEdge.getInput().removeOutput(inputEdge);
+        }
 
-        return result;
+        return insertionResult;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    public boolean addInput(T input) {
-        boolean result = inputs.add(input);
+    public boolean addInput(@NonNull TInput inputEdge) {
+        boolean insertionResult = inputs.add(inputEdge);
 
-        if (result)
-            input.addOutput((TSelf) this);
+        if (insertionResult) {
+            inputEdge.getInput().addOutput(inputEdge);
+        }
 
-        return result;
+        return insertionResult;
     }
 }

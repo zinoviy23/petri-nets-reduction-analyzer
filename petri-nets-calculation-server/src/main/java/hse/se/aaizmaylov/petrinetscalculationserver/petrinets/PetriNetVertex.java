@@ -3,16 +3,22 @@ package hse.se.aaizmaylov.petrinetscalculationserver.petrinets;
 import java.util.Set;
 
 @SuppressWarnings({"UnusedReturnValue", "unused"})
-public interface PetriNetVertex<TSelf extends PetriNetVertex<TSelf, T>, T extends PetriNetVertex<T, TSelf>> {
-    Set<T> getInputs();
+public interface PetriNetVertex<
+        TTokenContainer,
+        TSelf,
+        TNeighbours,
+        TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
+        TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>> {
 
-    Set<T> getOutputs();
+    Set<TInput> getInputs();
 
-    boolean removeOutput(T output);
+    Set<TOutput> getOutputs();
 
-    boolean addOutput(T output);
+    boolean removeOutput(TOutput output);
 
-    boolean removeInput(T input);
+    boolean addOutput(TOutput output);
 
-    boolean addInput(T input);
+    boolean removeInput(TInput input);
+
+    boolean addInput(TInput input);
 }
