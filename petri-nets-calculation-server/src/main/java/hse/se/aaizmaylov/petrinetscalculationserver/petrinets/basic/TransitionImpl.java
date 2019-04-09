@@ -22,6 +22,6 @@ public class TransitionImpl extends AbstractPetriNetVertexImpl<
 
     @Override
     public boolean enabled() {
-        return getInputs().stream().allMatch(p -> p.getInput().getMarks() > 0);
+        return getInputs().stream().allMatch(p -> p.getFrom().getMarks() > 0);
     }
 }

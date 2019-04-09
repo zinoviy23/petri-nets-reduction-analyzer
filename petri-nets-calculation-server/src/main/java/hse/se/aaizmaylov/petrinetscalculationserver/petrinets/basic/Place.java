@@ -9,7 +9,6 @@ public interface Place extends PetriNetVertex<
         Transition,
         Edge<Integer, Transition, Place>,
         Edge<Integer, Place, Transition>> {
-
     int getMarks();
 
     void setMarks(int marks);
@@ -17,4 +16,8 @@ public interface Place extends PetriNetVertex<
     int addMarks(int marks);
 
     int removeMarks(int marks);
+
+    static Place withMarks(int marks) {
+        return new PlaceImpl(marks);
+    }
 }

@@ -9,7 +9,6 @@ public interface Transition extends PetriNetVertex<
         Place,
         Edge<Integer, Place, Transition>,
         Edge<Integer, Transition, Place>> {
-
     void fire();
 
     boolean enabled();

@@ -2,25 +2,29 @@ package hse.se.aaizmaylov.petrinetscalculationserver.petrinets.basic;
 
 import hse.se.aaizmaylov.petrinetscalculationserver.petrinets.Edge;
 import lombok.Getter;
+import lombok.Setter;
 
 public class FromPlaceToTransitionEdge implements Edge<Integer, Place, Transition> {
 
     @Getter
-    private Place input;
+    @Setter
+    private Place from;
 
     @Getter
-    private Transition output;
+    @Setter
+    private Transition to;
 
-    public FromPlaceToTransitionEdge(Place input, Transition output) {
-        this.input = input;
-        this.output = output;
+    public FromPlaceToTransitionEdge(Place from, Transition to) {
+        this.from = from;
+        this.to = to;
     }
 
     @Override
     public void getTokensFrom(Integer tokens) {
-        input.removeMarks(tokens);
+        from.removeMarks(tokens);
     }
 
     @Override
-    public void putTokensTo(Integer tokens) { }
+    public void putTokensTo(Integer tokens) {
+    }
 }

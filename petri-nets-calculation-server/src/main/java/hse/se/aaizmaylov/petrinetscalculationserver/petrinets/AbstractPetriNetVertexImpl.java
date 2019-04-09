@@ -2,7 +2,9 @@ package hse.se.aaizmaylov.petrinetscalculationserver.petrinets;
 
 import lombok.NonNull;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 public abstract class AbstractPetriNetVertexImpl<
         TTokenContainer,
@@ -11,9 +13,8 @@ public abstract class AbstractPetriNetVertexImpl<
         TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
         TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>>
         implements PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput> {
-
-    private Set<TInput> inputs = new LinkedHashSet<>();
-    private Set<TOutput> outputs = new LinkedHashSet<>();
+    private Set<TInput> inputs = new HashSet<>();
+    private Set<TOutput> outputs = new HashSet<>();
 
     @Override
     public Set<TInput> getInputs() {
@@ -30,7 +31,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = outputs.add(outputEdge);
 
         if (insertionResult) {
-            outputEdge.getOutput().addInput(outputEdge);
+            outputEdge.getTo().addInput(outputEdge);
         }
 
         return insertionResult;
@@ -41,7 +42,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = outputs.remove(outputEdge);
 
         if (insertionResult) {
-            outputEdge.getOutput().removeInput(outputEdge);
+            outputEdge.getTo().removeInput(outputEdge);
         }
 
         return insertionResult;
@@ -52,7 +53,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = inputs.remove(inputEdge);
 
         if (insertionResult) {
-            inputEdge.getInput().removeOutput(inputEdge);
+            inputEdge.getFrom().removeOutput(inputEdge);
         }
 
         return insertionResult;
@@ -63,7 +64,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = inputs.add(inputEdge);
 
         if (insertionResult) {
-            inputEdge.getInput().addOutput(inputEdge);
+            inputEdge.getFrom().addOutput(inputEdge);
         }
 
         return insertionResult;
