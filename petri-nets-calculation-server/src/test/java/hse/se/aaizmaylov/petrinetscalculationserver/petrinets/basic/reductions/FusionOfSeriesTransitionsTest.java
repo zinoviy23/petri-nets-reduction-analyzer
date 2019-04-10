@@ -24,6 +24,6 @@ class FusionOfSeriesTransitionsTest {
 
         assertEquals(0, transition1.getInputs().size());
         assertEquals(1, transition2.getOutputs().size());
-        assertEquals(place2, transition1.getOutputs().iterator().next().getTo());
+        assertEquals(place2, transition1.getOutputs().iterator().next().getToEndpoint());
     }
 }

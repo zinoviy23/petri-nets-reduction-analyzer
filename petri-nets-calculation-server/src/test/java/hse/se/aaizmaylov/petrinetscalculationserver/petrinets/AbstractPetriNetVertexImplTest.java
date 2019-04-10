@@ -105,22 +105,22 @@ class AbstractPetriNetVertexImplTest {
     private Edge genEdge(Object vertex1, Object vertex2) {
         return new Edge() {
             @Override
-            public Object getFrom() {
+            public Object getFromEndpoint() {
                 return vertex1;
             }
 
             @Override
-            public Object getTo() {
+            public Object getToEndpoint() {
                 return vertex2;
             }
 
             @Override
-            public void setFrom(Object o) {
+            public void setFromEndpoint(Object o) {
 
             }
 
             @Override
-            public void setTo(Object o) {
+            public void setToEndpoint(Object o) {
 
             }
 

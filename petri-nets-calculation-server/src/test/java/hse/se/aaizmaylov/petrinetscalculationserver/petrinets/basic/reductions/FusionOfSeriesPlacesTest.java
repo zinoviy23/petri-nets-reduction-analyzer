@@ -26,6 +26,6 @@ class FusionOfSeriesPlacesTest {
 
         assertEquals(1, place1.getInputs().size());
         assertEquals(0, place1.getOutputs().size());
-        assertEquals(transition1, place1.getInputs().iterator().next().getFrom());
+        assertEquals(transition1, place1.getInputs().iterator().next().getFromEndpoint());
     }
 }

@@ -13,6 +13,9 @@ public abstract class AbstractPetriNetVertexImpl<
         TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
         TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>>
         implements PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput> {
+
+    //TODO: add check, that added edge contains current vertex
+
     private Set<TInput> inputs = new HashSet<>();
     private Set<TOutput> outputs = new HashSet<>();
 
@@ -31,7 +34,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = outputs.add(outputEdge);
 
         if (insertionResult) {
-            outputEdge.getTo().addInput(outputEdge);
+            outputEdge.getToEndpoint().addInput(outputEdge);
         }
 
         return insertionResult;
@@ -42,7 +45,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = outputs.remove(outputEdge);
 
         if (insertionResult) {
-            outputEdge.getTo().removeInput(outputEdge);
+            outputEdge.getToEndpoint().removeInput(outputEdge);
         }
 
         return insertionResult;
@@ -53,7 +56,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = inputs.remove(inputEdge);
 
         if (insertionResult) {
-            inputEdge.getFrom().removeOutput(inputEdge);
+            inputEdge.getFromEndpoint().removeOutput(inputEdge);
         }
 
         return insertionResult;
@@ -64,7 +67,7 @@ public abstract class AbstractPetriNetVertexImpl<
         boolean insertionResult = inputs.add(inputEdge);
 
         if (insertionResult) {
-            inputEdge.getFrom().addOutput(inputEdge);
+            inputEdge.getFromEndpoint().addOutput(inputEdge);
         }
 
         return insertionResult;

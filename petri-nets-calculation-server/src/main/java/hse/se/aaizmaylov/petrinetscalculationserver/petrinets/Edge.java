@@ -1,13 +1,13 @@
 package hse.se.aaizmaylov.petrinetscalculationserver.petrinets;
 
 public interface Edge<TTokenContainer, Input, Output> {
-    Input getFrom();
+    Input getFromEndpoint();
 
-    Output getTo();
+    Output getToEndpoint();
 
-    void setFrom(Input from);
+    void setFromEndpoint(Input from);
 
-    void setTo(Output to);
+    void setToEndpoint(Output to);
 
     void getTokensFrom(TTokenContainer tokens);
 

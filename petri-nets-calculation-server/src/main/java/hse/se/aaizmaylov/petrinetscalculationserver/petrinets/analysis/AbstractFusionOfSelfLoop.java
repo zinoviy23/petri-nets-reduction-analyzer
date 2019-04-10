@@ -14,6 +14,8 @@ public abstract class AbstractFusionOfSelfLoop<
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
         implements Reduction<TTarget> {
 
+    //TODO: call from neighbour
+
     @Override
     public boolean reduceFrom(@NonNull TTarget target) {
         if (!check(target))
@@ -25,7 +27,7 @@ public abstract class AbstractFusionOfSelfLoop<
         Edge<TTokenContainer, TNeighbour, TTarget> edgeFromNeighbour = first(target.getInputs());
         Edge<TTokenContainer, TTarget, TNeighbour> edgeToNeighbour = first(target.getOutputs());
 
-        if (edgeFromNeighbour.getFrom() != edgeToNeighbour.getTo())
+        if (edgeFromNeighbour.getFromEndpoint() != edgeToNeighbour.getToEndpoint())
             return false;
 
         target.removeInput(edgeFromNeighbour);

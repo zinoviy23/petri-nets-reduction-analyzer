@@ -21,9 +21,9 @@ public abstract class AbstractFusionOfSeries<
         Edge<TTokenContainer, TTarget, TNeighbour> reducedEdge = null;
 
         for (Edge<TTokenContainer, TTarget, TNeighbour> output : target.getOutputs()) {
-            if (output.getTo().getOutputs().size() == 1 && output.getTo().getInputs().size() == 1 &&
-                    checkNeighbour(output.getTo())) {
-                TTarget vertexToMerge = first(output.getTo().getOutputs()).getTo();
+            if (output.getToEndpoint().getOutputs().size() == 1 && output.getToEndpoint().getInputs().size() == 1 &&
+                    checkNeighbour(output.getToEndpoint())) {
+                TTarget vertexToMerge = first(output.getToEndpoint().getOutputs()).getToEndpoint();
 
                 if (checkMergedVertex(vertexToMerge)) {
                     reducedEdge = output;
@@ -41,14 +41,14 @@ public abstract class AbstractFusionOfSeries<
     }
 
     private void mergePlacesConnectedByTransition(Edge<TTokenContainer, TTarget, TNeighbour> connectingTransition) {
-        TTarget firstPlace = connectingTransition.getFrom();
-        TTarget secondPlace = first(connectingTransition.getTo().getOutputs()).getTo();
+        TTarget firstPlace = connectingTransition.getFromEndpoint();
+        TTarget secondPlace = first(connectingTransition.getToEndpoint().getOutputs()).getToEndpoint();
 
         firstPlace.removeOutput(connectingTransition);
-        secondPlace.removeInput(first(connectingTransition.getTo().getOutputs()));
+        secondPlace.removeInput(first(connectingTransition.getToEndpoint().getOutputs()));
 
-        secondPlace.getInputs().forEach(e -> e.setTo(firstPlace));
-        secondPlace.getOutputs().forEach(e -> e.setFrom(firstPlace));
+        secondPlace.getInputs().forEach(e -> e.setToEndpoint(firstPlace));
+        secondPlace.getOutputs().forEach(e -> e.setFromEndpoint(firstPlace));
         secondPlace.getInputs().forEach(firstPlace::addInput);
         secondPlace.getOutputs().forEach(firstPlace::addOutput);
     }

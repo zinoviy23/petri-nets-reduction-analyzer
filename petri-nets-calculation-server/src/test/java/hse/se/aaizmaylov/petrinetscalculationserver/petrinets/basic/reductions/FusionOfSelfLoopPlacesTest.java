@@ -22,7 +22,7 @@ class FusionOfSelfLoopPlacesTest {
         assertTrue(reduction.reduceFrom(place));
         assertTrue(transition.getInputs().isEmpty());
         assertEquals(1, transition.getOutputs().size());
-        assertEquals(place1, first(transition.getOutputs()).getTo());
+        assertEquals(place1, first(transition.getOutputs()).getToEndpoint());
     }
 
     @Test

@@ -8,15 +8,15 @@ public class FromTransitionToPlaceEdge implements Edge<Integer, Transition, Plac
 
     @Getter
     @Setter
-    private Transition from;
+    private Transition fromEndpoint;
 
     @Getter
     @Setter
-    private Place to;
+    private Place toEndpoint;
 
-    public FromTransitionToPlaceEdge(Transition from, Place to) {
-        this.from = from;
-        this.to = to;
+    public FromTransitionToPlaceEdge(Transition fromEndpoint, Place toEndpoint) {
+        this.fromEndpoint = fromEndpoint;
+        this.toEndpoint = toEndpoint;
     }
 
     @Override
@@ -25,6 +25,6 @@ public class FromTransitionToPlaceEdge implements Edge<Integer, Transition, Plac
 
     @Override
     public void putTokensTo(Integer tokens) {
-        to.addMarks(tokens);
+        toEndpoint.addMarks(tokens);
     }
 }
