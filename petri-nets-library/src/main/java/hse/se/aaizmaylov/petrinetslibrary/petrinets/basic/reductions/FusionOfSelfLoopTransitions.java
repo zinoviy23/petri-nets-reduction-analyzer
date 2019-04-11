@@ -4,9 +4,14 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.AbstractFusionOfSel
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 
-public class FusionOfSelfLoopTransitions extends AbstractFusionOfSelfLoop<Integer, Transition, Place> {
+public class FusionOfSelfLoopTransitions extends AbstractFusionOfSelfLoop<Integer, Place, Transition> {
     @Override
-    protected boolean check(Transition vertex) {
+    protected boolean check(Place vertex) {
+        return true;
+    }
+
+    @Override
+    protected boolean checkNeighbour(Transition transition) {
         return true;
     }
 }

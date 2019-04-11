@@ -19,7 +19,7 @@ class FusionOfSelfLoopPlacesTest {
 
         FusionOfSelfLoopPlaces reduction = new FusionOfSelfLoopPlaces();
 
-        assertTrue(reduction.reduceFrom(place));
+        assertTrue(reduction.reduceFrom(transition));
         assertTrue(transition.getInputs().isEmpty());
         assertEquals(1, transition.getOutputs().size());
         assertEquals(place1, first(transition.getOutputs()).getToEndpoint());
@@ -37,7 +37,7 @@ class FusionOfSelfLoopPlacesTest {
 
         FusionOfSelfLoopPlaces reduction = new FusionOfSelfLoopPlaces();
 
-        assertFalse(reduction.reduceFrom(place));
+        assertFalse(reduction.reduceFrom(transition));
         assertEquals(1, transition.getInputs().size());
         assertEquals(2, transition.getOutputs().size());
     }
@@ -56,7 +56,7 @@ class FusionOfSelfLoopPlacesTest {
 
         FusionOfSelfLoopPlaces reduction = new FusionOfSelfLoopPlaces();
 
-        assertFalse(reduction.reduceFrom(place));
+        assertFalse(reduction.reduceFrom(transition));
         assertEquals(1, transition.getInputs().size());
         assertEquals(2, transition.getOutputs().size());
         assertEquals(2, place.getInputs().size());

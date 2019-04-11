@@ -18,7 +18,7 @@ class FusionOfSelfLoopTransitionsTest {
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
 
-        assertTrue(reduction.reduceFrom(transition));
+        assertTrue(reduction.reduceFrom(place));
         assertTrue(place.getOutputs().isEmpty());
         assertEquals(1, place.getInputs().size());
     }
@@ -37,7 +37,7 @@ class FusionOfSelfLoopTransitionsTest {
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
 
-        assertFalse(reduction.reduceFrom(transition));
+        assertFalse(reduction.reduceFrom(place));
         assertFalse(place.getOutputs().isEmpty());
         assertEquals(2, place.getInputs().size());
     }

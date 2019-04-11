@@ -24,7 +24,7 @@ public abstract class AbstractFusionOfParallel<
         if (!check(target))
             return false;
 
-        Map<TTarget, List<EdgePairs<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge = new HashMap<>();
+        Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge = new HashMap<>();
 
         for (Edge<TTokenContainer, TTarget, TNeighbour> outputEdge : target.getOutputs()) {
             if (checkNeighbour(outputEdge.getToEndpoint())) {
@@ -35,7 +35,7 @@ public abstract class AbstractFusionOfParallel<
                             first(possibleVertexToMerge.getOutputs());
 
                     edgesToMerge.computeIfAbsent(fromPossibleVertexEdge.getToEndpoint(), unused -> new ArrayList<>())
-                            .add(new EdgePairs<>(outputEdge, fromPossibleVertexEdge));
+                            .add(new EdgesPairIncidentWithVertex<>(outputEdge, fromPossibleVertexEdge));
                 }
             }
         }
@@ -43,37 +43,25 @@ public abstract class AbstractFusionOfParallel<
         return mergeEdges(edgesToMerge);
     }
 
-    private boolean mergeEdges(Map<TTarget, List<EdgePairs<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge) {
+    private boolean mergeEdges(Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge) {
         boolean mergedSomething = false;
 
-        for (Map.Entry<TTarget, List<EdgePairs<TTokenContainer, TTarget, TNeighbour>>> entry :
+        for (Map.Entry<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> entry :
                 edgesToMerge.entrySet()) {
             if (entry.getValue().size() < 2)
                 continue;
 
             for (int i = 1; i < entry.getValue().size(); i++) {
-                EdgePairs<TTokenContainer, TTarget, TNeighbour> currentPair = entry.getValue().get(i);
+                EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour> currentPair = entry.getValue().get(i);
 
-                currentPair.edgeToMergingVertex.getFromEndpoint().removeOutput(currentPair.edgeToMergingVertex);
-                currentPair.edgeFromMergingVertex.getToEndpoint().removeInput(currentPair.edgeFromMergingVertex);
+                currentPair.edgeToVertex.getFromEndpoint().removeOutput(currentPair.edgeToVertex);
+                currentPair.edgeFromVertex.getToEndpoint().removeInput(currentPair.edgeFromVertex);
             }
 
             mergedSomething = true;
         }
 
         return mergedSomething;
-    }
-
-    private static class EdgePairs<TTokenContainer, TTarget, TNeighbour> {
-        private final Edge<TTokenContainer, TTarget, TNeighbour> edgeToMergingVertex;
-
-        private final Edge<TTokenContainer, TNeighbour, TTarget> edgeFromMergingVertex;
-
-        private EdgePairs(Edge<TTokenContainer, TTarget, TNeighbour> edgeToMergingVertex,
-                          Edge<TTokenContainer, TNeighbour, TTarget> edgeFromMergingVertex) {
-            this.edgeToMergingVertex = edgeToMergingVertex;
-            this.edgeFromMergingVertex = edgeFromMergingVertex;
-        }
     }
 
     protected abstract boolean check(TTarget vertex);
