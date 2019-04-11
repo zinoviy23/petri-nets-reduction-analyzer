@@ -1,4 +1,5 @@
 rootProject.name = 'petri-nets-reduction-analyzer'
 include 'terminal-client'
 include 'petri-nets-calculation-server'
+include 'petri-nets-library'
 
