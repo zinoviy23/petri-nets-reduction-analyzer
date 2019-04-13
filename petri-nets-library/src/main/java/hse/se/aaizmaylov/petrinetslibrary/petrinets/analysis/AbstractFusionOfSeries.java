@@ -13,6 +13,7 @@ public abstract class AbstractFusionOfSeries<
         TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
         implements Reduction<TTarget> {
+
     @Override
     public boolean reduceFrom(@NonNull TTarget target) {
         if (!check(target))

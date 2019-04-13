@@ -17,8 +17,6 @@ public abstract class AbstractFusionOfSelfLoop<
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
         implements Reduction<TTarget> {
 
-    //TODO: call from neighbour
-
     @Override
     public boolean reduceFrom(@NonNull TTarget target) {
         if (!check(target))
