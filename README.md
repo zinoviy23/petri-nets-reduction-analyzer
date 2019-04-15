@@ -1,8 +1,8 @@
 # Petri Nets Analyser
 
 ## Build status
-<a href="http://18.197.97.149:8111/viewType.html?buildTypeId=PetriNetsReductionAnalyzer_Build&guest=1">
-<img src="http://18.197.97.149:8111/app/rest/builds/buildType:(id:PetriNetsReductionAnalyzer_Build)/statusIcon"/>
+<a href="http://3.122.90.201:8111/viewType.html?buildTypeId=PetriNetsReductionAnalyzer_Build&guest=1">
+<img src="http://3.122.90.201:8111/app/rest/builds/buildType:(id:PetriNetsReductionAnalyzer_Build)/statusIcon"/>
 </a>
 
 ## General
