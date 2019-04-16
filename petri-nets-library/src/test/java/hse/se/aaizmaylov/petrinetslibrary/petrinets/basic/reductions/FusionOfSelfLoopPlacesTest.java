@@ -1,5 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
 
@@ -63,5 +64,18 @@ class FusionOfSelfLoopPlacesTest {
         assertEquals(2, transition.getOutputs().size());
         assertEquals(2, place.getInputs().size());
         assertEquals(1, place.getOutputs().size());
+    }
+
+    @Test
+    void disabledBecauseNothingLoops() {
+        Transition transition = new TransitionImpl();
+        Transition transition1 = new TransitionImpl();
+        Place place = Place.withMarks(1);
+
+        place.addOutput(new FromPlaceToTransitionEdge(place, transition1));
+        transition.addOutput(new FromTransitionToPlaceEdge(transition, place));
+
+        Reduction<Transition> reduction = new FusionOfSelfLoopPlaces();
+        assertFalse(reduction.reduceFrom(transition));
     }
 }

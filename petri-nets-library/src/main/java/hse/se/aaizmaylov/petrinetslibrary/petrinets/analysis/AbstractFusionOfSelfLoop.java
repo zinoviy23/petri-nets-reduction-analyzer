@@ -31,7 +31,10 @@ public abstract class AbstractFusionOfSelfLoop<
                     potentialVertex.getInputs().size() != 1)
                 continue;
 
-            edgesToRemove.add(new EdgesPairIncidentWithVertex<>(edgeToPotentialVertex, first(potentialVertex.getOutputs())));
+            if (first(potentialVertex.getOutputs()).getToEndpoint() == target) {
+                edgesToRemove.add(new EdgesPairIncidentWithVertex<>(edgeToPotentialVertex,
+                        first(potentialVertex.getOutputs())));
+            }
         }
 
         if (edgesToRemove.isEmpty())

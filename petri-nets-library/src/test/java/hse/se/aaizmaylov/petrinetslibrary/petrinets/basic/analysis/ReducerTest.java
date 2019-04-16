@@ -56,20 +56,24 @@ class ReducerTest {
 
     @Test
     void simpleReduction() {
-        List<Place> places = new ArrayList<>();
-        List<Transition> transitions = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            List<Place> places = new ArrayList<>();
+            List<Transition> transitions = new ArrayList<>();
 
-        PetriNet petriNet = createPetriNetWithoutMarks(places, transitions);
+            PetriNet petriNet = createPetriNetWithoutMarks(places, transitions);
 
-        Reducer reducer = new Reducer(petriNet);
+            Reducer reducer = new Reducer(petriNet);
 
-        reducer.reduce(Arrays.asList(new FusionOfSeriesPlaces(), new FusionOfSelfLoopTransitions()),
-                Arrays.asList(new FusionOfSeriesTransitions(), new FusionOfSelfLoopPlaces()));
+            reducer.reduce(Arrays.asList(new FusionOfSeriesPlaces(), new FusionOfSelfLoopTransitions()),
+                    Arrays.asList(new FusionOfSeriesTransitions(), new FusionOfSelfLoopPlaces()));
 
-        assertTrue((1 == places.get(1).getOutputs().size()) || (places.get(0).getOutputs().size() == 1));
-        assertTrue(places.get(1).getInputs().isEmpty());
+            assertTrue((1 == places.get(1).getOutputs().size()) || (places.get(0).getOutputs().size() == 1));
+            assertTrue(places.get(1).getInputs().isEmpty());
 
-        assertEquals(1, transitions.get(2).getInputs().size());
-        assertTrue(transitions.get(2).getOutputs().isEmpty());
+            assertEquals(1, transitions.get(2).getInputs().size());
+            assertTrue(transitions.get(2).getOutputs().isEmpty());
+
+            System.out.println("=========");
+        }
     }
 }
