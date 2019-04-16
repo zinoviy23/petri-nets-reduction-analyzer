@@ -10,6 +10,8 @@ import lombok.NonNull;
 
 import java.util.*;
 
+import static java.util.stream.Collectors.toList;
+
 public class Reducer {
     private PetriNet petriNet;
 
@@ -96,6 +98,7 @@ public class Reducer {
         return reducedSmth || current.getOutputs().stream()
                 .map(Edge::getToEndpoint)
                 .filter(transition -> !visitedTransition.contains(transition))
+                .collect(toList()).stream()
                 .anyMatch(this::transitionDFS);
     }
 
@@ -113,6 +116,7 @@ public class Reducer {
         return reducedSmth || current.getOutputs().stream()
                 .map(Edge::getToEndpoint)
                 .filter(place -> !visitedPlace.contains(place))
+                .collect(toList()).stream()
                 .anyMatch(this::placeDFS);
     }
 }

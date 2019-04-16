@@ -21,6 +21,8 @@ class FusionOfSelfLoopTransitionsTest {
         assertTrue(reduction.reduceFrom(place));
         assertTrue(place.getOutputs().isEmpty());
         assertEquals(1, place.getInputs().size());
+
+        assertTrue(transition.getOutputs().isEmpty() && transition.getInputs().isEmpty());
     }
 
     @Test

@@ -25,6 +25,9 @@ class FusionOfParallelPlacesTest {
         assertTrue(reduction.reduceFrom(transition1));
         assertEquals(1, transition1.getOutputs().size());
         assertEquals(1, transition2.getInputs().size());
+
+        assertTrue((place2.getInputs().isEmpty() && place2.getOutputs().isEmpty())
+                ^ (place1.getInputs().isEmpty() && place1.getOutputs().isEmpty()));
     }
 
     @Test

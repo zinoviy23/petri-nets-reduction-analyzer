@@ -23,6 +23,8 @@ class FusionOfSelfLoopPlacesTest {
         assertTrue(transition.getInputs().isEmpty());
         assertEquals(1, transition.getOutputs().size());
         assertEquals(place1, first(transition.getOutputs()).getToEndpoint());
+
+        assertTrue(place.getInputs().isEmpty() && place.getOutputs().isEmpty());
     }
 
     @Test

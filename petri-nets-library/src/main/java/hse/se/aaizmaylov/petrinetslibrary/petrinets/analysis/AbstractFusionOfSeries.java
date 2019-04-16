@@ -38,6 +38,7 @@ public abstract class AbstractFusionOfSeries<
 
         mergePlacesConnectedByTransition(reducedEdge);
 
+        System.out.println("Series! " + target.getClass().getSimpleName());
         return true;
     }
 
