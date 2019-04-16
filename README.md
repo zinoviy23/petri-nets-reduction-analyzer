@@ -13,6 +13,4 @@ It distributed by 2 versions:
 - server/cloud/docker version for computations on remote server
 
 ## Features
-You can add your reductions to calculation server
-
-checkkkk 
+You can add your reductions to calculation server 
