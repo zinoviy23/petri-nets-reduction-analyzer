@@ -10,6 +10,9 @@ public class TransitionImpl extends AbstractPetriNetVertexImpl<
         Edge<Integer, Place, Transition>,
         Edge<Integer, Transition, Place>> implements Transition {
 
+    public TransitionImpl(String label) {
+        super(label);
+    }
 
     @Override
     public void fire() {

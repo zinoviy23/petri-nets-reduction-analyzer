@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class FusionOfSeriesTransitionsTest {
     @Test
     void checkReduction() {
-        Transition transition1 = new TransitionImpl();
-        Transition transition2 = new TransitionImpl();
-        Place place1 = Place.withMarks(2);
-        Place place2 = Place.withMarks(1);
+        Transition transition1 = new TransitionImpl("t1");
+        Transition transition2 = new TransitionImpl("t2");
+        Place place1 = Place.withMarks(2, "p1");
+        Place place2 = Place.withMarks(1, "p2");
 
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
         transition2.addInput(new FromPlaceToTransitionEdge(place1, transition2));

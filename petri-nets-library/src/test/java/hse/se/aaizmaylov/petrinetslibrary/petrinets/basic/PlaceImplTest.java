@@ -8,14 +8,14 @@ class PlaceImplTest {
 
     @Test
     void ctor() {
-        Place place = new PlaceImpl(12);
+        Place place = new PlaceImpl(12, "p");
 
         assertEquals(12, place.getMarks());
     }
 
     @Test
     void setMarks() {
-        Place place = new PlaceImpl(10);
+        Place place = new PlaceImpl(10, "p");
 
         place.setMarks(11);
 
@@ -24,7 +24,7 @@ class PlaceImplTest {
 
     @Test
     void addMarks() {
-        Place place = new PlaceImpl(3);
+        Place place = new PlaceImpl(3, "p");
 
         place.addMarks(12);
 
@@ -33,7 +33,7 @@ class PlaceImplTest {
 
     @Test
     void removeMarks() {
-        Place place = new PlaceImpl(10);
+        Place place = new PlaceImpl(10, "p");
 
         place.removeMarks(7);
 
@@ -42,7 +42,7 @@ class PlaceImplTest {
 
     @Test
     void removeMarksToZero() {
-        Place place = new PlaceImpl(4);
+        Place place = new PlaceImpl(4, "p");
 
         place.removeMarks(4);
 
@@ -51,7 +51,7 @@ class PlaceImplTest {
 
     @Test
     void checkForNegativeThrowing() {
-        Place place = new PlaceImpl(5);
+        Place place = new PlaceImpl(5, "p");
 
         assertThrows(IllegalArgumentException.class, () -> place.removeMarks(6));
     }

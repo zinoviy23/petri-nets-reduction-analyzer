@@ -14,7 +14,8 @@ public class PlaceImpl extends AbstractPetriNetVertexImpl<
     @Getter
     private int marks;
 
-    PlaceImpl(int marks) {
+    PlaceImpl(int marks, String label) {
+        super(label);
         checkMarksCount(marks);
         this.marks = marks;
     }

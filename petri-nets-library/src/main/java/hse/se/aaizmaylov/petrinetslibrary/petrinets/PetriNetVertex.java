@@ -9,6 +9,9 @@ public interface PetriNetVertex<
         TNeighbours,
         TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
         TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>> {
+
+    String label();
+
     Set<TInput> getInputs();
 
     Set<TOutput> getOutputs();

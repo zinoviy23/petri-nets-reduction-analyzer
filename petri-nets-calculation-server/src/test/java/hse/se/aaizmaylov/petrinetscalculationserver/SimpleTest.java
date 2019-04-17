@@ -8,7 +8,7 @@ import static org.junit.Assert.*;
 public class SimpleTest {
     @Test
     public void test() {
-        Place place = Place.withMarks(10);
+        Place place = Place.withMarks(10, "label");
         assertEquals(10, place.getMarks());
     }
 }

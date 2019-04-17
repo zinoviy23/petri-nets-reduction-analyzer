@@ -9,11 +9,11 @@ class FusionOfSeriesPlacesTest {
 
     @Test
     void checkReduction() {
-        Place place1 = Place.withMarks(0);
-        Place place2 = Place.withMarks(0);
+        Place place1 = Place.withMarks(0, "p1");
+        Place place2 = Place.withMarks(0, "p2");
 
-        Transition transition = new TransitionImpl();
-        Transition transition1 = new TransitionImpl();
+        Transition transition = new TransitionImpl("t1");
+        Transition transition1 = new TransitionImpl("t2");
 
         transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
         transition.addOutput(new FromTransitionToPlaceEdge(transition, place2));

@@ -42,7 +42,7 @@ public abstract class AbstractFusionOfSelfLoop<
 
         deleteEdgesToLoopedVertices(edgesToRemove);
 
-        System.out.println("Self loop! " + target.getClass().getSimpleName());
+        System.out.println("Self loop! " + target);
 
         return true;
     }

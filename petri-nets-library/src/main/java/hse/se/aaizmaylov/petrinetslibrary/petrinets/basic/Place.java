@@ -17,7 +17,7 @@ public interface Place extends PetriNetVertex<
 
     int removeMarks(int marks);
 
-    static Place withMarks(int marks) {
-        return new PlaceImpl(marks);
+    static Place withMarks(int marks, String label) {
+        return new PlaceImpl(marks, label);
     }
 }
