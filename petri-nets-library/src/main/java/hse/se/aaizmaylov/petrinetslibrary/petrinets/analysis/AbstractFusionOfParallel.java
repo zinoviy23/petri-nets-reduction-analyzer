@@ -40,7 +40,14 @@ public abstract class AbstractFusionOfParallel<
             }
         }
 
-        return mergeEdges(edgesToMerge);
+        return printIfResult(mergeEdges(edgesToMerge), "Parallel! " + target);
+    }
+
+    private static boolean printIfResult(boolean result, String value) {
+        if (result)
+            System.out.println(value);
+
+        return result;
     }
 
     private boolean mergeEdges(Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge) {

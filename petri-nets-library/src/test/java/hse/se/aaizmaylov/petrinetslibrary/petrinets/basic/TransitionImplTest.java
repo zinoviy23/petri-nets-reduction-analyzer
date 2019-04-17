@@ -8,10 +8,10 @@ class TransitionImplTest {
 
     @Test
     void fireEnabled() {
-        Transition transition = new TransitionImpl();
-        Place place1 = new PlaceImpl(1);
-        Place place2 = new PlaceImpl(2);
-        Place place3 = new PlaceImpl(3);
+        Transition transition = new TransitionImpl("t");
+        Place place1 = new PlaceImpl(1, "p1");
+        Place place2 = new PlaceImpl(2, "p2");
+        Place place3 = new PlaceImpl(3, "p3");
 
         transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
         transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
@@ -27,10 +27,10 @@ class TransitionImplTest {
 
     @Test
     void fireDisabled() {
-        Transition transition = new TransitionImpl();
-        Place place1 = new PlaceImpl(0);
-        Place place2 = new PlaceImpl(2);
-        Place place3 = new PlaceImpl(3);
+        Transition transition = new TransitionImpl("t");
+        Place place1 = new PlaceImpl(0, "p1");
+        Place place2 = new PlaceImpl(2, "p2");
+        Place place3 = new PlaceImpl(3, "p3");
 
         transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
         transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
@@ -46,10 +46,10 @@ class TransitionImplTest {
 
     @Test
     void enabledTrue() {
-        Transition transition = new TransitionImpl();
-        Place place1 = new PlaceImpl(1);
-        Place place2 = new PlaceImpl(2);
-        Place place3 = new PlaceImpl(3);
+        Transition transition = new TransitionImpl("t");
+        Place place1 = new PlaceImpl(1, "p1");
+        Place place2 = new PlaceImpl(2, "p2");
+        Place place3 = new PlaceImpl(3, "p3");
 
         transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
         transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
@@ -61,10 +61,10 @@ class TransitionImplTest {
 
     @Test
     void enableFalse() {
-        Transition transition = new TransitionImpl();
-        Place place1 = new PlaceImpl(0);
-        Place place2 = new PlaceImpl(2);
-        Place place3 = new PlaceImpl(3);
+        Transition transition = new TransitionImpl("t");
+        Place place1 = new PlaceImpl(0, "p1");
+        Place place2 = new PlaceImpl(2, "p2");
+        Place place3 = new PlaceImpl(3, "p3");
 
         transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
         transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
@@ -76,7 +76,7 @@ class TransitionImplTest {
 
     @Test
     void enabledEmpty() {
-        Transition transition = new TransitionImpl();
+        Transition transition = new TransitionImpl("t");
 
         assertTrue(transition.enabled());
     }

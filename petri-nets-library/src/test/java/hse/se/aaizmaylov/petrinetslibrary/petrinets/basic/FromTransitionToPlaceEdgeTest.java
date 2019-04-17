@@ -8,8 +8,8 @@ class FromTransitionToPlaceEdgeTest {
 
     @Test
     void putTokensTo() {
-        Place place = new PlaceImpl(10);
-        FromTransitionToPlaceEdge edge = new FromTransitionToPlaceEdge(new TransitionImpl(), place);
+        Place place = new PlaceImpl(10, "p1");
+        FromTransitionToPlaceEdge edge = new FromTransitionToPlaceEdge(new TransitionImpl("t1"), place);
 
         edge.putTokensTo(3);
 

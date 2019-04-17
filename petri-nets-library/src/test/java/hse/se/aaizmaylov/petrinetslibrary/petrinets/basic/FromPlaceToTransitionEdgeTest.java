@@ -7,9 +7,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class FromPlaceToTransitionEdgeTest {
     @Test
     void getTokensFrom() {
-        Place place = new PlaceImpl(10);
+        Place place = new PlaceImpl(10, "p1");
 
-        FromPlaceToTransitionEdge edge = new FromPlaceToTransitionEdge(place, new TransitionImpl());
+        FromPlaceToTransitionEdge edge = new FromPlaceToTransitionEdge(place, new TransitionImpl("t1"));
 
         edge.getTokensFrom(6);
 

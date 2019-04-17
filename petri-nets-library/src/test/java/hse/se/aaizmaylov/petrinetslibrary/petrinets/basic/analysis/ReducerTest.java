@@ -18,15 +18,15 @@ class ReducerTest {
 
     // 17d from Murata
     PetriNet createPetriNetWithoutMarks(List<? super Place> places, List<? super Transition> transitions) {
-        Place p1 = Place.withMarks(0);
-        Place p2 = Place.withMarks(0);
-        Place p3 = Place.withMarks(1);
-        Place p4 = Place.withMarks(0);
+        Place p1 = Place.withMarks(0, "p1");
+        Place p2 = Place.withMarks(0, "p2");
+        Place p3 = Place.withMarks(1, "p3");
+        Place p4 = Place.withMarks(0, "p4");
 
-        Transition t1 = new TransitionImpl();
-        Transition t2 = new TransitionImpl();
-        Transition t3 = new TransitionImpl();
-        Transition t4 = new TransitionImpl();
+        Transition t1 = new TransitionImpl("t1");
+        Transition t2 = new TransitionImpl("t2");
+        Transition t3 = new TransitionImpl("t3");
+        Transition t4 = new TransitionImpl("t4");
 
         t1.addInput(new FromPlaceToTransitionEdge(p2, t1));
         t1.addOutput(new FromTransitionToPlaceEdge(t1, p1));
@@ -56,7 +56,7 @@ class ReducerTest {
 
     @Test
     void simpleReduction() {
-        for (int i = 0; i < 100; i++) {
+        for (int i = 0; i < 15; i++) {
             List<Place> places = new ArrayList<>();
             List<Transition> transitions = new ArrayList<>();
 

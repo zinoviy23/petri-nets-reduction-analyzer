@@ -9,7 +9,7 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void getInputsUnmodifiable() {
-        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("v") {};
 
         assertTrue(vertex.getInputs().isEmpty());
 
@@ -18,7 +18,7 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void getOutputsUnmodifiable() {
-        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("v") {};
 
         assertTrue(vertex.getOutputs().isEmpty());
 
@@ -27,8 +27,8 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void addOutput() {
-        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
-        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl("v") {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl("v") {};
 
         vertex1.addOutput(genEdge(vertex1, vertex2));
 
@@ -38,8 +38,8 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void removeOutput() {
-        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
-        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl("v") {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl("v") {};
 
         Edge edge = genEdge(vertex1, vertex2);
 
@@ -56,8 +56,8 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void removeInput() {
-        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
-        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl("v") {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl("v") {};
 
         Edge edge = genEdge(vertex2, vertex1);
 
@@ -74,7 +74,7 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void emptyRemove() {
-        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("v") {};
         Edge edge = genEdge(vertex, vertex);
 
         assertFalse(vertex.removeInput(edge));
@@ -83,7 +83,7 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void nullChecking() {
-        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("v") {};
 
         assertThrows(NullPointerException.class, () -> vertex.addInput(null));
         assertThrows(NullPointerException.class, () -> vertex.addOutput(null));
@@ -93,8 +93,8 @@ class AbstractPetriNetVertexImplTest {
 
     @Test
     void addInput() {
-        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl() {};
-        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl() {};
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl("v") {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl("v") {};
 
         vertex1.addInput(genEdge(vertex2, vertex1));
 
@@ -130,5 +130,16 @@ class AbstractPetriNetVertexImplTest {
             @Override
             public void putTokensTo(Object tokens) { }
         };
+    }
+
+    @Test
+    void label() {
+        AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("kekkekkek") {};
+        assertEquals("kekkekkek", vertex.label());
+    }
+
+    @Test
+    void labelNonNull() {
+        assertThrows(NullPointerException.class, () -> new AbstractPetriNetVertexImpl(null) {});
     }
 }

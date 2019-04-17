@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.*;
 class FusionOfParallelPlacesTest {
     @Test
     void checkReduction() {
-        Transition transition1 = new TransitionImpl();
-        Transition transition2 = new TransitionImpl();
-        Place place1 = Place.withMarks(0);
-        Place place2 = Place.withMarks(0);
+        Transition transition1 = new TransitionImpl("t1");
+        Transition transition2 = new TransitionImpl("t2");
+        Place place1 = Place.withMarks(0, "p1");
+        Place place2 = Place.withMarks(0, "p2");
 
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
         place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
@@ -32,10 +32,10 @@ class FusionOfParallelPlacesTest {
 
     @Test
     void unavailableBecauseOfMarks() {
-        Transition transition1 = new TransitionImpl();
-        Transition transition2 = new TransitionImpl();
-        Place place1 = Place.withMarks(1);
-        Place place2 = Place.withMarks(1);
+        Transition transition1 = new TransitionImpl("t1");
+        Transition transition2 = new TransitionImpl("t2");
+        Place place1 = Place.withMarks(1, "p1");
+        Place place2 = Place.withMarks(1, "p2");
 
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
         place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
@@ -52,9 +52,9 @@ class FusionOfParallelPlacesTest {
 
     @Test
     void unavailableBecauseOfOneEdge() {
-        Transition transition1 = new TransitionImpl();
-        Transition transition2 = new TransitionImpl();
-        Place place1 = Place.withMarks(0);
+        Transition transition1 = new TransitionImpl("t1");
+        Transition transition2 = new TransitionImpl("t2");
+        Place place1 = Place.withMarks(0, "p1");
 
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
         place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));

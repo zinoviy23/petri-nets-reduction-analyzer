@@ -4,6 +4,7 @@ import lombok.NonNull;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 public abstract class AbstractPetriNetVertexImpl<
@@ -16,8 +17,19 @@ public abstract class AbstractPetriNetVertexImpl<
 
     //TODO: add check, that added edge contains current vertex
 
+    private final String label;
+
     private Set<TInput> inputs = new HashSet<>();
     private Set<TOutput> outputs = new HashSet<>();
+
+    protected AbstractPetriNetVertexImpl(@NonNull String label) {
+        this.label = label;
+    }
+
+    @Override
+    public String label() {
+        return label;
+    }
 
     @Override
     public Set<TInput> getInputs() {
@@ -71,5 +83,25 @@ public abstract class AbstractPetriNetVertexImpl<
         }
 
         return insertionResult;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof AbstractPetriNetVertexImpl)) return false;
+        AbstractPetriNetVertexImpl<?, ?, ?, ?, ?> that = (AbstractPetriNetVertexImpl<?, ?, ?, ?, ?>) o;
+        return label.equals(that.label);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(label);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + "{" +
+                "label='" + label + '\'' +
+                '}';
     }
 }

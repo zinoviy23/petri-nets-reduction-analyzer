@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class FusionOfSelfLoopPlacesTest {
     @Test
     void checkReduction() {
-        Place place = Place.withMarks(1);
-        Transition transition = new TransitionImpl();
-        Place place1 = Place.withMarks(0);
+        Place place = Place.withMarks(1, "p1");
+        Transition transition = new TransitionImpl("t1");
+        Place place1 = Place.withMarks(0, "p2");
 
         transition.addOutput(new FromTransitionToPlaceEdge(transition, place));
         transition.addInput(new FromPlaceToTransitionEdge(place, transition));
@@ -30,9 +30,9 @@ class FusionOfSelfLoopPlacesTest {
 
     @Test
     void checkReductionDisabledBecauseOfMarks() {
-        Place place = Place.withMarks(0);
-        Transition transition = new TransitionImpl();
-        Place place1 = Place.withMarks(0);
+        Place place = Place.withMarks(0, "p1");
+        Transition transition = new TransitionImpl("t1");
+        Place place1 = Place.withMarks(0, "p2");
 
         transition.addOutput(new FromTransitionToPlaceEdge(transition, place));
         transition.addInput(new FromPlaceToTransitionEdge(place, transition));
@@ -47,10 +47,10 @@ class FusionOfSelfLoopPlacesTest {
 
     @Test
     void checkReductionDisabledBecauseOfEdges() {
-        Place place = Place.withMarks(1);
-        Transition transition = new TransitionImpl();
-        Transition transition1 = new TransitionImpl();
-        Place place1 = Place.withMarks(0);
+        Place place = Place.withMarks(1, "p1");
+        Transition transition = new TransitionImpl("t1");
+        Transition transition1 = new TransitionImpl("t2");
+        Place place1 = Place.withMarks(0, "p2");
 
         transition.addOutput(new FromTransitionToPlaceEdge(transition, place));
         transition.addInput(new FromPlaceToTransitionEdge(place, transition));
@@ -68,9 +68,9 @@ class FusionOfSelfLoopPlacesTest {
 
     @Test
     void disabledBecauseNothingLoops() {
-        Transition transition = new TransitionImpl();
-        Transition transition1 = new TransitionImpl();
-        Place place = Place.withMarks(1);
+        Transition transition = new TransitionImpl("t1");
+        Transition transition1 = new TransitionImpl("t2");
+        Place place = Place.withMarks(1, "p1");
 
         place.addOutput(new FromPlaceToTransitionEdge(place, transition1));
         transition.addOutput(new FromTransitionToPlaceEdge(transition, place));
