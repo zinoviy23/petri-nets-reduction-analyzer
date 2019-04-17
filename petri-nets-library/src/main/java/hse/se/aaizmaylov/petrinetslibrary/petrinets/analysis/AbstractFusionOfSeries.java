@@ -13,12 +13,12 @@ public abstract class AbstractFusionOfSeries<
                 Edge<TTokenContainer, TTarget, TNeighbour>>,
         TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
-        implements Reduction<TTarget> {
+        implements Reduction<TTarget, TNeighbour> {
 
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSeries.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target) {
+    public boolean reduceFrom(@NonNull TTarget target, @NonNull DeleteVertexCallback<TTarget, TNeighbour> callback) {
         if (!check(target))
             return false;
 
@@ -39,23 +39,30 @@ public abstract class AbstractFusionOfSeries<
         if (reducedEdge == null)
             return false;
 
-        mergePlacesConnectedByTransition(reducedEdge);
+        mergeVertexConnectedByNeighbourVertex(reducedEdge, callback);
 
         LOGGER.debug("Series! " + target);
         return true;
     }
 
-    private void mergePlacesConnectedByTransition(Edge<TTokenContainer, TTarget, TNeighbour> connectingTransition) {
-        TTarget firstPlace = connectingTransition.getFromEndpoint();
-        TTarget secondPlace = first(connectingTransition.getToEndpoint().getOutputs()).getToEndpoint();
+    private void mergeVertexConnectedByNeighbourVertex(
+            Edge<TTokenContainer, TTarget, TNeighbour> edgeToConnectingNeighbour,
+            DeleteVertexCallback<TTarget, TNeighbour> callback) {
 
-        firstPlace.removeOutput(connectingTransition);
-        secondPlace.removeInput(first(connectingTransition.getToEndpoint().getOutputs()));
+        TTarget firstVertex = edgeToConnectingNeighbour.getFromEndpoint();
+        TTarget secondVertex = first(edgeToConnectingNeighbour.getToEndpoint().getOutputs()).getToEndpoint();
 
-        secondPlace.getInputs().forEach(e -> e.setToEndpoint(firstPlace));
-        secondPlace.getOutputs().forEach(e -> e.setFromEndpoint(firstPlace));
-        secondPlace.getInputs().forEach(firstPlace::addInput);
-        secondPlace.getOutputs().forEach(firstPlace::addOutput);
+        callback.onDeleteNeighbour(edgeToConnectingNeighbour.getToEndpoint());
+
+        firstVertex.removeOutput(edgeToConnectingNeighbour);
+        secondVertex.removeInput(first(edgeToConnectingNeighbour.getToEndpoint().getOutputs()));
+
+        secondVertex.getInputs().forEach(e -> e.setToEndpoint(firstVertex));
+        secondVertex.getOutputs().forEach(e -> e.setFromEndpoint(firstVertex));
+        secondVertex.getInputs().forEach(firstVertex::addInput);
+        secondVertex.getOutputs().forEach(firstVertex::addOutput);
+
+        callback.onDeleteTarget(secondVertex);
     }
 
     protected abstract boolean check(TTarget target);

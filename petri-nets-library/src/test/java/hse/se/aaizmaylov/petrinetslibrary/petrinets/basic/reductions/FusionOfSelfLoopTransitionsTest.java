@@ -1,5 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
 
@@ -18,11 +19,15 @@ class FusionOfSelfLoopTransitionsTest {
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
 
-        assertTrue(reduction.reduceFrom(place));
+        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+
+        assertTrue(reduction.reduceFrom(place, callback));
         assertTrue(place.getOutputs().isEmpty());
         assertEquals(1, place.getInputs().size());
 
         assertTrue(transition.getOutputs().isEmpty() && transition.getInputs().isEmpty());
+
+        assertEquals(1, callback.getTransitions());
     }
 
     @Test
@@ -39,9 +44,13 @@ class FusionOfSelfLoopTransitionsTest {
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
 
-        assertFalse(reduction.reduceFrom(place));
+        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+
+        assertFalse(reduction.reduceFrom(place, callback));
         assertFalse(place.getOutputs().isEmpty());
         assertEquals(2, place.getInputs().size());
+
+        assertEquals(0, callback.getTransitions());
     }
 
     @Test
@@ -54,6 +63,6 @@ class FusionOfSelfLoopTransitionsTest {
         transition.addOutput(new FromTransitionToPlaceEdge(transition, place1));
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
-        assertFalse(reduction.reduceFrom(place));
+        assertFalse(reduction.reduceFrom(place, DeleteVertexCallback.empty()));
     }
 }

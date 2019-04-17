@@ -22,10 +22,15 @@ class FusionOfSeriesPlacesTest {
 
         FusionOfSeriesPlaces reduction = new FusionOfSeriesPlaces();
 
-        assertTrue(reduction.reduceFrom(place1));
+        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+
+        assertTrue(reduction.reduceFrom(place1, callback));
 
         assertEquals(1, place1.getInputs().size());
         assertEquals(0, place1.getOutputs().size());
         assertEquals(transition1, place1.getInputs().iterator().next().getFromEndpoint());
+
+        assertEquals(1, callback.getPlaces());
+        assertEquals(1, callback.getTransitions());
     }
 }

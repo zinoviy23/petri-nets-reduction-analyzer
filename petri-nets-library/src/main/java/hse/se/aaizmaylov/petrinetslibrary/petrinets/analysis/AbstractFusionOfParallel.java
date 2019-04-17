@@ -18,16 +18,17 @@ public abstract class AbstractFusionOfParallel<
                 Edge<TTokenContainer, TTarget, TNeighbour>>,
         TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
-        implements Reduction<TTarget>  {
+        implements Reduction<TTarget, TNeighbour>  {
 
     private static final Logger LOGGER = Logger.getLogger(AbstractFusionOfParallel.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target) {
+    public boolean reduceFrom(@NonNull TTarget target, @NonNull DeleteVertexCallback<TTarget, TNeighbour> callback) {
         if (!check(target))
             return false;
 
-        Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge = new HashMap<>();
+        Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge
+                = new HashMap<>();
 
         for (Edge<TTokenContainer, TTarget, TNeighbour> outputEdge : target.getOutputs()) {
             if (checkNeighbour(outputEdge.getToEndpoint())) {
@@ -43,7 +44,7 @@ public abstract class AbstractFusionOfParallel<
             }
         }
 
-        return logIfResult(mergeEdges(edgesToMerge), "Parallel! " + target);
+        return logIfResult(mergeEdges(edgesToMerge, callback), "Parallel! " + target);
     }
 
     private static boolean logIfResult(boolean result, String value) {
@@ -53,7 +54,10 @@ public abstract class AbstractFusionOfParallel<
         return result;
     }
 
-    private boolean mergeEdges(Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge) {
+    private boolean mergeEdges(
+            Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge,
+            DeleteVertexCallback<TTarget, TNeighbour> callback) {
+
         boolean mergedSomething = false;
 
         for (Map.Entry<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> entry :
@@ -66,6 +70,7 @@ public abstract class AbstractFusionOfParallel<
 
                 currentPair.edgeToVertex.getFromEndpoint().removeOutput(currentPair.edgeToVertex);
                 currentPair.edgeFromVertex.getToEndpoint().removeInput(currentPair.edgeFromVertex);
+                callback.onDeleteNeighbour(currentPair.edgeToVertex.getToEndpoint());
             }
 
             mergedSomething = true;

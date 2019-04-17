@@ -35,4 +35,10 @@ class DeleteVertexCallbackTest {
         assertTrue(integerList.contains(1));
         assertTrue(stringList.contains("kek"));
     }
+
+    @Test
+    void sameEmptyAndNotNull() {
+        assertNotNull(DeleteVertexCallback.empty());
+        assertEquals(DeleteVertexCallback.empty(), DeleteVertexCallback.empty());
+    }
 }

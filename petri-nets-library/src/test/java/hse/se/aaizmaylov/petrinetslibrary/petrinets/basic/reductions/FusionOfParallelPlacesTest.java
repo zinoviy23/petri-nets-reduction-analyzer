@@ -1,5 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
@@ -20,14 +21,18 @@ class FusionOfParallelPlacesTest {
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place2));
         place2.addOutput(new FromPlaceToTransitionEdge(place2, transition2));
 
-        Reduction<Transition> reduction = new FusionOfParallelPlaces();
+        Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
-        assertTrue(reduction.reduceFrom(transition1));
+        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+
+        assertTrue(reduction.reduceFrom(transition1, DeleteVertexCallback.invertedAdapter(callback)));
         assertEquals(1, transition1.getOutputs().size());
         assertEquals(1, transition2.getInputs().size());
 
         assertTrue((place2.getInputs().isEmpty() && place2.getOutputs().isEmpty())
                 ^ (place1.getInputs().isEmpty() && place1.getOutputs().isEmpty()));
+
+        assertEquals(1, callback.getPlaces());
     }
 
     @Test
@@ -43,11 +48,15 @@ class FusionOfParallelPlacesTest {
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place2));
         place2.addOutput(new FromPlaceToTransitionEdge(place2, transition2));
 
-        Reduction<Transition> reduction = new FusionOfParallelPlaces();
+        Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
-        assertFalse(reduction.reduceFrom(transition1));
+        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+
+        assertFalse(reduction.reduceFrom(transition1, DeleteVertexCallback.invertedAdapter(callback)));
         assertEquals(2, transition1.getOutputs().size());
         assertEquals(2, transition2.getInputs().size());
+
+        assertEquals(0, callback.getPlaces());
     }
 
     @Test
@@ -59,9 +68,9 @@ class FusionOfParallelPlacesTest {
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
         place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
 
-        Reduction<Transition> reduction = new FusionOfParallelPlaces();
+        Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
-        assertFalse(reduction.reduceFrom(transition1));
+        assertFalse(reduction.reduceFrom(transition1, DeleteVertexCallback.empty()));
         assertEquals(1, transition1.getOutputs().size());
         assertEquals(1, transition2.getInputs().size());
     }
