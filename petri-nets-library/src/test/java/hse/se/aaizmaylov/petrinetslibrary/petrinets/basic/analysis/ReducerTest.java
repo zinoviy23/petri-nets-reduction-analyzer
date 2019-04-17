@@ -1,5 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.FusionOfSelfLoopPlaces;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.FusionOfSelfLoopTransitions;
@@ -16,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ReducerTest {
 
     // 17d from Murata
-    PetriNet createPetriNetWithoutMarks() {
+    PetriNet<Place, Transition> createPetriNetWithoutMarks() {
         Place p1 = Place.withMarks(0, "p1");
         Place p2 = Place.withMarks(0, "p2");
         Place p3 = Place.withMarks(1, "p3");
@@ -40,10 +41,10 @@ class ReducerTest {
         t4.addInput(new FromPlaceToTransitionEdge(p4, t4));
         t4.addOutput(new FromTransitionToPlaceEdge(t4, p3));
 
-        return new PetriNet(Arrays.asList(p1, p2, p3, p4), Arrays.asList(t1, t2, t3, t4));
+        return new PetriNet<>(Arrays.asList(p1, p2, p3, p4), Arrays.asList(t1, t2, t3, t4));
     }
 
-    PetriNet cycleNetWithMark() {
+    PetriNet<Place, Transition> cycleNetWithMark() {
         Place p1 = Place.withMarks(1, "p1");
         Place p2 = Place.withMarks(0, "p2");
         Place p3 = Place.withMarks(0, "p3");
@@ -59,13 +60,13 @@ class ReducerTest {
         p3.addOutput(new FromPlaceToTransitionEdge(p3, t3));
         t3.addOutput(new FromTransitionToPlaceEdge(t3, p1));
 
-        return new PetriNet(Arrays.asList(p1, p2, p3), Arrays.asList(t1, t2, t3));
+        return new PetriNet<>(Arrays.asList(p1, p2, p3), Arrays.asList(t1, t2, t3));
     }
 
     @Test
     void simpleReduction() {
         for (int i = 0; i < 5; i++) {
-            PetriNet petriNet = createPetriNetWithoutMarks();
+            PetriNet<Place, Transition> petriNet = createPetriNetWithoutMarks();
 
             Reducer reducer = new Reducer(petriNet);
 
@@ -90,7 +91,7 @@ class ReducerTest {
 
     @Test
     void checkCycle() {
-        PetriNet petriNet = cycleNetWithMark();
+        PetriNet<Place, Transition> petriNet = cycleNetWithMark();
 
         Reducer reducer = new Reducer(petriNet);
 

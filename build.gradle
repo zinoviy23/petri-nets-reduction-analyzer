@@ -1,3 +1,17 @@
 group 'hse.se.aaizmaylov'
 version '0.0.1'
 
+allprojects {
+    repositories {
+        mavenCentral()
+        jcenter()
+
+        maven {
+            url "s3://zinoviy23.artifacts.io/release"
+            credentials(AwsCredentials) {
+                accessKey mavenAccessKey
+                secretKey mavenSecretKey
+            }
+        }
+    }
+}

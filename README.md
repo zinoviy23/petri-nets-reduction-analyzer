@@ -14,3 +14,8 @@ It distributed by 2 versions:
 
 ## Features
 You can add your reductions to calculation server 
+
+
+## Supported formats
+### PNML - ISO standard for Petri Nets
+Analyser removes all graphical and toolsepcific information about Petri Net
