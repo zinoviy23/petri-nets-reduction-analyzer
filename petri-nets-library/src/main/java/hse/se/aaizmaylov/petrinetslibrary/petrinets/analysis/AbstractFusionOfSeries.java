@@ -3,6 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 
 import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 
@@ -13,6 +14,8 @@ public abstract class AbstractFusionOfSeries<
         TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
         implements Reduction<TTarget> {
+
+    private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSeries.class);
 
     @Override
     public boolean reduceFrom(@NonNull TTarget target) {
@@ -38,7 +41,7 @@ public abstract class AbstractFusionOfSeries<
 
         mergePlacesConnectedByTransition(reducedEdge);
 
-        System.out.println("Series! " + target);
+        LOGGER.debug("Series! " + target);
         return true;
     }
 

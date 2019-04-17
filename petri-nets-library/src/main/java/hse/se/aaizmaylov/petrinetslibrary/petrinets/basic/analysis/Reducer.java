@@ -7,12 +7,15 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 
 import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
 public class Reducer {
+    private final static Logger LOGGER = Logger.getLogger(Reducer.class);
+
     private PetriNet petriNet;
 
     private boolean reduced = false;
@@ -49,6 +52,8 @@ public class Reducer {
 
     public void reduce(@NonNull Collection<? extends Reduction<Place>> reductionsOnPlaces,
                        @NonNull Collection<? extends Reduction<Transition>> reductionsOnTransitions) {
+        LOGGER.info("Reductions started");
+
         if (reduced) {
             throw new IllegalStateException("Petri Net already reduced");
         }

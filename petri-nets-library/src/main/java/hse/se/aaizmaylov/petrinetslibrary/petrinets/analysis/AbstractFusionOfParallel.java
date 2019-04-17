@@ -3,6 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -18,6 +19,8 @@ public abstract class AbstractFusionOfParallel<
         TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
         implements Reduction<TTarget>  {
+
+    private static final Logger LOGGER = Logger.getLogger(AbstractFusionOfParallel.class);
 
     @Override
     public boolean reduceFrom(@NonNull TTarget target) {
@@ -40,12 +43,12 @@ public abstract class AbstractFusionOfParallel<
             }
         }
 
-        return printIfResult(mergeEdges(edgesToMerge), "Parallel! " + target);
+        return logIfResult(mergeEdges(edgesToMerge), "Parallel! " + target);
     }
 
-    private static boolean printIfResult(boolean result, String value) {
+    private static boolean logIfResult(boolean result, String value) {
         if (result)
-            System.out.println(value);
+            LOGGER.debug(value);
 
         return result;
     }

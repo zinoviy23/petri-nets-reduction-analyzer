@@ -3,6 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,8 @@ public abstract class AbstractFusionOfSelfLoop<
         TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
         implements Reduction<TTarget> {
+
+    private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSelfLoop.class);
 
     @Override
     public boolean reduceFrom(@NonNull TTarget target) {
@@ -42,7 +45,7 @@ public abstract class AbstractFusionOfSelfLoop<
 
         deleteEdgesToLoopedVertices(edgesToRemove);
 
-        System.out.println("Self loop! " + target);
+        LOGGER.debug("Self loop! " + target);
 
         return true;
     }
