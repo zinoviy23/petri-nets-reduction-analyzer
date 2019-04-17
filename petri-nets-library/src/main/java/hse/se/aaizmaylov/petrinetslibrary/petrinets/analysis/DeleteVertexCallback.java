@@ -2,6 +2,8 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
 import lombok.NonNull;
 
+import static hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.EmptyCallback.EMPTY;
+
 public interface DeleteVertexCallback<TTarget, TNeighbour> {
     void onDeleteTarget(TTarget target);
 
@@ -21,5 +23,10 @@ public interface DeleteVertexCallback<TTarget, TNeighbour> {
                 callback.onDeleteTarget(target);
             }
         };
+    }
+
+    @SuppressWarnings("unchecked")
+    static <TTarget, TNeighbour> DeleteVertexCallback<TTarget, TNeighbour> empty() {
+        return EMPTY;
     }
 }

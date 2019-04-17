@@ -16,12 +16,12 @@ public abstract class AbstractFusionOfSelfLoop<
                 Edge<TTokenContainer, TTarget, TNeighbour>>,
         TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
                 Edge<TTokenContainer, TNeighbour, TTarget>>>
-        implements Reduction<TTarget> {
+        implements Reduction<TTarget, TNeighbour> {
 
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSelfLoop.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target) {
+    public boolean reduceFrom(@NonNull TTarget target, @NonNull DeleteVertexCallback<TTarget, TNeighbour> callback) {
         if (!check(target))
             return false;
 
@@ -43,17 +43,21 @@ public abstract class AbstractFusionOfSelfLoop<
         if (edgesToRemove.isEmpty())
             return false;
 
-        deleteEdgesToLoopedVertices(edgesToRemove);
+        deleteEdgesToLoopedVertices(edgesToRemove, callback);
 
         LOGGER.debug("Self loop! " + target);
 
         return true;
     }
 
-    private void deleteEdgesToLoopedVertices(List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>> edgesToRemove) {
+    private void deleteEdgesToLoopedVertices(
+            List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>> edgesToRemove,
+            DeleteVertexCallback<TTarget, TNeighbour> callback) {
+
         for (EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour> pair : edgesToRemove) {
             pair.edgeFromVertex.getToEndpoint().removeInput(pair.edgeFromVertex);
             pair.edgeToVertex.getFromEndpoint().removeOutput(pair.edgeToVertex);
+            callback.onDeleteNeighbour(pair.edgeToVertex.getToEndpoint());
         }
     }
 

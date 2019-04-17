@@ -22,14 +22,18 @@ class FusionOfParallelTransitionsTest {
         place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
         transition2.addOutput(new FromTransitionToPlaceEdge(transition2, place2));
 
-        Reduction<Place> reduction = new FusionOfParallelTransitions();
+        Reduction<Place, Transition> reduction = new FusionOfParallelTransitions();
 
-        assertTrue(reduction.reduceFrom(place1));
+        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+
+        assertTrue(reduction.reduceFrom(place1, callback));
         assertEquals(1, place1.getOutputs().size());
         assertEquals(1, place2.getInputs().size());
 
         assertTrue((transition1.getInputs().isEmpty() && transition1.getOutputs().isEmpty())
             ^ (transition2.getInputs().isEmpty() && transition2.getOutputs().isEmpty()));
+
+        assertEquals(1, callback.getTransitions());
     }
 
     @Test
@@ -42,11 +46,14 @@ class FusionOfParallelTransitionsTest {
         place1.addOutput(new FromPlaceToTransitionEdge(place1, transition1));
         transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place2));
 
+        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
 
-        Reduction<Place> reduction = new FusionOfParallelTransitions();
+        Reduction<Place, Transition> reduction = new FusionOfParallelTransitions();
 
-        assertFalse(reduction.reduceFrom(place1));
+        assertFalse(reduction.reduceFrom(place1, callback));
         assertEquals(1, place1.getOutputs().size());
         assertEquals(1, place2.getInputs().size());
+
+        assertEquals(0, callback.getTransitions());
     }
 }
