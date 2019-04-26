@@ -6,7 +6,7 @@
 </a>
 
 ## General
-It uses reductions, to optimize count of operations in analysis
+It uses reductions, to optimize count of operations in analysis :bug:
 
 It distributed by 2 versions:
 - standalone version with CLI
