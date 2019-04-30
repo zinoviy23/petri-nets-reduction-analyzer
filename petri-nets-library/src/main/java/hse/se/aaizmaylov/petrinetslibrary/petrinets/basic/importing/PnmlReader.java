@@ -3,10 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.importing;
 import fr.lip6.move.pnml.framework.general.PnmlImport;
 import fr.lip6.move.pnml.framework.hlapi.HLAPIClass;
 import fr.lip6.move.pnml.framework.utils.exception.*;
-import fr.lip6.move.pnml.ptnet.PlaceNode;
-import fr.lip6.move.pnml.ptnet.TransitionNode;
 import fr.lip6.move.pnml.ptnet.hlapi.*;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetReader;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
@@ -83,7 +80,10 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
 
     private static void getVerticesFromPage(@NotNull PageHLAPI page, @NotNull PetriNet<Place, Transition> petriNet) {
         for (PlaceHLAPI placeHLAPI : page.getObjects_PlaceHLAPI()) {
-            Place place = Place.withMarks((int) (long)placeHLAPI.getInitialMarkingHLAPI().getText(),
+            Place place = Place.withMarks(
+                    (int) (placeHLAPI.getInitialMarkingHLAPI() != null
+                            ? (long)placeHLAPI.getInitialMarkingHLAPI().getText()
+                            : 0),
                     placeHLAPI.getId());
 
             petriNet.addPlace(place);
@@ -99,7 +99,7 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
             throws CyclicReferencesException, WrongEdgeTypeException {
 
         for (ArcHLAPI arc : page.getObjects_ArcHLAPI()) {
-            if (arc.getSourceHLAPI() instanceof PlaceNode && arc.getTargetHLAPI() instanceof TransitionNode) {
+            if (arc.getSourceHLAPI() instanceof PlaceNodeHLAPI && arc.getTargetHLAPI() instanceof TransitionNodeHLAPI) {
                 Place from = petriNet.getPlacesMap()
                         .get(getOriginalIdFromRef(references, arc.getSourceHLAPI().getId()));
 
@@ -107,7 +107,9 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
                         .get(getOriginalIdFromRef(references, arc.getTargetHLAPI().getId()));
 
                 from.addOutput(new FromPlaceToTransitionEdge(from, to));
-            } else if (arc.getSourceHLAPI() instanceof TransitionNode && arc.getTargetHLAPI() instanceof PlaceNode) {
+            } else if (arc.getSourceHLAPI() instanceof TransitionNodeHLAPI &&
+                    arc.getTargetHLAPI() instanceof PlaceNodeHLAPI) {
+
                 Transition from = petriNet.getTransitionsMap()
                         .get(getOriginalIdFromRef(references, arc.getSourceHLAPI().getId()));
 
