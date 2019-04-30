@@ -13,4 +13,9 @@ It distributed by 2 versions:
 - server/cloud/docker version for computations on remote server
 
 ## Features
-You can add your reductions to calculation server 
+You can add your reductions to calculation server :question:
+
+
+## Supported formats
+### PNML - ISO standard for Petri Nets
+Analyser removes all graphical and toolsepcific information about Petri Net

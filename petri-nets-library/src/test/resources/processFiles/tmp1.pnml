@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net type="http://www.pnml.org/version-2009/grammar/ptnet" id="net">
+    <page id="page">
+      <toolspecific tool="org.pnml.tools.epnk.diagraminfo" version="0.9.2">
+        <diagram visible="true" type="PNMLCoreModel" element="page" name="Page null" measurementUnit="Pixel">
+          <styles xsi:type="notation:DiagramStyle" pageX="0" pageY="0" pageWidth="100" pageHeight="100" description=""/>
+        </diagram>
+      </toolspecific>
+      <place id="p1">
+        <name>
+          <text>p1</text>
+        </name>
+        <graphics>
+          <position x="458.0" y="303.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+        <initialMarking>
+          <text>10</text>
+        </initialMarking>
+      </place>
+    </page>
+  </net>
+</pnml>

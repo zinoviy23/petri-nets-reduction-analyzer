@@ -3,7 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.PetriNet;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 import lombok.NonNull;
@@ -16,7 +16,7 @@ import static java.util.stream.Collectors.toList;
 public class Reducer {
     private final static Logger LOGGER = Logger.getLogger(Reducer.class);
 
-    private PetriNet petriNet;
+    private PetriNet<Place, Transition> petriNet;
 
     private boolean reduced = false;
 
@@ -46,7 +46,7 @@ public class Reducer {
     private DeleteVertexCallback<Transition, Place> deleteTransitionCallback =
             DeleteVertexCallback.invertedAdapter(deletePlaceCallback);
 
-    public Reducer(@NonNull PetriNet petriNet) {
+    public Reducer(@NonNull PetriNet<Place, Transition> petriNet) {
         this.petriNet = petriNet;
     }
 
