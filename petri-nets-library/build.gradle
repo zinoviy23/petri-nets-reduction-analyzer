@@ -15,7 +15,7 @@ dependencies {
     implementation "fr.lip6.pnml:fr.lip6.pnml.framework.ptnet:$pnmlVersion"
     implementation "fr.lip6.pnml:fr.lip6.pnml.framework.utils:$pnmlVersion"
 
-    compileOnly 'org.jetbrains:annotations:17.0.0'
+    implementation 'org.jetbrains:annotations:17.0.0'
     
     implementation 'pnml.framework:fucking3dparties:1.0.0'
     
