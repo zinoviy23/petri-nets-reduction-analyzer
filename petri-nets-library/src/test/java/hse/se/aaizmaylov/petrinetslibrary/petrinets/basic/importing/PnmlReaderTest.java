@@ -12,7 +12,7 @@ import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PnmlReaderTest {
-    private static final Logger LOGGER = Logger.getLogger(PnmlReaderTest.class);
+//    private static final Logger LOGGER = Logger.getLogger(PnmlReaderTest.class);
 
     @Test
     void readSuccessPetriNetWithOnePlace() throws PetriNetReader.PetriNetReadingException {
@@ -51,6 +51,9 @@ class PnmlReaderTest {
 
         assertEquals(t1, first(p1.getInputs()).getFromEndpoint());
         assertEquals(t1, first(p1.getOutputs()).getToEndpoint());
+
+        assertEquals(Long.valueOf(1), first(p1.getInputs()).weight());
+        assertEquals(Long.valueOf(1), first(p1.getOutputs()).weight());
     }
 
     @Test
@@ -83,5 +86,19 @@ class PnmlReaderTest {
         assertEquals(p1, first(t1.getInputs()).getFromEndpoint());
 
         assertEquals(t1, first(p1.getOutputs()).getToEndpoint());
+    }
+
+    @Test
+    void edgeAnnotation() throws PetriNetReader.PetriNetReadingException {
+        PetriNetReader<Place, Transition> reader = new PnmlReader();
+        PetriNet<Place, Transition> petriNet = reader.read(getPath("readingFromPnml/withEdgeAnnotation.pnml",
+                getClass()));
+
+        assertEquals(1, petriNet.getPlaces().size());
+        assertEquals(1, petriNet.getTransitions().size());
+
+        Place p = first(petriNet.getPlaces());
+
+        assertEquals(Long.valueOf(10), first(p.getOutputs()).weight());
     }
 }

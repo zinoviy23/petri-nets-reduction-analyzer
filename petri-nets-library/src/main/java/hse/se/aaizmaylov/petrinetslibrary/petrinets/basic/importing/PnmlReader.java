@@ -81,8 +81,8 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
     private static void getVerticesFromPage(@NotNull PageHLAPI page, @NotNull PetriNet<Place, Transition> petriNet) {
         for (PlaceHLAPI placeHLAPI : page.getObjects_PlaceHLAPI()) {
             Place place = Place.withMarks(
-                    (int) (placeHLAPI.getInitialMarkingHLAPI() != null
-                            ? (long)placeHLAPI.getInitialMarkingHLAPI().getText()
+                    (placeHLAPI.getInitialMarkingHLAPI() != null
+                            ? placeHLAPI.getInitialMarking().getText()
                             : 0),
                     placeHLAPI.getId());
 
@@ -106,7 +106,9 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
                 Transition to = petriNet.getTransitionsMap()
                         .get(getOriginalIdFromRef(references, arc.getTargetHLAPI().getId()));
 
-                from.addOutput(new FromPlaceToTransitionEdge(from, to));
+                from.addOutput(new FromPlaceToTransitionArc(from, to, arc.getInscription() != null
+                        ? arc.getInscription().getText()
+                        : 1));
             } else if (arc.getSourceHLAPI() instanceof TransitionNodeHLAPI &&
                     arc.getTargetHLAPI() instanceof PlaceNodeHLAPI) {
 
@@ -116,7 +118,9 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
                 Place to = petriNet.getPlacesMap()
                         .get(getOriginalIdFromRef(references, arc.getTargetHLAPI().getId()));
 
-                from.addOutput(new FromTransitionToPlaceEdge(from, to));
+                from.addOutput(new FromTransitionToPlaceArc(from, to, arc.getInscription() != null
+                                ? arc.getInscription().getText()
+                                : 1));
             } else {
                 throw new WrongEdgeTypeException("Wrong endpoint types: source = " + arc.getSourceHLAPI().getClass() +
                         ", target = " + arc.getTargetHLAPI().getClass());

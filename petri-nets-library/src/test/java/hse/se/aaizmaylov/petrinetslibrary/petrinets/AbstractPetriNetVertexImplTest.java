@@ -41,14 +41,14 @@ class AbstractPetriNetVertexImplTest {
         AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl("v") {};
         AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl("v") {};
 
-        Edge edge = genEdge(vertex1, vertex2);
+        Arc arc = genEdge(vertex1, vertex2);
 
-        vertex1.addOutput(edge);
+        vertex1.addOutput(arc);
 
         assertEquals(1, vertex1.getOutputs().size());
         assertEquals(1, vertex2.getInputs().size());
 
-        vertex1.removeOutput(edge);
+        vertex1.removeOutput(arc);
 
         assertTrue(vertex1.getOutputs().isEmpty());
         assertTrue(vertex2.getInputs().isEmpty());
@@ -59,14 +59,14 @@ class AbstractPetriNetVertexImplTest {
         AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl("v") {};
         AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl("v") {};
 
-        Edge edge = genEdge(vertex2, vertex1);
+        Arc arc = genEdge(vertex2, vertex1);
 
-        vertex1.addInput(edge);
+        vertex1.addInput(arc);
 
         assertEquals(1, vertex1.getInputs().size());
         assertEquals(1, vertex2.getOutputs().size());
 
-        vertex1.removeInput(edge);
+        vertex1.removeInput(arc);
 
         assertTrue(vertex1.getInputs().isEmpty());
         assertTrue(vertex2.getOutputs().isEmpty());
@@ -75,12 +75,13 @@ class AbstractPetriNetVertexImplTest {
     @Test
     void emptyRemove() {
         AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("v") {};
-        Edge edge = genEdge(vertex, vertex);
+        Arc arc = genEdge(vertex, vertex);
 
-        assertFalse(vertex.removeInput(edge));
-        assertFalse(vertex.removeOutput(edge));
+        assertFalse(vertex.removeInput(arc));
+        assertFalse(vertex.removeOutput(arc));
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     void nullChecking() {
         AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("v") {};
@@ -102,8 +103,8 @@ class AbstractPetriNetVertexImplTest {
         assertEquals(1, vertex2.getOutputs().size());
     }
 
-    private Edge genEdge(Object vertex1, Object vertex2) {
-        return new Edge() {
+    private Arc genEdge(Object vertex1, Object vertex2) {
+        return new Arc() {
             @Override
             public Object getFromEndpoint() {
                 return vertex1;
@@ -112,6 +113,11 @@ class AbstractPetriNetVertexImplTest {
             @Override
             public Object getToEndpoint() {
                 return vertex2;
+            }
+
+            @Override
+            public Object weight() {
+                return 1;
             }
 
             @Override
@@ -138,6 +144,7 @@ class AbstractPetriNetVertexImplTest {
         assertEquals("kekkekkek", vertex.label());
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     void labelNonNull() {
         assertThrows(NullPointerException.class, () -> new AbstractPetriNetVertexImpl(null) {});

@@ -13,10 +13,10 @@ class TransitionImplTest {
         Place place2 = new PlaceImpl(2, "p2");
         Place place3 = new PlaceImpl(3, "p3");
 
-        transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
-        transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place1, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place2, transition));
 
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place3));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place3));
 
         transition.fire();
 
@@ -32,10 +32,10 @@ class TransitionImplTest {
         Place place2 = new PlaceImpl(2, "p2");
         Place place3 = new PlaceImpl(3, "p3");
 
-        transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
-        transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place1, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place2, transition));
 
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place3));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place3));
 
         transition.fire();
 
@@ -51,10 +51,10 @@ class TransitionImplTest {
         Place place2 = new PlaceImpl(2, "p2");
         Place place3 = new PlaceImpl(3, "p3");
 
-        transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
-        transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place1, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place2, transition));
 
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place3));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place3));
 
         assertTrue(transition.enabled());
     }
@@ -66,10 +66,10 @@ class TransitionImplTest {
         Place place2 = new PlaceImpl(2, "p2");
         Place place3 = new PlaceImpl(3, "p3");
 
-        transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
-        transition.addInput(new FromPlaceToTransitionEdge(place2, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place1, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place2, transition));
 
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place3));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place3));
 
         assertFalse(transition.enabled());
     }
@@ -79,5 +79,25 @@ class TransitionImplTest {
         Transition transition = new TransitionImpl("t");
 
         assertTrue(transition.enabled());
+    }
+
+    @Test
+    void enabledWithWeights() {
+        Transition t = new TransitionImpl("t");
+        Place p1 = new PlaceImpl(2, "p1");
+        Place p2 = new PlaceImpl(0, "p2");
+        Place p3 = new PlaceImpl(3, "p3");
+
+        t.addInput(new FromPlaceToTransitionArc(p1, t, 2));
+        t.addInput(new FromPlaceToTransitionArc(p3, t, 2));
+        t.addOutput(new FromTransitionToPlaceArc(t, p2, 3));
+
+        assertTrue(t.enabled());
+
+        t.fire();
+
+        assertEquals(0, p1.getMarks());
+        assertEquals(1, p3.getMarks());
+        assertEquals(3, p2.getMarks());
     }
 }

@@ -15,9 +15,9 @@ class FusionOfSeriesTransitionsTest {
         Place place1 = Place.withMarks(2, "p1");
         Place place2 = Place.withMarks(1, "p2");
 
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
-        transition2.addInput(new FromPlaceToTransitionEdge(place1, transition2));
-        transition2.addOutput(new FromTransitionToPlaceEdge(transition2, place2));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place1));
+        transition2.addInput(new FromPlaceToTransitionArc(place1, transition2));
+        transition2.addOutput(new FromTransitionToPlaceArc(transition2, place2));
 
         Reduction<Transition, Place> reduction = new FusionOfSeriesTransitions();
 

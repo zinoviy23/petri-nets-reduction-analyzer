@@ -15,10 +15,10 @@ class FusionOfSeriesPlacesTest {
         Transition transition = new TransitionImpl("t1");
         Transition transition1 = new TransitionImpl("t2");
 
-        transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place2));
+        transition.addInput(new FromPlaceToTransitionArc(place1, transition));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place2));
 
-        place2.addInput(new FromTransitionToPlaceEdge(transition1, place2));
+        place2.addInput(new FromTransitionToPlaceArc(transition1, place2));
 
         FusionOfSeriesPlaces reduction = new FusionOfSeriesPlaces();
 

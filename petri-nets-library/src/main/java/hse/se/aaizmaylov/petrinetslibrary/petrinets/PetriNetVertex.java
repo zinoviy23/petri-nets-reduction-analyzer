@@ -5,10 +5,11 @@ import java.util.Set;
 @SuppressWarnings({"UnusedReturnValue", "unused"})
 public interface PetriNetVertex<
         TTokenContainer,
+        TWeight,
         TSelf,
         TNeighbours,
-        TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
-        TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>>
+        TInput extends Arc<TTokenContainer, TWeight, TNeighbours, TSelf>,
+        TOutput extends Arc<TTokenContainer, TWeight, TSelf, TNeighbours>>
         extends LabeledVertex {
 
     Set<TInput> getInputs();

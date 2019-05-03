@@ -1,15 +1,16 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
+import org.jetbrains.annotations.NotNull;
 
-class EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour> {
-    final Edge<TTokenContainer, TTarget, TNeighbour> edgeToVertex;
+class EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour> {
+    final Arc<TTokenContainer, TWeight, TTarget, TNeighbour> arcToVertex;
 
-    final Edge<TTokenContainer, TNeighbour, TTarget> edgeFromVertex;
+    final Arc<TTokenContainer, TWeight, TNeighbour, TTarget> arcFromVertex;
 
-    EdgesPairIncidentWithVertex(Edge<TTokenContainer, TTarget, TNeighbour> edgeToVertex,
-                                        Edge<TTokenContainer, TNeighbour, TTarget> edgeFromVertex) {
-        this.edgeToVertex = edgeToVertex;
-        this.edgeFromVertex = edgeFromVertex;
+    EdgesPairIncidentWithVertex(@NotNull Arc<TTokenContainer, TWeight, TTarget, TNeighbour> arcToVertex,
+                                @NotNull Arc<TTokenContainer, TWeight, TNeighbour, TTarget> arcFromVertex) {
+        this.arcToVertex = arcToVertex;
+        this.arcFromVertex = arcFromVertex;
     }
 }

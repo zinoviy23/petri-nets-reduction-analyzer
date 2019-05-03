@@ -13,9 +13,9 @@ class FusionOfSelfLoopTransitionsTest {
         Transition transition1 = new TransitionImpl("t2");
         Place place = Place.withMarks(0, "p1");
 
-        transition.addInput(new FromPlaceToTransitionEdge(place, transition));
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place));
-        place.addInput(new FromTransitionToPlaceEdge(transition1, place));
+        transition.addInput(new FromPlaceToTransitionArc(place, transition));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place));
+        place.addInput(new FromTransitionToPlaceArc(transition1, place));
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
 
@@ -37,10 +37,10 @@ class FusionOfSelfLoopTransitionsTest {
         Place place = Place.withMarks(0, "p1");
         Place place1 = Place.withMarks(1, "p2");
 
-        transition.addInput(new FromPlaceToTransitionEdge(place, transition));
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place));
-        place.addInput(new FromTransitionToPlaceEdge(transition1, place));
-        transition.addInput(new FromPlaceToTransitionEdge(place1, transition));
+        transition.addInput(new FromPlaceToTransitionArc(place, transition));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place));
+        place.addInput(new FromTransitionToPlaceArc(transition1, place));
+        transition.addInput(new FromPlaceToTransitionArc(place1, transition));
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
 
@@ -59,8 +59,8 @@ class FusionOfSelfLoopTransitionsTest {
         Place place = Place.withMarks(1, "p1");
         Place place1 = Place.withMarks(1, "p2");
 
-        place.addOutput(new FromPlaceToTransitionEdge(place, transition));
-        transition.addOutput(new FromTransitionToPlaceEdge(transition, place1));
+        place.addOutput(new FromPlaceToTransitionArc(place, transition));
+        transition.addOutput(new FromTransitionToPlaceArc(transition, place1));
 
         FusionOfSelfLoopTransitions reduction = new FusionOfSelfLoopTransitions();
         assertFalse(reduction.reduceFrom(place, DeleteVertexCallback.empty()));

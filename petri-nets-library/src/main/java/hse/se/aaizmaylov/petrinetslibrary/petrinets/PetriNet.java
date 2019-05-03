@@ -1,6 +1,7 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets;
 
 import lombok.NonNull;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -10,7 +11,7 @@ public class PetriNet<TPlace extends LabeledVertex, TTransition extends LabeledV
 
     private Map<String, TTransition> transitions;
 
-    public PetriNet(Collection<? extends TPlace> places, Collection<? extends TTransition> transitions) {
+    public PetriNet(@NonNull Collection<? extends TPlace> places, @NonNull Collection<? extends TTransition> transitions) {
         this.places = places.stream().collect(Collectors.toMap(LabeledVertex::label, p->p));
         this.transitions = transitions.stream().collect(Collectors.toMap(LabeledVertex::label, t->t));
     }

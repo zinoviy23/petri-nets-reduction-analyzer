@@ -1,9 +1,10 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 import lombok.NonNull;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +13,13 @@ import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 
 public abstract class AbstractFusionOfSelfLoop<
         TTokenContainer,
-        TTarget extends PetriNetVertex<TTokenContainer, TTarget, TNeighbour, Edge<TTokenContainer, TNeighbour, TTarget>,
-                Edge<TTokenContainer, TTarget, TNeighbour>>,
-        TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
-                Edge<TTokenContainer, TNeighbour, TTarget>>>
+        TWeight,
+        TTarget extends PetriNetVertex<TTokenContainer, TWeight, TTarget, TNeighbour,
+                Arc<TTokenContainer, TWeight, TNeighbour, TTarget>,
+                Arc<TTokenContainer, TWeight, TTarget, TNeighbour>>,
+        TNeighbour extends PetriNetVertex<TTokenContainer, TWeight, TNeighbour, TTarget,
+                Arc<TTokenContainer, TWeight, TTarget, TNeighbour>,
+                Arc<TTokenContainer, TWeight, TNeighbour, TTarget>>>
         implements Reduction<TTarget, TNeighbour> {
 
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSelfLoop.class);
@@ -25,17 +29,18 @@ public abstract class AbstractFusionOfSelfLoop<
         if (!check(target))
             return false;
 
-        List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>> edgesToRemove = new ArrayList<>();
+        List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>> edgesToRemove =
+                new ArrayList<>();
 
-        for (Edge<TTokenContainer, TTarget, TNeighbour> edgeToPotentialVertex : target.getOutputs()) {
-            TNeighbour potentialVertex = edgeToPotentialVertex.getToEndpoint();
+        for (Arc<TTokenContainer, TWeight, TTarget, TNeighbour> arcToPotentialVertex : target.getOutputs()) {
+            TNeighbour potentialVertex = arcToPotentialVertex.getToEndpoint();
 
             if (!checkNeighbour(potentialVertex) || potentialVertex.getOutputs().size() != 1 ||
                     potentialVertex.getInputs().size() != 1)
                 continue;
 
             if (first(potentialVertex.getOutputs()).getToEndpoint() == target) {
-                edgesToRemove.add(new EdgesPairIncidentWithVertex<>(edgeToPotentialVertex,
+                edgesToRemove.add(new EdgesPairIncidentWithVertex<>(arcToPotentialVertex,
                         first(potentialVertex.getOutputs())));
             }
         }
@@ -51,17 +56,17 @@ public abstract class AbstractFusionOfSelfLoop<
     }
 
     private void deleteEdgesToLoopedVertices(
-            List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>> edgesToRemove,
+            List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>> edgesToRemove,
             DeleteVertexCallback<TTarget, TNeighbour> callback) {
 
-        for (EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour> pair : edgesToRemove) {
-            pair.edgeFromVertex.getToEndpoint().removeInput(pair.edgeFromVertex);
-            pair.edgeToVertex.getFromEndpoint().removeOutput(pair.edgeToVertex);
-            callback.onDeleteNeighbour(pair.edgeToVertex.getToEndpoint());
+        for (EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour> pair : edgesToRemove) {
+            pair.arcFromVertex.getToEndpoint().removeInput(pair.arcFromVertex);
+            pair.arcToVertex.getFromEndpoint().removeOutput(pair.arcToVertex);
+            callback.onDeleteNeighbour(pair.arcToVertex.getToEndpoint());
         }
     }
 
-    protected abstract boolean check(TTarget vertex);
+    protected abstract boolean check(@NotNull TTarget vertex);
 
-    protected abstract boolean checkNeighbour(TNeighbour neighbour);
+    protected abstract boolean checkNeighbour(@NotNull TNeighbour neighbour);
 }

@@ -1,23 +1,24 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 
 public interface Place extends PetriNetVertex<
-        Integer,
+        Long,
+        Long,
         Place,
         Transition,
-        Edge<Integer, Transition, Place>,
-        Edge<Integer, Place, Transition>> {
-    int getMarks();
+        Arc<Long, Long, Transition, Place>,
+        Arc<Long, Long, Place, Transition>> {
+    long getMarks();
 
-    void setMarks(int marks);
+    void setMarks(long marks);
 
-    int addMarks(int marks);
+    void addMarks(long marks);
 
-    int removeMarks(int marks);
+    void removeMarks(long marks);
 
-    static Place withMarks(int marks, String label) {
+    static Place withMarks(long marks, String label) {
         return new PlaceImpl(marks, label);
     }
 }

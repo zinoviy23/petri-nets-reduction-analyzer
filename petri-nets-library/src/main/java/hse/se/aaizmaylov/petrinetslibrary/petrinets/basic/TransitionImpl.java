@@ -1,14 +1,15 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.AbstractPetriNetVertexImpl;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 
 public class TransitionImpl extends AbstractPetriNetVertexImpl<
-        Integer,
+        Long,
+        Long,
         Transition,
         Place,
-        Edge<Integer, Place, Transition>,
-        Edge<Integer, Transition, Place>> implements Transition {
+        Arc<Long, Long, Place, Transition>,
+        Arc<Long, Long, Transition, Place>> implements Transition {
 
     public TransitionImpl(String label) {
         super(label);
@@ -19,12 +20,12 @@ public class TransitionImpl extends AbstractPetriNetVertexImpl<
         if (!enabled())
             return;
 
-        getInputs().forEach(p -> p.getTokensFrom(1));
-        getOutputs().forEach(p -> p.putTokensTo(1));
+        getInputs().forEach(p -> p.getTokensFrom(p.weight()));
+        getOutputs().forEach(p -> p.putTokensTo(p.weight()));
     }
 
     @Override
     public boolean enabled() {
-        return getInputs().stream().allMatch(p -> p.getFromEndpoint().getMarks() > 0);
+        return getInputs().stream().allMatch(p -> p.getFromEndpoint().getMarks() >= p.weight());
     }
 }

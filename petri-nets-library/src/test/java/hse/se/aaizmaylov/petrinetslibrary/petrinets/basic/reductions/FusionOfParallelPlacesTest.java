@@ -15,11 +15,11 @@ class FusionOfParallelPlacesTest {
         Place place1 = Place.withMarks(0, "p1");
         Place place2 = Place.withMarks(0, "p2");
 
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
-        place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place1));
+        place1.addOutput(new FromPlaceToTransitionArc(place1, transition2));
 
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place2));
-        place2.addOutput(new FromPlaceToTransitionEdge(place2, transition2));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place2));
+        place2.addOutput(new FromPlaceToTransitionArc(place2, transition2));
 
         Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
@@ -42,11 +42,11 @@ class FusionOfParallelPlacesTest {
         Place place1 = Place.withMarks(1, "p1");
         Place place2 = Place.withMarks(1, "p2");
 
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
-        place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place1));
+        place1.addOutput(new FromPlaceToTransitionArc(place1, transition2));
 
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place2));
-        place2.addOutput(new FromPlaceToTransitionEdge(place2, transition2));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place2));
+        place2.addOutput(new FromPlaceToTransitionArc(place2, transition2));
 
         Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
@@ -65,8 +65,8 @@ class FusionOfParallelPlacesTest {
         Transition transition2 = new TransitionImpl("t2");
         Place place1 = Place.withMarks(0, "p1");
 
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place1));
-        place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place1));
+        place1.addOutput(new FromPlaceToTransitionArc(place1, transition2));
 
         Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 

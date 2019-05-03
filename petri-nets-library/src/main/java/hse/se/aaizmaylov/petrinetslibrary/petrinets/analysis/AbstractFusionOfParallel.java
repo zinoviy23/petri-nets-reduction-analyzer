@@ -1,9 +1,10 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 import lombok.NonNull;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,10 +15,13 @@ import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 
 public abstract class AbstractFusionOfParallel<
         TTokenContainer,
-        TTarget extends PetriNetVertex<TTokenContainer, TTarget, TNeighbour, Edge<TTokenContainer, TNeighbour, TTarget>,
-                Edge<TTokenContainer, TTarget, TNeighbour>>,
-        TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
-                Edge<TTokenContainer, TNeighbour, TTarget>>>
+        TWeight,
+        TTarget extends PetriNetVertex<TTokenContainer, TWeight, TTarget, TNeighbour,
+                Arc<TTokenContainer, TWeight, TNeighbour, TTarget>,
+                Arc<TTokenContainer, TWeight, TTarget, TNeighbour>>,
+        TNeighbour extends PetriNetVertex<TTokenContainer, TWeight, TNeighbour, TTarget,
+                Arc<TTokenContainer, TWeight, TTarget, TNeighbour>,
+                Arc<TTokenContainer, TWeight, TNeighbour, TTarget>>>
         implements Reduction<TTarget, TNeighbour>  {
 
     private static final Logger LOGGER = Logger.getLogger(AbstractFusionOfParallel.class);
@@ -27,19 +31,19 @@ public abstract class AbstractFusionOfParallel<
         if (!check(target))
             return false;
 
-        Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge
+        Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>>> edgesToMerge
                 = new HashMap<>();
 
-        for (Edge<TTokenContainer, TTarget, TNeighbour> outputEdge : target.getOutputs()) {
-            if (checkNeighbour(outputEdge.getToEndpoint())) {
-                TNeighbour possibleVertexToMerge = outputEdge.getToEndpoint();
+        for (Arc<TTokenContainer, TWeight, TTarget, TNeighbour> outputArc : target.getOutputs()) {
+            if (checkNeighbour(outputArc.getToEndpoint())) {
+                TNeighbour possibleVertexToMerge = outputArc.getToEndpoint();
 
                 if (possibleVertexToMerge.getInputs().size() == 1 && possibleVertexToMerge.getOutputs().size() == 1) {
-                    Edge<TTokenContainer, TNeighbour, TTarget> fromPossibleVertexEdge =
+                    Arc<TTokenContainer, TWeight, TNeighbour, TTarget> fromPossibleVertexArc =
                             first(possibleVertexToMerge.getOutputs());
 
-                    edgesToMerge.computeIfAbsent(fromPossibleVertexEdge.getToEndpoint(), unused -> new ArrayList<>())
-                            .add(new EdgesPairIncidentWithVertex<>(outputEdge, fromPossibleVertexEdge));
+                    edgesToMerge.computeIfAbsent(fromPossibleVertexArc.getToEndpoint(), unused -> new ArrayList<>())
+                            .add(new EdgesPairIncidentWithVertex<>(outputArc, fromPossibleVertexArc));
                 }
             }
         }
@@ -55,22 +59,24 @@ public abstract class AbstractFusionOfParallel<
     }
 
     private boolean mergeEdges(
-            Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> edgesToMerge,
+            Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>>> edgesToMerge,
             DeleteVertexCallback<TTarget, TNeighbour> callback) {
 
         boolean mergedSomething = false;
 
-        for (Map.Entry<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>>> entry :
+        for (Map.Entry<TTarget,
+                List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>>> entry :
                 edgesToMerge.entrySet()) {
             if (entry.getValue().size() < 2)
                 continue;
 
             for (int i = 1; i < entry.getValue().size(); i++) {
-                EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour> currentPair = entry.getValue().get(i);
+                EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour> currentPair
+                        = entry.getValue().get(i);
 
-                currentPair.edgeToVertex.getFromEndpoint().removeOutput(currentPair.edgeToVertex);
-                currentPair.edgeFromVertex.getToEndpoint().removeInput(currentPair.edgeFromVertex);
-                callback.onDeleteNeighbour(currentPair.edgeToVertex.getToEndpoint());
+                currentPair.arcToVertex.getFromEndpoint().removeOutput(currentPair.arcToVertex);
+                currentPair.arcFromVertex.getToEndpoint().removeInput(currentPair.arcFromVertex);
+                callback.onDeleteNeighbour(currentPair.arcToVertex.getToEndpoint());
             }
 
             mergedSomething = true;
@@ -79,7 +85,7 @@ public abstract class AbstractFusionOfParallel<
         return mergedSomething;
     }
 
-    protected abstract boolean check(TTarget vertex);
+    protected abstract boolean check(@NotNull TTarget vertex);
 
-    protected abstract boolean checkNeighbour(TNeighbour neighbour);
+    protected abstract boolean checkNeighbour(@NotNull TNeighbour neighbour);
 }

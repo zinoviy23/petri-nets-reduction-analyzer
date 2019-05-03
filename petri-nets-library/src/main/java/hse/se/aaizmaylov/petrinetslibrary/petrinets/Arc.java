@@ -1,9 +1,11 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets;
 
-public interface Edge<TTokenContainer, Input, Output> {
+public interface Arc<TTokenContainer, TWeight, Input, Output> {
     Input getFromEndpoint();
 
     Output getToEndpoint();
+
+    TWeight weight();
 
     void setFromEndpoint(Input from);
 
