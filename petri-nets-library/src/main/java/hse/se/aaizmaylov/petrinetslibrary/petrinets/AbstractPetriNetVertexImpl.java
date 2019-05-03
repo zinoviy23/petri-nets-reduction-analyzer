@@ -16,7 +16,7 @@ public abstract class AbstractPetriNetVertexImpl<
         TOutput extends Arc<TTokenContainer, TWeight, TSelf, TNeighbours>>
         implements PetriNetVertex<TTokenContainer, TWeight, TSelf, TNeighbours, TInput, TOutput> {
 
-    //TODO: add check, that added edge contains current vertex
+    //TODO: add check, that added edge contains current vertex, for TC
 
     private final String label;
 
