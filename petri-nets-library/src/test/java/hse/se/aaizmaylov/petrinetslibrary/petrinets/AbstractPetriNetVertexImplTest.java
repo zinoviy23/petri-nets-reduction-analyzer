@@ -1,5 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets;
 
+import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -103,18 +104,35 @@ class AbstractPetriNetVertexImplTest {
         assertEquals(1, vertex2.getOutputs().size());
     }
 
+    @Test
+    void foreignArcs() {
+        AbstractPetriNetVertexImpl vertex1 = new AbstractPetriNetVertexImpl("v1") {};
+        AbstractPetriNetVertexImpl vertex2 = new AbstractPetriNetVertexImpl("v2") {};
+        AbstractPetriNetVertexImpl vertex3 = new AbstractPetriNetVertexImpl("v3") {};
+
+        final Arc arc = genEdge(vertex2, vertex3);
+
+        assertThrows(ForeignArcException.class, () -> vertex1.addInput(arc));
+        assertThrows(ForeignArcException.class, () -> vertex1.removeInput(arc));
+        assertThrows(ForeignArcException.class, () -> vertex1.addOutput(arc));
+        assertThrows(ForeignArcException.class, () -> vertex1.removeOutput(arc));
+    }
+
     private Arc genEdge(Object vertex1, Object vertex2) {
         return new Arc() {
+            @NotNull
             @Override
             public Object getFromEndpoint() {
                 return vertex1;
             }
 
+            @NotNull
             @Override
             public Object getToEndpoint() {
                 return vertex2;
             }
 
+            @NotNull
             @Override
             public Object weight() {
                 return 1;
