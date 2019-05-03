@@ -16,8 +16,6 @@ public abstract class AbstractPetriNetVertexImpl<
         TOutput extends Arc<TTokenContainer, TWeight, TSelf, TNeighbours>>
         implements PetriNetVertex<TTokenContainer, TWeight, TSelf, TNeighbours, TInput, TOutput> {
 
-    //TODO: add check, that added edge contains current vertex, for TC
-
     private final String label;
 
     private Set<TInput> inputs = new HashSet<>();
@@ -43,44 +41,56 @@ public abstract class AbstractPetriNetVertexImpl<
     }
 
     @Override
-    public boolean addOutput(@NonNull TOutput outputEdge) {
-        boolean insertionResult = outputs.add(outputEdge);
+    public boolean addOutput(@NonNull TOutput outputArc) {
+        if (outputArc.getFromEndpoint() != this)
+            throw new ForeignArcException("Try to add output arc, which doesn't go from this. " + outputArc);
+
+        boolean insertionResult = outputs.add(outputArc);
 
         if (insertionResult) {
-            outputEdge.getToEndpoint().addInput(outputEdge);
+            outputArc.getToEndpoint().addInput(outputArc);
         }
 
         return insertionResult;
     }
 
     @Override
-    public boolean removeOutput(@NonNull TOutput outputEdge) {
-        boolean insertionResult = outputs.remove(outputEdge);
+    public boolean removeOutput(@NonNull TOutput outputArc) {
+        if (outputArc.getFromEndpoint() != this)
+            throw new ForeignArcException("Try to remove output arc, which doesn't go from this. " + outputArc);
+
+        boolean insertionResult = outputs.remove(outputArc);
 
         if (insertionResult) {
-            outputEdge.getToEndpoint().removeInput(outputEdge);
+            outputArc.getToEndpoint().removeInput(outputArc);
         }
 
         return insertionResult;
     }
 
     @Override
-    public boolean removeInput(@NonNull TInput inputEdge) {
-        boolean insertionResult = inputs.remove(inputEdge);
+    public boolean removeInput(@NonNull TInput inputArc) {
+        if (inputArc.getToEndpoint() != this)
+            throw new ForeignArcException("Try to remove input arc, which doesn't go to this. " + inputArc);
+
+        boolean insertionResult = inputs.remove(inputArc);
 
         if (insertionResult) {
-            inputEdge.getFromEndpoint().removeOutput(inputEdge);
+            inputArc.getFromEndpoint().removeOutput(inputArc);
         }
 
         return insertionResult;
     }
 
     @Override
-    public boolean addInput(@NonNull TInput inputEdge) {
-        boolean insertionResult = inputs.add(inputEdge);
+    public boolean addInput(@NonNull TInput inputArc) {
+        if (inputArc.getToEndpoint() != this)
+            throw new ForeignArcException("Try to add input arc, which doesn't go to this. " + inputArc);
+
+        boolean insertionResult = inputs.add(inputArc);
 
         if (insertionResult) {
-            inputEdge.getFromEndpoint().addOutput(inputEdge);
+            inputArc.getFromEndpoint().addOutput(inputArc);
         }
 
         return insertionResult;

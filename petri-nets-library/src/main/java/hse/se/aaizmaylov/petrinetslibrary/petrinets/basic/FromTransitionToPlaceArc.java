@@ -4,6 +4,7 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.jetbrains.annotations.NotNull;
 
 public class FromTransitionToPlaceArc implements Arc<Long, Long, Transition, Place> {
 
@@ -36,6 +37,7 @@ public class FromTransitionToPlaceArc implements Arc<Long, Long, Transition, Pla
         toEndpoint.addMarks(tokens);
     }
 
+    @NotNull
     @Override
     public Long weight() {
         return weight;
