@@ -80,4 +80,24 @@ class TransitionImplTest {
 
         assertTrue(transition.enabled());
     }
+
+    @Test
+    void enabledWithWeights() {
+        Transition t = new TransitionImpl("t");
+        Place p1 = new PlaceImpl(2, "p1");
+        Place p2 = new PlaceImpl(0, "p2");
+        Place p3 = new PlaceImpl(3, "p3");
+
+        t.addInput(new FromPlaceToTransitionArc(p1, t, 2));
+        t.addInput(new FromPlaceToTransitionArc(p3, t, 2));
+        t.addOutput(new FromTransitionToPlaceArc(t, p2, 3));
+
+        assertTrue(t.enabled());
+
+        t.fire();
+
+        assertEquals(0, p1.getMarks());
+        assertEquals(1, p3.getMarks());
+        assertEquals(3, p2.getMarks());
+    }
 }

@@ -4,15 +4,19 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 import lombok.NonNull;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
 
 import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 
 public abstract class AbstractFusionOfSeries<
         TTokenContainer,
-        TTarget extends PetriNetVertex<TTokenContainer, TTarget, TNeighbour, Arc<TTokenContainer, TNeighbour, TTarget>,
-                Arc<TTokenContainer, TTarget, TNeighbour>>,
-        TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Arc<TTokenContainer, TTarget, TNeighbour>,
-                Arc<TTokenContainer, TNeighbour, TTarget>>>
+        TWeight,
+        TTarget extends PetriNetVertex<TTokenContainer, TWeight, TTarget, TNeighbour,
+                Arc<TTokenContainer, TWeight, TNeighbour, TTarget>,
+                Arc<TTokenContainer, TWeight, TTarget, TNeighbour>>,
+        TNeighbour extends PetriNetVertex<TTokenContainer, TWeight, TNeighbour, TTarget,
+                Arc<TTokenContainer, TWeight, TTarget, TNeighbour>,
+                Arc<TTokenContainer, TWeight, TNeighbour, TTarget>>>
         implements Reduction<TTarget, TNeighbour> {
 
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSeries.class);
@@ -22,9 +26,9 @@ public abstract class AbstractFusionOfSeries<
         if (!check(target))
             return false;
 
-        Arc<TTokenContainer, TTarget, TNeighbour> reducedArc = null;
+        Arc<TTokenContainer, TWeight, TTarget, TNeighbour> reducedArc = null;
 
-        for (Arc<TTokenContainer, TTarget, TNeighbour> output : target.getOutputs()) {
+        for (Arc<TTokenContainer, TWeight, TTarget, TNeighbour> output : target.getOutputs()) {
             if (output.getToEndpoint().getOutputs().size() == 1 && output.getToEndpoint().getInputs().size() == 1 &&
                     checkNeighbour(output.getToEndpoint())) {
                 TTarget vertexToMerge = first(output.getToEndpoint().getOutputs()).getToEndpoint();
@@ -46,7 +50,7 @@ public abstract class AbstractFusionOfSeries<
     }
 
     private void mergeVertexConnectedByNeighbourVertex(
-            Arc<TTokenContainer, TTarget, TNeighbour> arcToConnectingNeighbour,
+            Arc<TTokenContainer, TWeight, TTarget, TNeighbour> arcToConnectingNeighbour,
             DeleteVertexCallback<TTarget, TNeighbour> callback) {
 
         TTarget firstVertex = arcToConnectingNeighbour.getFromEndpoint();
@@ -65,9 +69,9 @@ public abstract class AbstractFusionOfSeries<
         callback.onDeleteTarget(secondVertex);
     }
 
-    protected abstract boolean check(TTarget target);
+    protected abstract boolean check(@NotNull TTarget target);
 
-    protected abstract boolean checkMergedVertex(TTarget vertex);
+    protected abstract boolean checkMergedVertex(@NotNull TTarget vertex);
 
-    protected abstract boolean checkNeighbour(TNeighbour neighbour);
+    protected abstract boolean checkNeighbour(@NotNull TNeighbour neighbour);
 }

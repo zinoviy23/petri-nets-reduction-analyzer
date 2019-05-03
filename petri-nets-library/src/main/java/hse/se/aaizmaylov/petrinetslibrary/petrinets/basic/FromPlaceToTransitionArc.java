@@ -2,9 +2,10 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import lombok.Getter;
+import lombok.NonNull;
 import lombok.Setter;
 
-public class FromPlaceToTransitionArc implements Arc<Integer, Place, Transition> {
+public class FromPlaceToTransitionArc implements Arc<Long, Long, Place, Transition> {
 
     @Getter
     @Setter
@@ -14,17 +15,30 @@ public class FromPlaceToTransitionArc implements Arc<Integer, Place, Transition>
     @Setter
     private Transition toEndpoint;
 
-    public FromPlaceToTransitionArc(Place fromEndpoint, Transition toEndpoint) {
-        this.fromEndpoint = fromEndpoint;
-        this.toEndpoint = toEndpoint;
+    private Long weight;
+
+    public FromPlaceToTransitionArc(@NonNull Place fromEndpoint, @NonNull Transition toEndpoint) {
+        this(fromEndpoint, toEndpoint, 1);
     }
 
+    public FromPlaceToTransitionArc(@NonNull Place fromEndpoint, @NonNull Transition toEndpoint, long weight) {
+        this.fromEndpoint = fromEndpoint;
+        this.toEndpoint = toEndpoint;
+        this.weight = weight;
+    }
+    
+
     @Override
-    public void getTokensFrom(Integer tokens) {
+    public void getTokensFrom(Long tokens) {
         fromEndpoint.removeMarks(tokens);
     }
 
     @Override
-    public void putTokensTo(Integer tokens) {
+    public void putTokensTo(Long tokens) {
+    }
+
+    @Override
+    public Long weight() {
+        return weight;
     }
 }

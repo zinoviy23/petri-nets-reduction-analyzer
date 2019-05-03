@@ -81,6 +81,7 @@ class AbstractPetriNetVertexImplTest {
         assertFalse(vertex.removeOutput(arc));
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     void nullChecking() {
         AbstractPetriNetVertexImpl vertex = new AbstractPetriNetVertexImpl("v") {};
@@ -115,6 +116,11 @@ class AbstractPetriNetVertexImplTest {
             }
 
             @Override
+            public Object weight() {
+                return 1;
+            }
+
+            @Override
             public void setFromEndpoint(Object o) {
 
             }
@@ -138,6 +144,7 @@ class AbstractPetriNetVertexImplTest {
         assertEquals("kekkekkek", vertex.label());
     }
 
+    @SuppressWarnings("ConstantConditions")
     @Test
     void labelNonNull() {
         assertThrows(NullPointerException.class, () -> new AbstractPetriNetVertexImpl(null) {});

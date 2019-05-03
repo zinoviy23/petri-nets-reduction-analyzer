@@ -1,9 +1,8 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
+import org.jetbrains.annotations.NotNull;
+
 @FunctionalInterface
 public interface Reduction<TElement, TNeighbour> {
-
-    //TODO: Add callback
-
-    boolean reduceFrom(TElement element, DeleteVertexCallback<TElement, TNeighbour> callback);
+    boolean reduceFrom(@NotNull TElement element, @NotNull DeleteVertexCallback<TElement, TNeighbour> callback);
 }

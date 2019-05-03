@@ -5,40 +5,41 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import lombok.Getter;
 
 public class PlaceImpl extends AbstractPetriNetVertexImpl<
-        Integer,
+        Long,
+        Long,
         Place,
         Transition,
-        Arc<Integer, Transition, Place>,
-        Arc<Integer, Place, Transition>> implements Place {
+        Arc<Long, Long, Transition, Place>,
+        Arc<Long, Long, Place, Transition>> implements Place {
 
     @Getter
-    private int marks;
+    private long marks;
 
-    PlaceImpl(int marks, String label) {
+    PlaceImpl(long marks, String label) {
         super(label);
         checkMarksCount(marks);
         this.marks = marks;
     }
 
     @Override
-    public void setMarks(int marks) {
+    public void setMarks(long marks) {
         checkMarksCount(marks);
         this.marks = marks;
     }
 
     @Override
-    public int addMarks(int marks) {
+    public void addMarks(long marks) {
         checkMarksCount(this.marks + marks);
-        return this.marks += marks;
+        this.marks += marks;
     }
 
     @Override
-    public int removeMarks(int marks) {
+    public void removeMarks(long marks) {
         checkMarksCount(this.marks - marks);
-        return this.marks -= marks;
+        this.marks -= marks;
     }
 
-    private static void checkMarksCount(int marksCount) {
+    private static void checkMarksCount(long marksCount) {
         if (marksCount < 0)
             throw new IllegalArgumentException("Marks count must be more or equals than 0");
     }

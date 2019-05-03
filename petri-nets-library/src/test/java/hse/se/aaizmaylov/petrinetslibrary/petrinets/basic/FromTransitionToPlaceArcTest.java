@@ -9,10 +9,18 @@ class FromTransitionToPlaceArcTest {
     @Test
     void putTokensTo() {
         Place place = new PlaceImpl(10, "p1");
-        FromTransitionToPlaceArc edge = new FromTransitionToPlaceArc(new TransitionImpl("t1"), place);
+        FromTransitionToPlaceArc arc = new FromTransitionToPlaceArc(new TransitionImpl("t1"), place);
 
-        edge.putTokensTo(3);
+        arc.putTokensTo(3L);
 
         assertEquals(13, place.getMarks());
+    }
+
+    @Test
+    void defaultCtor() {
+        FromTransitionToPlaceArc arc = new FromTransitionToPlaceArc(new TransitionImpl("t"),
+                new PlaceImpl(0,"p"));
+
+        assertEquals(Long.valueOf(1), arc.weight());
     }
 }

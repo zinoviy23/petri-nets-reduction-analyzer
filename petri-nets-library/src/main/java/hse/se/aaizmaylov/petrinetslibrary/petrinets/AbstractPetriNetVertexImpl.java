@@ -9,11 +9,12 @@ import java.util.Set;
 
 public abstract class AbstractPetriNetVertexImpl<
         TTokenContainer,
-        TSelf extends PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput>,
-        TNeighbours extends PetriNetVertex<TTokenContainer, TNeighbours, TSelf, TOutput, TInput>,
-        TInput extends Arc<TTokenContainer, TNeighbours, TSelf>,
-        TOutput extends Arc<TTokenContainer, TSelf, TNeighbours>>
-        implements PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput> {
+        TWeight,
+        TSelf extends PetriNetVertex<TTokenContainer, TWeight, TSelf, TNeighbours, TInput, TOutput>,
+        TNeighbours extends PetriNetVertex<TTokenContainer, TWeight, TNeighbours, TSelf, TOutput, TInput>,
+        TInput extends Arc<TTokenContainer, TWeight, TNeighbours, TSelf>,
+        TOutput extends Arc<TTokenContainer, TWeight, TSelf, TNeighbours>>
+        implements PetriNetVertex<TTokenContainer, TWeight, TSelf, TNeighbours, TInput, TOutput> {
 
     //TODO: add check, that added edge contains current vertex
 
@@ -89,7 +90,7 @@ public abstract class AbstractPetriNetVertexImpl<
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof AbstractPetriNetVertexImpl)) return false;
-        AbstractPetriNetVertexImpl<?, ?, ?, ?, ?> that = (AbstractPetriNetVertexImpl<?, ?, ?, ?, ?>) o;
+        AbstractPetriNetVertexImpl<?, ?, ?, ?, ?, ?> that = (AbstractPetriNetVertexImpl<?, ?, ?, ?, ?, ?>) o;
         return label.equals(that.label);
     }
 
