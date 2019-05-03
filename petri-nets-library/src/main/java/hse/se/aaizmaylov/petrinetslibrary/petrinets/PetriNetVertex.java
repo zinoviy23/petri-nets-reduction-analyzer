@@ -7,8 +7,8 @@ public interface PetriNetVertex<
         TTokenContainer,
         TSelf,
         TNeighbours,
-        TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
-        TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>>
+        TInput extends Arc<TTokenContainer, TNeighbours, TSelf>,
+        TOutput extends Arc<TTokenContainer, TSelf, TNeighbours>>
         extends LabeledVertex {
 
     Set<TInput> getInputs();

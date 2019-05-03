@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class FromPlaceToTransitionEdgeTest {
+class FromPlaceToTransitionArcTest {
     @Test
     void getTokensFrom() {
         Place place = new PlaceImpl(10, "p1");
 
-        FromPlaceToTransitionEdge edge = new FromPlaceToTransitionEdge(place, new TransitionImpl("t1"));
+        FromPlaceToTransitionArc edge = new FromPlaceToTransitionArc(place, new TransitionImpl("t1"));
 
         edge.getTokensFrom(6);
 

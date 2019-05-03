@@ -11,8 +11,8 @@ public abstract class AbstractPetriNetVertexImpl<
         TTokenContainer,
         TSelf extends PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput>,
         TNeighbours extends PetriNetVertex<TTokenContainer, TNeighbours, TSelf, TOutput, TInput>,
-        TInput extends Edge<TTokenContainer, TNeighbours, TSelf>,
-        TOutput extends Edge<TTokenContainer, TSelf, TNeighbours>>
+        TInput extends Arc<TTokenContainer, TNeighbours, TSelf>,
+        TOutput extends Arc<TTokenContainer, TSelf, TNeighbours>>
         implements PetriNetVertex<TTokenContainer, TSelf, TNeighbours, TInput, TOutput> {
 
     //TODO: add check, that added edge contains current vertex

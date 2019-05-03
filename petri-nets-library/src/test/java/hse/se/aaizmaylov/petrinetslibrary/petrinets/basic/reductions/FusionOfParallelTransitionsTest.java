@@ -16,11 +16,11 @@ class FusionOfParallelTransitionsTest {
         Transition transition1 = new TransitionImpl("t1");
         Transition transition2 = new TransitionImpl("t2");
 
-        place1.addOutput(new FromPlaceToTransitionEdge(place1, transition1));
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place2));
+        place1.addOutput(new FromPlaceToTransitionArc(place1, transition1));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place2));
 
-        place1.addOutput(new FromPlaceToTransitionEdge(place1, transition2));
-        transition2.addOutput(new FromTransitionToPlaceEdge(transition2, place2));
+        place1.addOutput(new FromPlaceToTransitionArc(place1, transition2));
+        transition2.addOutput(new FromTransitionToPlaceArc(transition2, place2));
 
         Reduction<Place, Transition> reduction = new FusionOfParallelTransitions();
 
@@ -43,8 +43,8 @@ class FusionOfParallelTransitionsTest {
 
         Transition transition1 = new TransitionImpl("t1");
 
-        place1.addOutput(new FromPlaceToTransitionEdge(place1, transition1));
-        transition1.addOutput(new FromTransitionToPlaceEdge(transition1, place2));
+        place1.addOutput(new FromPlaceToTransitionArc(place1, transition1));
+        transition1.addOutput(new FromTransitionToPlaceArc(transition1, place2));
 
         DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
 

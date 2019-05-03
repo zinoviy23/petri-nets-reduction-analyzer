@@ -1,15 +1,15 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.AbstractPetriNetVertexImpl;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import lombok.Getter;
 
 public class PlaceImpl extends AbstractPetriNetVertexImpl<
         Integer,
         Place,
         Transition,
-        Edge<Integer, Transition, Place>,
-        Edge<Integer, Place, Transition>> implements Place {
+        Arc<Integer, Transition, Place>,
+        Arc<Integer, Place, Transition>> implements Place {
 
     @Getter
     private int marks;

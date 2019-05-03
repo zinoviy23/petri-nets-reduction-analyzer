@@ -1,6 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 import lombok.NonNull;
 import org.apache.log4j.Logger;
@@ -12,10 +12,10 @@ import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 
 public abstract class AbstractFusionOfSelfLoop<
         TTokenContainer,
-        TTarget extends PetriNetVertex<TTokenContainer, TTarget, TNeighbour, Edge<TTokenContainer, TNeighbour, TTarget>,
-                Edge<TTokenContainer, TTarget, TNeighbour>>,
-        TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Edge<TTokenContainer, TTarget, TNeighbour>,
-                Edge<TTokenContainer, TNeighbour, TTarget>>>
+        TTarget extends PetriNetVertex<TTokenContainer, TTarget, TNeighbour, Arc<TTokenContainer, TNeighbour, TTarget>,
+                Arc<TTokenContainer, TTarget, TNeighbour>>,
+        TNeighbour extends PetriNetVertex<TTokenContainer, TNeighbour, TTarget, Arc<TTokenContainer, TTarget, TNeighbour>,
+                Arc<TTokenContainer, TNeighbour, TTarget>>>
         implements Reduction<TTarget, TNeighbour> {
 
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSelfLoop.class);
@@ -27,15 +27,15 @@ public abstract class AbstractFusionOfSelfLoop<
 
         List<EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour>> edgesToRemove = new ArrayList<>();
 
-        for (Edge<TTokenContainer, TTarget, TNeighbour> edgeToPotentialVertex : target.getOutputs()) {
-            TNeighbour potentialVertex = edgeToPotentialVertex.getToEndpoint();
+        for (Arc<TTokenContainer, TTarget, TNeighbour> arcToPotentialVertex : target.getOutputs()) {
+            TNeighbour potentialVertex = arcToPotentialVertex.getToEndpoint();
 
             if (!checkNeighbour(potentialVertex) || potentialVertex.getOutputs().size() != 1 ||
                     potentialVertex.getInputs().size() != 1)
                 continue;
 
             if (first(potentialVertex.getOutputs()).getToEndpoint() == target) {
-                edgesToRemove.add(new EdgesPairIncidentWithVertex<>(edgeToPotentialVertex,
+                edgesToRemove.add(new EdgesPairIncidentWithVertex<>(arcToPotentialVertex,
                         first(potentialVertex.getOutputs())));
             }
         }
@@ -55,9 +55,9 @@ public abstract class AbstractFusionOfSelfLoop<
             DeleteVertexCallback<TTarget, TNeighbour> callback) {
 
         for (EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour> pair : edgesToRemove) {
-            pair.edgeFromVertex.getToEndpoint().removeInput(pair.edgeFromVertex);
-            pair.edgeToVertex.getFromEndpoint().removeOutput(pair.edgeToVertex);
-            callback.onDeleteNeighbour(pair.edgeToVertex.getToEndpoint());
+            pair.arcFromVertex.getToEndpoint().removeInput(pair.arcFromVertex);
+            pair.arcToVertex.getFromEndpoint().removeOutput(pair.arcToVertex);
+            callback.onDeleteNeighbour(pair.arcToVertex.getToEndpoint());
         }
     }
 

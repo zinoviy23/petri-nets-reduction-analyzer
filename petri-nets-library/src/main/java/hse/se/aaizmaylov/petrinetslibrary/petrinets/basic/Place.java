@@ -1,14 +1,14 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNetVertex;
 
 public interface Place extends PetriNetVertex<
         Integer,
         Place,
         Transition,
-        Edge<Integer, Transition, Place>,
-        Edge<Integer, Place, Transition>> {
+        Arc<Integer, Transition, Place>,
+        Arc<Integer, Place, Transition>> {
     int getMarks();
 
     void setMarks(int marks);

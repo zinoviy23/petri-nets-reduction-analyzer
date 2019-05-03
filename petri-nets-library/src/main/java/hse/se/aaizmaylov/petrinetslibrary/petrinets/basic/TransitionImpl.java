@@ -1,14 +1,14 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.AbstractPetriNetVertexImpl;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 
 public class TransitionImpl extends AbstractPetriNetVertexImpl<
         Integer,
         Transition,
         Place,
-        Edge<Integer, Place, Transition>,
-        Edge<Integer, Transition, Place>> implements Transition {
+        Arc<Integer, Place, Transition>,
+        Arc<Integer, Transition, Place>> implements Transition {
 
     public TransitionImpl(String label) {
         super(label);

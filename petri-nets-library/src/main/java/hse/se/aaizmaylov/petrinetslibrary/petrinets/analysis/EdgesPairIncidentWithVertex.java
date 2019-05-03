@@ -1,15 +1,15 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 
 class EdgesPairIncidentWithVertex<TTokenContainer, TTarget, TNeighbour> {
-    final Edge<TTokenContainer, TTarget, TNeighbour> edgeToVertex;
+    final Arc<TTokenContainer, TTarget, TNeighbour> arcToVertex;
 
-    final Edge<TTokenContainer, TNeighbour, TTarget> edgeFromVertex;
+    final Arc<TTokenContainer, TNeighbour, TTarget> arcFromVertex;
 
-    EdgesPairIncidentWithVertex(Edge<TTokenContainer, TTarget, TNeighbour> edgeToVertex,
-                                        Edge<TTokenContainer, TNeighbour, TTarget> edgeFromVertex) {
-        this.edgeToVertex = edgeToVertex;
-        this.edgeFromVertex = edgeFromVertex;
+    EdgesPairIncidentWithVertex(Arc<TTokenContainer, TTarget, TNeighbour> arcToVertex,
+                                Arc<TTokenContainer, TNeighbour, TTarget> arcFromVertex) {
+        this.arcToVertex = arcToVertex;
+        this.arcFromVertex = arcFromVertex;
     }
 }

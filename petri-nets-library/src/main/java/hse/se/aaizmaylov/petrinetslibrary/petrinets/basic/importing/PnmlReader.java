@@ -106,7 +106,7 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
                 Transition to = petriNet.getTransitionsMap()
                         .get(getOriginalIdFromRef(references, arc.getTargetHLAPI().getId()));
 
-                from.addOutput(new FromPlaceToTransitionEdge(from, to));
+                from.addOutput(new FromPlaceToTransitionArc(from, to));
             } else if (arc.getSourceHLAPI() instanceof TransitionNodeHLAPI &&
                     arc.getTargetHLAPI() instanceof PlaceNodeHLAPI) {
 
@@ -116,7 +116,7 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
                 Place to = petriNet.getPlacesMap()
                         .get(getOriginalIdFromRef(references, arc.getTargetHLAPI().getId()));
 
-                from.addOutput(new FromTransitionToPlaceEdge(from, to));
+                from.addOutput(new FromTransitionToPlaceArc(from, to));
             } else {
                 throw new WrongEdgeTypeException("Wrong endpoint types: source = " + arc.getSourceHLAPI().getClass() +
                         ", target = " + arc.getTargetHLAPI().getClass());

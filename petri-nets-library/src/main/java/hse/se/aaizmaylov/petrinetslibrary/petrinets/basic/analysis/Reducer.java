@@ -1,6 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
@@ -100,7 +100,7 @@ public class Reducer {
         }
 
         return reducedSmth || current.getOutputs().stream()
-                .map(Edge::getToEndpoint)
+                .map(Arc::getToEndpoint)
                 .filter(transition -> !visitedTransition.contains(transition))
                 .collect(toList()).stream()
                 .anyMatch(this::transitionDFS);
@@ -115,7 +115,7 @@ public class Reducer {
         }
 
         return reducedSmth || current.getOutputs().stream()
-                .map(Edge::getToEndpoint)
+                .map(Arc::getToEndpoint)
                 .filter(place -> !visitedPlace.contains(place))
                 .collect(toList()).stream()
                 .anyMatch(this::placeDFS);

@@ -1,6 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets;
 
-public interface Edge<TTokenContainer, Input, Output> {
+public interface Arc<TTokenContainer, Input, Output> {
     Input getFromEndpoint();
 
     Output getToEndpoint();

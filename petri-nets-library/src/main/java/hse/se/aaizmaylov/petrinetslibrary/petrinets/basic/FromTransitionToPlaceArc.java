@@ -1,10 +1,10 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.Edge;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import lombok.Getter;
 import lombok.Setter;
 
-public class FromTransitionToPlaceEdge implements Edge<Integer, Transition, Place> {
+public class FromTransitionToPlaceArc implements Arc<Integer, Transition, Place> {
 
     @Getter
     @Setter
@@ -14,7 +14,7 @@ public class FromTransitionToPlaceEdge implements Edge<Integer, Transition, Plac
     @Setter
     private Place toEndpoint;
 
-    public FromTransitionToPlaceEdge(Transition fromEndpoint, Place toEndpoint) {
+    public FromTransitionToPlaceArc(Transition fromEndpoint, Place toEndpoint) {
         this.fromEndpoint = fromEndpoint;
         this.toEndpoint = toEndpoint;
     }

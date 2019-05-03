@@ -28,18 +28,18 @@ class ReducerTest {
         Transition t3 = new TransitionImpl("t3");
         Transition t4 = new TransitionImpl("t4");
 
-        t1.addInput(new FromPlaceToTransitionEdge(p2, t1));
-        t1.addOutput(new FromTransitionToPlaceEdge(t1, p1));
+        t1.addInput(new FromPlaceToTransitionArc(p2, t1));
+        t1.addOutput(new FromTransitionToPlaceArc(t1, p1));
 
-        t2.addInput(new FromPlaceToTransitionEdge(p1, t2));
-        t2.addOutput(new FromTransitionToPlaceEdge(t2, p2));
+        t2.addInput(new FromPlaceToTransitionArc(p1, t2));
+        t2.addOutput(new FromTransitionToPlaceArc(t2, p2));
 
-        t3.addInput(new FromPlaceToTransitionEdge(p2, t3));
-        t3.addInput(new FromPlaceToTransitionEdge(p3, t3));
-        t3.addOutput(new FromTransitionToPlaceEdge(t3, p4));
+        t3.addInput(new FromPlaceToTransitionArc(p2, t3));
+        t3.addInput(new FromPlaceToTransitionArc(p3, t3));
+        t3.addOutput(new FromTransitionToPlaceArc(t3, p4));
 
-        t4.addInput(new FromPlaceToTransitionEdge(p4, t4));
-        t4.addOutput(new FromTransitionToPlaceEdge(t4, p3));
+        t4.addInput(new FromPlaceToTransitionArc(p4, t4));
+        t4.addOutput(new FromTransitionToPlaceArc(t4, p3));
 
         return new PetriNet<>(Arrays.asList(p1, p2, p3, p4), Arrays.asList(t1, t2, t3, t4));
     }
@@ -53,12 +53,12 @@ class ReducerTest {
         Transition t2 = new TransitionImpl("t2");
         Transition t3 = new TransitionImpl("t3");
 
-        p1.addOutput(new FromPlaceToTransitionEdge(p1, t1));
-        t1.addOutput(new FromTransitionToPlaceEdge(t1, p2));
-        p2.addOutput(new FromPlaceToTransitionEdge(p2, t2));
-        t2.addOutput(new FromTransitionToPlaceEdge(t2, p3));
-        p3.addOutput(new FromPlaceToTransitionEdge(p3, t3));
-        t3.addOutput(new FromTransitionToPlaceEdge(t3, p1));
+        p1.addOutput(new FromPlaceToTransitionArc(p1, t1));
+        t1.addOutput(new FromTransitionToPlaceArc(t1, p2));
+        p2.addOutput(new FromPlaceToTransitionArc(p2, t2));
+        t2.addOutput(new FromTransitionToPlaceArc(t2, p3));
+        p3.addOutput(new FromPlaceToTransitionArc(p3, t3));
+        t3.addOutput(new FromTransitionToPlaceArc(t3, p1));
 
         return new PetriNet<>(Arrays.asList(p1, p2, p3), Arrays.asList(t1, t2, t3));
     }
