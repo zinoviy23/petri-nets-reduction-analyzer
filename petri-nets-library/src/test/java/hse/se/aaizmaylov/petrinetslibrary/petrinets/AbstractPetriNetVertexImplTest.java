@@ -153,6 +153,12 @@ class AbstractPetriNetVertexImplTest {
 
             @Override
             public void putTokensTo(Object tokens) { }
+
+            @SuppressWarnings("MethodDoesntCallSuperMethod")
+            @Override
+            public Arc clone() {
+                return null;
+            }
         };
     }
 

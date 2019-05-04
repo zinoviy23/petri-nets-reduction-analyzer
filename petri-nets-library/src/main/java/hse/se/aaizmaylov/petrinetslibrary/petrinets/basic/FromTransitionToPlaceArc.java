@@ -37,6 +37,16 @@ public class FromTransitionToPlaceArc implements Arc<Long, Long, Transition, Pla
         toEndpoint.addMarks(tokens);
     }
 
+    @Override
+    public FromTransitionToPlaceArc clone() {
+        try {
+            return (FromTransitionToPlaceArc) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        throw new AssertionError("Cannot be here!");
+    }
+
     @NotNull
     @Override
     public Long weight() {
