@@ -4,5 +4,5 @@ import org.jetbrains.annotations.NotNull;
 
 @FunctionalInterface
 public interface Reduction<TElement, TNeighbour> {
-    boolean reduceFrom(@NotNull TElement element, @NotNull DeleteVertexCallback<TElement, TNeighbour> callback);
+    boolean reduceFrom(@NotNull TElement element, @NotNull TransformCallback<TElement, TNeighbour> callback);
 }

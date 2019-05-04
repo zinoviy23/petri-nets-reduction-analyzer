@@ -1,7 +1,7 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.FromPlaceToTransitionArc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 public class PreAgglomerationOfTransition implements Reduction<Place, Transition> {
 
     @Override
-    public boolean reduceFrom(@NonNull Place place, @NonNull DeleteVertexCallback<Place, Transition> callback) {
+    public boolean reduceFrom(@NonNull Place place, @NonNull TransformCallback<Place, Transition> callback) {
         List<Arc<Long, Long, Place, Transition>> prePlacesArcs = checkAndGetAllArcsToPrePlaces(place);
 
         if (prePlacesArcs.isEmpty())

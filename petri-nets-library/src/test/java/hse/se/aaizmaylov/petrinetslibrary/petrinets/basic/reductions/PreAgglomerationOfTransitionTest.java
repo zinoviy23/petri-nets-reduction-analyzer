@@ -46,7 +46,7 @@ class PreAgglomerationOfTransitionTest {
 
         Reduction<Place, Transition> reduction = new PreAgglomerationOfTransition();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
         assertTrue(reduction.reduceFrom(petriNet.getPlacesMap().get("pRed"), callback));
 

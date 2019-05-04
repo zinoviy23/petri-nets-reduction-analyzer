@@ -1,7 +1,7 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
@@ -23,13 +23,16 @@ public class Reducer {
     private List<Place> placesToDelete = new ArrayList<>();
     private List<Transition> transitionsToDelete = new ArrayList<>();
 
+    private List<Place> placesToAdd = new ArrayList<>();
+    private List<Transition> transitionsToAdd = new ArrayList<>();
+
     private Set<Place> visitedPlace = new HashSet<>();
     private Set<Transition> visitedTransition = new HashSet<>();
 
     private Collection<? extends Reduction<Place, Transition>> reductionsOnPlaces;
     private Collection<? extends Reduction<Transition, Place>> reductionsOnTransitions;
 
-    private DeleteVertexCallback<Place, Transition> deletePlaceCallback = new DeleteVertexCallback<Place, Transition>() {
+    private TransformCallback<Place, Transition> deletePlaceCallback = new TransformCallback<Place, Transition>() {
         @Override
         public void onDeleteTarget(Place place) {
             LOGGER.debug("Delete " + place);
@@ -41,10 +44,22 @@ public class Reducer {
             LOGGER.debug("Delete " + transition);
             transitionsToDelete.add(transition);
         }
+
+        @Override
+        public void onAddTarget(Place place) {
+            LOGGER.debug("Add " + place);
+            placesToAdd.add(place);
+        }
+
+        @Override
+        public void onAddNeighbour(Transition transition) {
+            LOGGER.debug("Add " + transition);
+            transitionsToAdd.add(transition);
+        }
     };
 
-    private DeleteVertexCallback<Transition, Place> deleteTransitionCallback =
-            DeleteVertexCallback.invertedAdapter(deletePlaceCallback);
+    private TransformCallback<Transition, Place> deleteTransitionCallback =
+            TransformCallback.invertedAdapter(deletePlaceCallback);
 
     public Reducer(@NonNull PetriNet<Place, Transition> petriNet) {
         this.petriNet = petriNet;
@@ -89,7 +104,7 @@ public class Reducer {
 
             prevReduced = reducedSmth;
 
-            deleteVertices();
+            updateVertices();
         }
 //тьмок тьмок
 
@@ -127,7 +142,7 @@ public class Reducer {
                 .anyMatch(this::placeDFS);
     }
 
-    private void deleteVertices() {
+    private void updateVertices() {
         for (Place place : placesToDelete) {
             petriNet.removePlace(place);
         }
@@ -138,5 +153,16 @@ public class Reducer {
 
         placesToDelete.clear();
         transitionsToDelete.clear();
+
+        for (Place place : placesToAdd) {
+            petriNet.addPlace(place);
+        }
+
+        for (Transition transition : transitionsToAdd) {
+            petriNet.addTransition(transition);
+        }
+
+        placesToAdd.clear();
+        placesToDelete.clear();
     }
 }

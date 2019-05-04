@@ -1,6 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,9 @@ class FusionOfSelfLoopPlacesTest {
 
         FusionOfSelfLoopPlaces reduction = new FusionOfSelfLoopPlaces();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(transition, DeleteVertexCallback.invertedAdapter(callback)));
+        assertTrue(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback)));
         assertTrue(transition.getInputs().isEmpty());
         assertEquals(1, transition.getOutputs().size());
         assertEquals(place1, first(transition.getOutputs()).getToEndpoint());
@@ -45,9 +45,9 @@ class FusionOfSelfLoopPlacesTest {
 
         FusionOfSelfLoopPlaces reduction = new FusionOfSelfLoopPlaces();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertFalse(reduction.reduceFrom(transition, DeleteVertexCallback.invertedAdapter(callback)));
+        assertFalse(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback)));
         assertEquals(1, transition.getInputs().size());
         assertEquals(2, transition.getOutputs().size());
 
@@ -68,9 +68,9 @@ class FusionOfSelfLoopPlacesTest {
 
         FusionOfSelfLoopPlaces reduction = new FusionOfSelfLoopPlaces();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertFalse(reduction.reduceFrom(transition, DeleteVertexCallback.invertedAdapter(callback)));
+        assertFalse(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback)));
         assertEquals(1, transition.getInputs().size());
         assertEquals(2, transition.getOutputs().size());
         assertEquals(2, place.getInputs().size());
@@ -87,6 +87,6 @@ class FusionOfSelfLoopPlacesTest {
         transition.addOutput(new FromTransitionToPlaceArc(transition, place));
 
         Reduction<Transition, Place> reduction = new FusionOfSelfLoopPlaces();
-        assertFalse(reduction.reduceFrom(transition, DeleteVertexCallback.empty()));
+        assertFalse(reduction.reduceFrom(transition, TransformCallback.empty()));
     }
 }

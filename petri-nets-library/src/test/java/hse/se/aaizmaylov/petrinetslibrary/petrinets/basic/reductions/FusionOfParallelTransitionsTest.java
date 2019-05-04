@@ -24,7 +24,7 @@ class FusionOfParallelTransitionsTest {
 
         Reduction<Place, Transition> reduction = new FusionOfParallelTransitions();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
         assertTrue(reduction.reduceFrom(place1, callback));
         assertEquals(1, place1.getOutputs().size());
@@ -46,7 +46,7 @@ class FusionOfParallelTransitionsTest {
         place1.addOutput(new FromPlaceToTransitionArc(place1, transition1));
         transition1.addOutput(new FromTransitionToPlaceArc(transition1, place2));
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
         Reduction<Place, Transition> reduction = new FusionOfParallelTransitions();
 

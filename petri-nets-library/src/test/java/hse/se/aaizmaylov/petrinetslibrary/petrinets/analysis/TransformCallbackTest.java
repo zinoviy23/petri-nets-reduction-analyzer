@@ -8,12 +8,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class DeleteVertexCallbackTest {
+class TransformCallbackTest {
 
     @Test
     void inverseAdapter() {
         @SuppressWarnings("unchecked")
-        DeleteVertexCallback<Integer, String> deleteVertexCallback = mock(DeleteVertexCallback.class);
+        TransformCallback<Integer, String> transformCallback = mock(TransformCallback.class);
 
         List<Integer> integerList = new ArrayList<>();
         List<String> stringList = new ArrayList<>();
@@ -21,14 +21,14 @@ class DeleteVertexCallbackTest {
         doAnswer(i -> {
             integerList.add(i.getArgument(0));
             return null;
-        }).when(deleteVertexCallback).onDeleteTarget(anyInt());
+        }).when(transformCallback).onDeleteTarget(anyInt());
 
         doAnswer(i -> {
             stringList.add(i.getArgument(0));
             return null;
-        }).when(deleteVertexCallback).onDeleteNeighbour(anyString());
+        }).when(transformCallback).onDeleteNeighbour(anyString());
 
-        DeleteVertexCallback<String, Integer> inverted = DeleteVertexCallback.invertedAdapter(deleteVertexCallback);
+        TransformCallback<String, Integer> inverted = TransformCallback.invertedAdapter(transformCallback);
         inverted.onDeleteNeighbour(1);
         inverted.onDeleteTarget("kek");
 
@@ -38,7 +38,7 @@ class DeleteVertexCallbackTest {
 
     @Test
     void sameEmptyAndNotNull() {
-        assertNotNull(DeleteVertexCallback.empty());
-        assertEquals(DeleteVertexCallback.empty(), DeleteVertexCallback.empty());
+        assertNotNull(TransformCallback.empty());
+        assertEquals(TransformCallback.empty(), TransformCallback.empty());
     }
 }

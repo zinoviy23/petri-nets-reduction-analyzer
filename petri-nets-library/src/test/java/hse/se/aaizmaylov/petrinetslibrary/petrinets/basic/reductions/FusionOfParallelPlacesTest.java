@@ -1,6 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
@@ -23,9 +23,9 @@ class FusionOfParallelPlacesTest {
 
         Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(transition1, DeleteVertexCallback.invertedAdapter(callback)));
+        assertTrue(reduction.reduceFrom(transition1, TransformCallback.invertedAdapter(callback)));
         assertEquals(1, transition1.getOutputs().size());
         assertEquals(1, transition2.getInputs().size());
 
@@ -50,9 +50,9 @@ class FusionOfParallelPlacesTest {
 
         Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertFalse(reduction.reduceFrom(transition1, DeleteVertexCallback.invertedAdapter(callback)));
+        assertFalse(reduction.reduceFrom(transition1, TransformCallback.invertedAdapter(callback)));
         assertEquals(2, transition1.getOutputs().size());
         assertEquals(2, transition2.getInputs().size());
 
@@ -70,7 +70,7 @@ class FusionOfParallelPlacesTest {
 
         Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
-        assertFalse(reduction.reduceFrom(transition1, DeleteVertexCallback.empty()));
+        assertFalse(reduction.reduceFrom(transition1, TransformCallback.empty()));
         assertEquals(1, transition1.getOutputs().size());
         assertEquals(1, transition2.getInputs().size());
     }

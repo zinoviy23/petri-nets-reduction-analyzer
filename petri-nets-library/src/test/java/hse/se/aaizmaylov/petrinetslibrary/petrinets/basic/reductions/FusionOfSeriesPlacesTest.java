@@ -22,7 +22,7 @@ class FusionOfSeriesPlacesTest {
 
         FusionOfSeriesPlaces reduction = new FusionOfSeriesPlaces();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
         assertTrue(reduction.reduceFrom(place1, callback));
 

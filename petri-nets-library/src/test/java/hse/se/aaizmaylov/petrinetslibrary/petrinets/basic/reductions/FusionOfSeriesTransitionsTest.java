@@ -1,6 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.DeleteVertexCallback;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
@@ -21,9 +21,9 @@ class FusionOfSeriesTransitionsTest {
 
         Reduction<Transition, Place> reduction = new FusionOfSeriesTransitions();
 
-        DeleteVertexCallbackImpl callback = new DeleteVertexCallbackImpl();
+        TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(transition1, DeleteVertexCallback.invertedAdapter(callback)));
+        assertTrue(reduction.reduceFrom(transition1, TransformCallback.invertedAdapter(callback)));
 
         assertEquals(0, transition1.getInputs().size());
         assertEquals(1, transition2.getOutputs().size());
