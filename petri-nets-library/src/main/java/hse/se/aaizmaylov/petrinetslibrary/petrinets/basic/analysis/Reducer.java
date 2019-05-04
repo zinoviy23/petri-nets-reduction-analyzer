@@ -67,14 +67,20 @@ public class Reducer {
             boolean reducedSmth = false;
 
             for (Place place : petriNet.getPlaces()) {
+                if (reducedSmth)
+                    break;
+
                 if (!visitedPlace.contains(place)) {
-                    reducedSmth = reducedSmth || placeDFS(place);
+                    reducedSmth = placeDFS(place);
                 }
             }
 
             for (Transition transition : petriNet.getTransitions()) {
+                if (reducedSmth)
+                    break;
+
                 if (!visitedTransition.contains(transition)) {
-                    reducedSmth = reducedSmth || transitionDFS(transition);
+                    reducedSmth = transitionDFS(transition);
                 }
             }
 
@@ -129,5 +135,8 @@ public class Reducer {
         for (Transition transition : transitionsToDelete) {
             petriNet.removeTransition(transition);
         }
+
+        placesToDelete.clear();
+        transitionsToDelete.clear();
     }
 }
