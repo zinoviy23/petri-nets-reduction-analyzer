@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.getIndices;
 import static java.util.stream.Collectors.toMap;
 
-public class CoverabilityGraph {
+public final class CoverabilityGraph {
     private Map<Place, Integer> placesIndices;
 
     @Getter
@@ -67,6 +67,7 @@ public class CoverabilityGraph {
         }
     }
 
+    @SuppressWarnings("WeakerAccess")
     public Map<Place, Integer> getPlacesIndices() {
         return Collections.unmodifiableMap(placesIndices);
     }
@@ -194,6 +195,11 @@ public class CoverabilityGraph {
 
             return Long.compare(o1, o2);
         };
+
+        public long get(int index) {
+            return elements.get(index);
+        }
+
 
         @Override
         public int compareTo(@NotNull MarkingNode o) {
