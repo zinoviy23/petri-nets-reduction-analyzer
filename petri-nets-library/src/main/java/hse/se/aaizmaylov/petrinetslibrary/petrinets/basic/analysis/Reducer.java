@@ -1,6 +1,7 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.InitializedReduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
@@ -117,6 +118,13 @@ public class Reducer {
 
         boolean reducedSmth = false;
         for (Reduction<Place, Transition> reduction : reductionsOnPlaces) {
+            if (!reducedSmth && reduction instanceof InitializedReduction) {
+                InitializedReduction<DefaultReductionInitializationData, Place, Transition> initializedReduction =
+                        (InitializedReduction<DefaultReductionInitializationData, Place, Transition>) reduction;
+
+                initializedReduction.initialize(new DefaultReductionInitializationData(petriNet));
+            }
+
             reducedSmth = reducedSmth || reduction.reduceFrom(current, deletePlaceCallback);
         }
 
@@ -132,6 +140,13 @@ public class Reducer {
 
         boolean reducedSmth = false;
         for (Reduction<Transition, Place> reduction : reductionsOnTransitions) {
+            if (!reducedSmth && reduction instanceof InitializedReduction) {
+                InitializedReduction<DefaultReductionInitializationData, Transition, Place> initializedReduction =
+                        (InitializedReduction<DefaultReductionInitializationData, Transition, Place>) reduction;
+
+                initializedReduction.initialize(new DefaultReductionInitializationData(petriNet));
+            }
+
             reducedSmth = reducedSmth || reduction.reduceFrom(current, deleteTransitionCallback);
         }
 

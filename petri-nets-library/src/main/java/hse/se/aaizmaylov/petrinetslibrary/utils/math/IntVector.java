@@ -1,12 +1,12 @@
 package hse.se.aaizmaylov.petrinetslibrary.utils.math;
 
 import lombok.NonNull;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
 import java.util.Arrays;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class IntVector {
     private final long[] elements;
     private final int size;

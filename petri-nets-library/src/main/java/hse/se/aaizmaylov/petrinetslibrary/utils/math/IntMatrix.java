@@ -6,6 +6,7 @@ import org.jetbrains.annotations.Range;
 
 import java.util.Objects;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class IntMatrix {
     private final long[][] elements;
 

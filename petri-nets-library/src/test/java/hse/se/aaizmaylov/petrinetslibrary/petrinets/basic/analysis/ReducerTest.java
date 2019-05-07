@@ -2,17 +2,14 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.FusionOfSelfLoopPlaces;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.FusionOfSelfLoopTransitions;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.FusionOfSeriesPlaces;
-import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.FusionOfSeriesTransitions;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.*;
 import hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
+import java.util.Collections;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class ReducerTest {
 
@@ -63,6 +60,7 @@ class ReducerTest {
         return new PetriNet<>(Arrays.asList(p1, p2, p3), Arrays.asList(t1, t2, t3));
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void simpleReduction() {
         for (int i = 0; i < 5; i++) {
@@ -89,6 +87,7 @@ class ReducerTest {
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     void checkCycle() {
         PetriNet<Place, Transition> petriNet = cycleNetWithMark();
@@ -109,5 +108,17 @@ class ReducerTest {
             assertTrue(place.getOutputs().isEmpty());
             assertEquals(1, place.getMarks());
         }
+    }
+
+    @Test
+    void initializedReduction() {
+        PetriNet<Place, Transition> petriNet = SomePetriNets.fromDiazWithRedundantPlace();
+
+        Reducer reducer = new Reducer(petriNet);
+
+        reducer.reduce(Collections.singletonList(new DeleteRedundantPlace()), Collections.emptyList());
+
+        assertFalse(petriNet.getPlacesMap().containsKey("p"));
+        assertEquals(2, petriNet.getPlaces().size());
     }
 }

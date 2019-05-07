@@ -6,19 +6,25 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.InitializedReductio
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis.DefaultReductionInitializationData;
 import hse.se.aaizmaylov.petrinetslibrary.utils.math.IntMatrix;
 import hse.se.aaizmaylov.petrinetslibrary.utils.math.IntVector;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class DeleteRedundantPlace implements InitializedReduction<PetriNet<Place, Transition>, Place, Transition> {
+import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.getIndices;
+
+public class DeleteRedundantPlace
+        implements InitializedReduction<DefaultReductionInitializationData, Place, Transition> {
+
+    private final static Logger LOGGER = Logger.getLogger(DeleteRedundantPlace.class);
 
     private IntMatrix incidenceMatrix;
     private Map<Place, Integer> placesIndices;
@@ -27,14 +33,16 @@ public class DeleteRedundantPlace implements InitializedReduction<PetriNet<Place
     private boolean initialized = false;
 
     @Override
-    public void initialize(@NonNull PetriNet<Place, Transition> petriNet) {
-        if (petriNet.getPlaces().size() == 0 || petriNet.getTransitions().size() == 0)
+    public void initialize(@NonNull DefaultReductionInitializationData data) {
+        if (data.getPetriNet().getPlaces().size() == 0 || data.getPetriNet().getTransitions().size() == 0)
             return;
 
-        getIncidenceMatrix(petriNet);
-        eliminationOfGauss(petriNet);
+        getIncidenceMatrix(data.getPetriNet());
+        eliminationOfGauss(data.getPetriNet());
 
         initialized = true;
+
+        LOGGER.info("Initialized!");
     }
 
 
@@ -119,6 +127,8 @@ public class DeleteRedundantPlace implements InitializedReduction<PetriNet<Place
     }
 
     private void eliminationOfGauss(@NotNull PetriNet<Place, Transition> petriNet) {
+        pInvariants.clear();
+
         for (Place place : petriNet.getPlaces()) {
             pInvariants.add(placeVector(place));
         }
@@ -200,18 +210,6 @@ public class DeleteRedundantPlace implements InitializedReduction<PetriNet<Place
 
         for (Arc<Long, Long, Transition, Place> input : place.getInputs()) {
             result.set(transitionsIndices.get(input.getFromEndpoint()), input.weight());
-        }
-
-        return result;
-    }
-
-    @NotNull
-    private static <T> Map<T, Integer> getIndices(@NotNull Iterable<? extends T> ts) {
-        Map<T, Integer> result = new HashMap<>();
-        int id = 0;
-
-        for (T t : ts) {
-            result.put(t, id++);
         }
 
         return result;
