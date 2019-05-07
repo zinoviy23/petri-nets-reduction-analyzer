@@ -1,10 +1,12 @@
 package hse.se.aaizmaylov.petrinetslibrary.utils.math;
 
 import lombok.NonNull;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Range;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class IntVector {
@@ -114,6 +116,15 @@ public class IntVector {
         return result;
     }
 
+    @Contract(" -> new")
+    @NotNull
+    public long[] getElements() {
+        long[] newElements = new long[size];
+
+        System.arraycopy(elements, 0, newElements, 0, size);
+
+        return newElements;
+    }
 
     private long gcd() {
         long gcd = 1;
