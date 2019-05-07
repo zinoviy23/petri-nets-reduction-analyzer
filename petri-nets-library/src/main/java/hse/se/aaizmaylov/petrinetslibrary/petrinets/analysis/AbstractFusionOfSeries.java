@@ -22,7 +22,7 @@ public abstract class AbstractFusionOfSeries<
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSeries.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target, @NonNull DeleteVertexCallback<TTarget, TNeighbour> callback) {
+    public boolean reduceFrom(@NonNull TTarget target, @NonNull TransformCallback<TTarget, TNeighbour> callback) {
         if (!check(target))
             return false;
 
@@ -51,7 +51,7 @@ public abstract class AbstractFusionOfSeries<
 
     private void mergeVertexConnectedByNeighbourVertex(
             Arc<TTokenContainer, TWeight, TTarget, TNeighbour> arcToConnectingNeighbour,
-            DeleteVertexCallback<TTarget, TNeighbour> callback) {
+            TransformCallback<TTarget, TNeighbour> callback) {
 
         TTarget firstVertex = arcToConnectingNeighbour.getFromEndpoint();
         TTarget secondVertex = first(arcToConnectingNeighbour.getToEndpoint().getOutputs()).getToEndpoint();

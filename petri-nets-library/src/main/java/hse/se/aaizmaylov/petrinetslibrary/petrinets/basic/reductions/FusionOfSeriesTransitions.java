@@ -5,6 +5,7 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 import org.jetbrains.annotations.NotNull;
 
+@Deprecated
 public class FusionOfSeriesTransitions extends AbstractFusionOfSeries<Long, Long, Transition, Place> {
     @Override
     protected boolean check(@NotNull Transition transition) {

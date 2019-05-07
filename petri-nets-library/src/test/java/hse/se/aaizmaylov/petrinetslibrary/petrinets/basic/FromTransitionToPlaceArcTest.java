@@ -23,4 +23,14 @@ class FromTransitionToPlaceArcTest {
 
         assertEquals(Long.valueOf(1), arc.weight());
     }
+
+    @Test
+    void cloneTest() {
+        FromTransitionToPlaceArc arc = new FromTransitionToPlaceArc(new TransitionImpl("t"),
+                new PlaceImpl(0, "p"), 10).clone();
+
+        assertEquals("p", arc.getToEndpoint().label());
+        assertEquals("t", arc.getFromEndpoint().label());
+        assertEquals(Long.valueOf(10), arc.weight());
+    }
 }

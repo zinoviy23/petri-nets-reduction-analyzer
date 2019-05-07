@@ -25,7 +25,7 @@ public abstract class AbstractFusionOfSelfLoop<
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSelfLoop.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target, @NonNull DeleteVertexCallback<TTarget, TNeighbour> callback) {
+    public boolean reduceFrom(@NonNull TTarget target, @NonNull TransformCallback<TTarget, TNeighbour> callback) {
         if (!check(target))
             return false;
 
@@ -57,7 +57,7 @@ public abstract class AbstractFusionOfSelfLoop<
 
     private void deleteEdgesToLoopedVertices(
             List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>> edgesToRemove,
-            DeleteVertexCallback<TTarget, TNeighbour> callback) {
+            TransformCallback<TTarget, TNeighbour> callback) {
 
         for (EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour> pair : edgesToRemove) {
             pair.arcFromVertex.getToEndpoint().removeInput(pair.arcFromVertex);

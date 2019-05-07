@@ -38,6 +38,16 @@ public class FromPlaceToTransitionArc implements Arc<Long, Long, Place, Transiti
     public void putTokensTo(Long tokens) {
     }
 
+    @Override
+    public FromPlaceToTransitionArc clone() {
+        try {
+            return (FromPlaceToTransitionArc) super.clone();
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+        throw new AssertionError("Cannot be here!");
+    }
+
     @NotNull
     @Override
     public Long weight() {

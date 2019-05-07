@@ -1,6 +1,6 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis;
 
-class EmptyCallback implements DeleteVertexCallback {
+class EmptyCallback implements TransformCallback {
     static final EmptyCallback EMPTY = new EmptyCallback();
 
     private EmptyCallback() {
@@ -12,5 +12,15 @@ class EmptyCallback implements DeleteVertexCallback {
 
     @Override
     public void onDeleteNeighbour(Object o) {
+    }
+
+    @Override
+    public void onAddTarget(Object o) {
+
+    }
+
+    @Override
+    public void onAddNeighbour(Object o) {
+
     }
 }

@@ -27,7 +27,7 @@ public abstract class AbstractFusionOfParallel<
     private static final Logger LOGGER = Logger.getLogger(AbstractFusionOfParallel.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target, @NonNull DeleteVertexCallback<TTarget, TNeighbour> callback) {
+    public boolean reduceFrom(@NonNull TTarget target, @NonNull TransformCallback<TTarget, TNeighbour> callback) {
         if (!check(target))
             return false;
 
@@ -60,7 +60,7 @@ public abstract class AbstractFusionOfParallel<
 
     private boolean mergeEdges(
             Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>>> edgesToMerge,
-            DeleteVertexCallback<TTarget, TNeighbour> callback) {
+            TransformCallback<TTarget, TNeighbour> callback) {
 
         boolean mergedSomething = false;
 
