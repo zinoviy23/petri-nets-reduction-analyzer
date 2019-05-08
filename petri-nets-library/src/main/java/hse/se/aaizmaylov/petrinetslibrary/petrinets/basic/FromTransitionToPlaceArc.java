@@ -23,6 +23,9 @@ public class FromTransitionToPlaceArc implements Arc<Long, Long, Transition, Pla
     }
 
     public FromTransitionToPlaceArc(@NonNull Transition fromEndpoint, @NonNull Place toEndpoint, long weight) {
+        if (weight < 1)
+            throw new IllegalArgumentException("Weight cannot be less than 1!");
+
         this.fromEndpoint = fromEndpoint;
         this.toEndpoint = toEndpoint;
         this.weight = weight;

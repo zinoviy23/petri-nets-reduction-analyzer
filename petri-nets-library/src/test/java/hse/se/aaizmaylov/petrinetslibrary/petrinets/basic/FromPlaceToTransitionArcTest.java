@@ -33,4 +33,10 @@ class FromPlaceToTransitionArcTest {
         assertEquals("t", arc.getToEndpoint().label());
         assertEquals(Long.valueOf(10), arc.weight());
     }
+
+    @Test
+    void weightEx() {
+        assertThrows(IllegalArgumentException.class, () -> new FromPlaceToTransitionArc(
+                new PlaceImpl(0, "p"), new TransitionImpl("t"), 0));
+    }
 }
