@@ -4,6 +4,7 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -14,6 +15,8 @@ import java.util.stream.Collectors;
 import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.not;
 
 public final class CoverabilityAnalyser {
+    private final static Logger LOGGER = Logger.getLogger(CoverabilityAnalyser.class);
+
     private final CoverabilityGraph coverabilityGraph;
     private final PetriNet<Place, Transition> petriNet;
 
@@ -36,6 +39,8 @@ public final class CoverabilityAnalyser {
     }
 
     private void analysis() {
+        LOGGER.info("analysis started");
+
         Set<Transition> notDeadTransitions = new HashSet<>();
 
         coverabilityGraph.bfs(markingNodeConsumer, notDeadTransitions::add);
@@ -46,6 +51,8 @@ public final class CoverabilityAnalyser {
                     .filter(not(notDeadTransitions::contains))
                     .collect(Collectors.toList())
         );
+
+        LOGGER.info("analysis finished");
     }
 
     private final Consumer<CoverabilityGraph.MarkingNode> markingNodeConsumer;

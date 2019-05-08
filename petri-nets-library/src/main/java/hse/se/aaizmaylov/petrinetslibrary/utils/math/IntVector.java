@@ -8,7 +8,7 @@ import org.jetbrains.annotations.Range;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings("unused")
 public class IntVector {
     private final long[] elements;
     private final int size;
@@ -98,6 +98,9 @@ public class IntVector {
 
         long gcd = gcd();
 
+        if (gcd == 0)
+            return result;
+
         for (int i = 0; i < size; i++) {
             result.set(i, elements[i] / gcd);
         }
@@ -127,7 +130,7 @@ public class IntVector {
     }
 
     private long gcd() {
-        long gcd = 1;
+        long gcd = 0;
 
         for (long element : elements) {
             gcd = gcd(gcd, element);
@@ -143,7 +146,7 @@ public class IntVector {
             b = r;
         }
 
-        return a;
+        return Math.abs(a);
     }
 
     private static void checkSize(int size) {
@@ -172,5 +175,12 @@ public class IntVector {
     @Override
     public int hashCode() {
         return size;
+    }
+
+    @Override
+    public String toString() {
+        return Arrays.stream(elements)
+                .mapToObj(Long::toString)
+                .collect(Collectors.joining(", ", "(", ")"));
     }
 }
