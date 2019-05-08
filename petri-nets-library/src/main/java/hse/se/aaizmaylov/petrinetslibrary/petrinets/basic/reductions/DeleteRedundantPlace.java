@@ -37,6 +37,8 @@ public class DeleteRedundantPlace
         if (data.getPetriNet().getPlaces().size() == 0 || data.getPetriNet().getTransitions().size() == 0)
             return;
 
+        LOGGER.info("Initialization started");
+
         getIncidenceMatrix(data.getPetriNet());
         eliminationOfGauss(data.getPetriNet());
 
@@ -74,6 +76,8 @@ public class DeleteRedundantPlace
         for (Arc<Long, Long, Transition, Place> arc : new ArrayList<>(place.getInputs())) {
             arc.getFromEndpoint().removeOutput(arc);
         }
+
+        LOGGER.debug("Remove redundant place " + place);
 
         return true;
     }

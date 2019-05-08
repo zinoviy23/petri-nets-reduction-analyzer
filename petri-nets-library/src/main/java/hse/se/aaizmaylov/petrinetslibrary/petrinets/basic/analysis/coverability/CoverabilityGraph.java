@@ -6,6 +6,7 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 import hse.se.aaizmaylov.petrinetslibrary.utils.math.IntVector;
 import lombok.Getter;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -18,6 +19,8 @@ import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.getIndic
 import static java.util.stream.Collectors.toMap;
 
 public final class CoverabilityGraph {
+    private final static Logger LOGGER = Logger.getLogger(CoverabilityGraph.class);
+
     private Map<Place, Integer> placesIndices;
 
     @Getter
@@ -30,6 +33,8 @@ public final class CoverabilityGraph {
     }
 
     private void buildGraph(@NotNull PetriNet<Place, Transition> petriNet) {
+        LOGGER.info("Building graph started");
+
         initialMarking = new MarkingNode(placesIndices, null);
 
         Queue<MarkingNode> newMarkings = new LinkedList<>();
@@ -65,6 +70,8 @@ public final class CoverabilityGraph {
                 newMarkings.add(newNode);
             }
         }
+
+        LOGGER.info("Building finished");
     }
 
     @SuppressWarnings("WeakerAccess")
@@ -73,6 +80,8 @@ public final class CoverabilityGraph {
     }
 
     public void bfs(Consumer<MarkingNode> nodeVisitor, Consumer<Transition> transitionVisitor) {
+        LOGGER.info("BFS started");
+
         Queue<MarkingNode> q = new LinkedList<>();
         q.add(initialMarking);
 
@@ -93,6 +102,8 @@ public final class CoverabilityGraph {
                 q.add(edge.getValue());
             }
         }
+
+        LOGGER.info("BFS finished");
     }
 
     public static class MarkingNode implements Comparable<MarkingNode> {
@@ -104,7 +115,7 @@ public final class CoverabilityGraph {
 
         private int hash;
 
-        private MarkingNode(@NotNull Map<Place, Integer> indices, MarkingNode parent) {
+        MarkingNode(@NotNull Map<Place, Integer> indices, MarkingNode parent) {
             elements = new IntVector(indices.size());
             this.parent = parent;
 
@@ -113,7 +124,7 @@ public final class CoverabilityGraph {
             hash = Arrays.hashCode(elements.getElements());
         }
 
-        private MarkingNode(@NotNull Map<Place, Long> marking, @NotNull Map<Place, Integer> indices,
+        MarkingNode(@NotNull Map<Place, Long> marking, @NotNull Map<Place, Integer> indices,
                             MarkingNode parent) {
 
             elements = new IntVector(indices.size());
