@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Range;
 
 import java.util.Objects;
 
-@SuppressWarnings({"unused", "WeakerAccess"})
+@SuppressWarnings("unused")
 public class IntMatrix {
     private final long[][] elements;
 
@@ -93,7 +93,7 @@ public class IntMatrix {
         return new IntVector(elements[row]);
     }
 
-    public IntVector multyply(@NonNull IntVector vector) {
+    public IntVector multiply(@NonNull IntVector vector) {
         if (vector.size() != columns)
             throw new IllegalArgumentException("Vector's size must be equal to columns number!" +
                     " But it " + vector.size());
