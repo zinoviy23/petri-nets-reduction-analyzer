@@ -71,9 +71,25 @@ class IntVectorTest {
     }
 
     @Test
+    void normalizedWithZero() {
+        IntVector vector = new IntVector(new long[] {0, 10});
+        IntVector res = new IntVector(new long[] {0, 1 });
+
+        assertEquals(res, vector.normalized());
+    }
+
+    @Test
     void toStringTest() {
         IntVector vector = new IntVector(new long[] {1, -123, 1111});
 
         assertEquals("(1, -123, 1111)", vector.toString());
+    }
+
+    @Test
+    void normalizedDontThrowException() {
+        assertDoesNotThrow(() -> new IntVector(new long[] {0, 0}).normalized());
+        assertDoesNotThrow(() -> new IntVector(new long[] {0, 1}).normalized());
+        assertDoesNotThrow(() -> new IntVector(new long[] {1, 0}).normalized());
+        assertDoesNotThrow(() -> new IntVector(new long[] {1, 1}).normalized());
     }
 }

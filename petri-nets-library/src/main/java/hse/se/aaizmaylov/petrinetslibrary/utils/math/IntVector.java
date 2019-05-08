@@ -98,6 +98,9 @@ public class IntVector {
 
         long gcd = gcd();
 
+        if (gcd == 0)
+            return result;
+
         for (int i = 0; i < size; i++) {
             result.set(i, elements[i] / gcd);
         }
