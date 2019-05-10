@@ -3,6 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
 
@@ -48,7 +49,8 @@ class PreAgglomerationOfTransitionTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(petriNet.getPlacesMap().get("pRed"), callback));
+        assertTrue(reduction.reduceFrom(petriNet.getPlacesMap().get("pRed"), callback,
+                new ReductionHistory(petriNet.getTransitions(), petriNet.getPlaces())));
 
         assertEquals(1, callback.getPlaces());
         assertEquals(1, callback.getTransitions());

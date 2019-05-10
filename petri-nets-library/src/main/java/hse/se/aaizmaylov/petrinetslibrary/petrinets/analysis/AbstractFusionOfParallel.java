@@ -27,7 +27,9 @@ public abstract class AbstractFusionOfParallel<
     private static final Logger LOGGER = Logger.getLogger(AbstractFusionOfParallel.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target, @NonNull TransformCallback<TTarget, TNeighbour> callback) {
+    public boolean reduceFrom(@NonNull TTarget target,
+                              @NonNull TransformCallback<TTarget, TNeighbour> callback,
+                              @NonNull ReductionHistory reductionHistory) {
         if (!check(target))
             return false;
 
@@ -48,7 +50,7 @@ public abstract class AbstractFusionOfParallel<
             }
         }
 
-        return logIfResult(mergeEdges(edgesToMerge, callback), "Parallel! " + target);
+        return logIfResult(mergeEdges(edgesToMerge, callback, reductionHistory), "Parallel! " + target);
     }
 
     private static boolean logIfResult(boolean result, String value) {
@@ -60,7 +62,8 @@ public abstract class AbstractFusionOfParallel<
 
     private boolean mergeEdges(
             Map<TTarget, List<EdgesPairIncidentWithVertex<TTokenContainer, TWeight, TTarget, TNeighbour>>> edgesToMerge,
-            TransformCallback<TTarget, TNeighbour> callback) {
+            TransformCallback<TTarget, TNeighbour> callback,
+            ReductionHistory history) {
 
         boolean mergedSomething = false;
 
@@ -76,6 +79,7 @@ public abstract class AbstractFusionOfParallel<
 
                 currentPair.arcToVertex.getFromEndpoint().removeOutput(currentPair.arcToVertex);
                 currentPair.arcFromVertex.getToEndpoint().removeInput(currentPair.arcFromVertex);
+                history.delete(currentPair.arcToVertex.getToEndpoint());
                 callback.onDeleteNeighbour(currentPair.arcToVertex.getToEndpoint());
             }
 

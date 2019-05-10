@@ -1,9 +1,12 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -25,7 +28,9 @@ class FusionOfParallelPlacesTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(transition1, TransformCallback.invertedAdapter(callback)));
+        assertTrue(reduction.reduceFrom(transition1, TransformCallback.invertedAdapter(callback),
+                new ReductionHistory(Arrays.asList(transition1, transition2, place1, place2))));
+
         assertEquals(1, transition1.getOutputs().size());
         assertEquals(1, transition2.getInputs().size());
 
@@ -52,7 +57,8 @@ class FusionOfParallelPlacesTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertFalse(reduction.reduceFrom(transition1, TransformCallback.invertedAdapter(callback)));
+        assertFalse(reduction.reduceFrom(transition1, TransformCallback.invertedAdapter(callback),
+                new ReductionHistory(Arrays.asList(transition1, transition2, place1, place2))));
         assertEquals(2, transition1.getOutputs().size());
         assertEquals(2, transition2.getInputs().size());
 
@@ -70,7 +76,8 @@ class FusionOfParallelPlacesTest {
 
         Reduction<Transition, Place> reduction = new FusionOfParallelPlaces();
 
-        assertFalse(reduction.reduceFrom(transition1, TransformCallback.empty()));
+        assertFalse(reduction.reduceFrom(transition1, TransformCallback.empty(),
+                new ReductionHistory(Arrays.asList(transition1, transition2, place1))));
         assertEquals(1, transition1.getOutputs().size());
         assertEquals(1, transition2.getInputs().size());
     }

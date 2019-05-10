@@ -22,13 +22,10 @@ class ReductionHistoryTest {
 
         assertTrue(history.contains(p4));
 
-        assertFalse(history.contains(p1));
-        assertFalse(history.contains(p2));
+        assertEquals(2, history.getAssociated(p4).size());
 
-        assertEquals(2, history.get(p4).size());
-
-        assertTrue(history.get(p4).contains("p1"));
-        assertTrue(history.get(p4).contains("p2"));
+        assertTrue(history.getAssociated(p4).contains("p1"));
+        assertTrue(history.getAssociated(p4).contains("p2"));
     }
 
     @Test
@@ -43,14 +40,11 @@ class ReductionHistoryTest {
 
         assertTrue(history.contains(p3));
 
-        assertFalse(history.contains(p1));
-        assertFalse(history.contains(p2));
+        assertEquals(3, history.getAssociated(p3).size());
 
-        assertEquals(3, history.get(p3).size());
-
-        assertTrue(history.get(p3).contains("p1"));
-        assertTrue(history.get(p3).contains("p2"));
-        assertTrue(history.get(p3).contains("p3"));
+        assertTrue(history.getAssociated(p3).contains("p1"));
+        assertTrue(history.getAssociated(p3).contains("p2"));
+        assertTrue(history.getAssociated(p3).contains("p3"));
     }
 
     @Test

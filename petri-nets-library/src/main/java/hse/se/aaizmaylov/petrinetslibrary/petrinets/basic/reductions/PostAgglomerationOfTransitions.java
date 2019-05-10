@@ -2,6 +2,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
@@ -21,7 +22,10 @@ public class PostAgglomerationOfTransitions implements Reduction<Place, Transiti
     private final static Logger LOGGER = Logger.getLogger(PostAgglomerationOfTransitions.class);
 
     @Override
-    public boolean reduceFrom(@NonNull Place place, @NonNull TransformCallback<Place, Transition> callback) {
+    public boolean reduceFrom(@NonNull Place place,
+                              @NonNull TransformCallback<Place, Transition> callback,
+                              @NonNull ReductionHistory history) {
+
         Pair<Set<Transition>, Set<Transition>> postPreTransitions = findApplicableTransitions(place);
 
         if (postPreTransitions == null)
@@ -59,10 +63,11 @@ public class PostAgglomerationOfTransitions implements Reduction<Place, Transiti
         }
 
         callback.onDeleteTarget(place);
+        history.delete(place);
         preTransitions.forEach(callback::onDeleteNeighbour);
         postTransitions.forEach(callback::onDeleteNeighbour);
 
-        mergeTransitions(postTransitions, preTransitions, postInputs, postOutputs, preOutputs, callback);
+        mergeTransitions(postTransitions, preTransitions, postInputs, postOutputs, preOutputs, callback, history);
 
         return true;
     }
@@ -71,17 +76,27 @@ public class PostAgglomerationOfTransitions implements Reduction<Place, Transiti
                                   @NotNull Map<Transition, List<Arc<Long, Long, Place, Transition>>> postInputs,
                                   @NotNull Map<Transition, List<Arc<Long, Long, Transition, Place>>> postOutputs,
                                   @NotNull Map<Transition, List<Arc<Long, Long, Transition, Place>>> preOutputs,
-                                  @NotNull TransformCallback<Place, Transition> callback) {
+                                  @NotNull TransformCallback<Place, Transition> callback,
+                                  @NotNull ReductionHistory history) {
 
         for (Transition post : postTransitions) {
             for (Transition pre : preTransitions) {
                 Transition t = new TransitionImpl(post.label() + "." + pre.label());
                 callback.onAddNeighbour(t);
+                history.merge(t, post, pre);
 
                 postInputs.get(post).forEach(input -> t.addInput(input.withChangedOutput(t)));
                 postOutputs.get(post).forEach(output -> t.addOutput(output.withChangedInput(t)));
                 preOutputs.get(pre).forEach(output -> t.addOutput(output.withChangedInput(t)));
             }
+        }
+
+        for (Transition post : postTransitions) {
+            history.delete(post);
+        }
+
+        for (Transition pre : preTransitions) {
+            history.delete(pre);
         }
     }
 

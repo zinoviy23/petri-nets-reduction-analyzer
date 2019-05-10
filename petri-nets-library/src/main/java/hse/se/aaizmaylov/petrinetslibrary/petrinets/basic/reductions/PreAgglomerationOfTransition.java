@@ -1,6 +1,7 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.FromPlaceToTransitionArc;
@@ -19,7 +20,10 @@ import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 public class PreAgglomerationOfTransition implements Reduction<Place, Transition> {
 
     @Override
-    public boolean reduceFrom(@NonNull Place place, @NonNull TransformCallback<Place, Transition> callback) {
+    public boolean reduceFrom(@NonNull Place place,
+                              @NonNull TransformCallback<Place, Transition> callback,
+                              @NonNull ReductionHistory reductionHistory) {
+
         List<Arc<Long, Long, Place, Transition>> prePlacesArcs = checkAndGetAllArcsToPrePlaces(place);
 
         if (prePlacesArcs.isEmpty())
@@ -32,16 +36,21 @@ public class PreAgglomerationOfTransition implements Reduction<Place, Transition
 
         final Transition h = first(place.getInputs()).getFromEndpoint();
         callback.onDeleteTarget(place);
+        reductionHistory.delete(place);
         callback.onDeleteNeighbour(h);
 
         for (Arc<Long, Long, Place, Transition> prePlacesArc : prePlacesArcs) {
-            for (Transition postTransition : preTransitions) {
-                postTransition.addInput(new FromPlaceToTransitionArc(
+            for (Transition preTransition : preTransitions) {
+                reductionHistory.merge(preTransition, h);
+
+                preTransition.addInput(new FromPlaceToTransitionArc(
                         prePlacesArc.getFromEndpoint(),
-                        postTransition,
+                        preTransition,
                         prePlacesArc.weight()));
             }
         }
+
+        reductionHistory.delete(h);
 
         new ArrayList<>(h.getInputs()).forEach(arc -> arc.getFromEndpoint().removeOutput(arc));
 

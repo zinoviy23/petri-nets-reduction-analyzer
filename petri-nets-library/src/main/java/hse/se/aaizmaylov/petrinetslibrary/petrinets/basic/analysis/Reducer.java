@@ -2,6 +2,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.InitializedReduction;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
@@ -14,7 +15,7 @@ import java.util.*;
 
 import static java.util.stream.Collectors.toList;
 
-public class Reducer {
+public final class Reducer {
     private final static Logger LOGGER = Logger.getLogger(Reducer.class);
 
     private PetriNet<Place, Transition> petriNet;
@@ -62,17 +63,21 @@ public class Reducer {
     private TransformCallback<Transition, Place> deleteTransitionCallback =
             TransformCallback.invertedAdapter(deletePlaceCallback);
 
+    private ReductionHistory reductionHistory;
+
     public Reducer(@NonNull PetriNet<Place, Transition> petriNet) {
         this.petriNet = petriNet;
     }
 
-    public void reduce(@NonNull Collection<? extends Reduction<Place, Transition>> reductionsOnPlaces,
-                       @NonNull Collection<? extends Reduction<Transition, Place>> reductionsOnTransitions) {
+    public ReductionHistory reduce(@NonNull Collection<? extends Reduction<Place, Transition>> reductionsOnPlaces,
+                                   @NonNull Collection<? extends Reduction<Transition, Place>> reductionsOnTransitions) {
         LOGGER.info("Reductions started");
 
         if (reduced) {
             throw new IllegalStateException("Petri Net already reduced");
         }
+
+        reductionHistory = new ReductionHistory(petriNet.getPlaces(), petriNet.getTransitions());
 
         this.reductionsOnPlaces = reductionsOnPlaces;
         this.reductionsOnTransitions = reductionsOnTransitions;
@@ -111,6 +116,8 @@ public class Reducer {
 
 //тьмок
         reduced = true;
+
+        return reductionHistory;
     }
 
     private boolean placeDFS(Place current) {
@@ -125,7 +132,7 @@ public class Reducer {
                 initializedReduction.initialize(new DefaultReductionInitializationData(petriNet));
             }
 
-            reducedSmth = reducedSmth || reduction.reduceFrom(current, deletePlaceCallback);
+            reducedSmth = reducedSmth || reduction.reduceFrom(current, deletePlaceCallback, reductionHistory);
         }
 
         return reducedSmth || current.getOutputs().stream()
@@ -147,7 +154,7 @@ public class Reducer {
                 initializedReduction.initialize(new DefaultReductionInitializationData(petriNet));
             }
 
-            reducedSmth = reducedSmth || reduction.reduceFrom(current, deleteTransitionCallback);
+            reducedSmth = reducedSmth || reduction.reduceFrom(current, deleteTransitionCallback, reductionHistory);
         }
 
         return reducedSmth || current.getOutputs().stream()

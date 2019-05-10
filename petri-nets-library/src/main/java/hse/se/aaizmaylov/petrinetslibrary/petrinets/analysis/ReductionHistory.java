@@ -11,7 +11,7 @@ public class ReductionHistory {
     private Map<LabeledVertex, List<String>> history;
 
     @SafeVarargs
-    public ReductionHistory(@NonNull List<LabeledVertex>... verticesList) {
+    public ReductionHistory(@NonNull Collection<? extends LabeledVertex>... verticesList) {
         history = Arrays.stream(verticesList)
                 .flatMap(Collection::stream)
                 .collect(Collectors.toMap(v -> v,
@@ -29,13 +29,11 @@ public class ReductionHistory {
             List<String> labelsToAdd = history.get(Objects.requireNonNull(vertexToMerge));
 
             labels.addAll(Objects.requireNonNull(labelsToAdd));
-
-            history.remove(vertexToMerge);
         }
     }
 
     @NotNull
-    public List<String> get(@NonNull LabeledVertex vertex) {
+    public List<String> getAssociated(@NonNull LabeledVertex vertex) {
         return Collections.unmodifiableList(Objects.requireNonNull(history.get(vertex)));
     }
 
