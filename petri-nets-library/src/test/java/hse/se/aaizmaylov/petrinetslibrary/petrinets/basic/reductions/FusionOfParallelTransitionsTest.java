@@ -1,8 +1,11 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -26,7 +29,8 @@ class FusionOfParallelTransitionsTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(place1, callback));
+        assertTrue(reduction.reduceFrom(place1, callback,
+                new ReductionHistory(Arrays.asList(transition1, transition2, place1, place2))));
         assertEquals(1, place1.getOutputs().size());
         assertEquals(1, place2.getInputs().size());
 
@@ -50,7 +54,8 @@ class FusionOfParallelTransitionsTest {
 
         Reduction<Place, Transition> reduction = new FusionOfParallelTransitions();
 
-        assertFalse(reduction.reduceFrom(place1, callback));
+        assertFalse(reduction.reduceFrom(place1, callback,
+                new ReductionHistory(Arrays.asList(transition1, place1, place2))));
         assertEquals(1, place1.getOutputs().size());
         assertEquals(1, place2.getInputs().size());
 

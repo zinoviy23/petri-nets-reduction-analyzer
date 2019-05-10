@@ -1,9 +1,12 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 import static org.junit.jupiter.api.Assertions.*;
@@ -23,7 +26,8 @@ class FusionOfSelfLoopPlacesTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback)));
+        assertTrue(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback),
+                new ReductionHistory(Arrays.asList(transition, place1, place))));
         assertTrue(transition.getInputs().isEmpty());
         assertEquals(1, transition.getOutputs().size());
         assertEquals(place1, first(transition.getOutputs()).getToEndpoint());
@@ -47,7 +51,8 @@ class FusionOfSelfLoopPlacesTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertFalse(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback)));
+        assertFalse(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback),
+                new ReductionHistory(Arrays.asList(transition, place1, place))));
         assertEquals(1, transition.getInputs().size());
         assertEquals(2, transition.getOutputs().size());
 
@@ -70,7 +75,8 @@ class FusionOfSelfLoopPlacesTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertFalse(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback)));
+        assertFalse(reduction.reduceFrom(transition, TransformCallback.invertedAdapter(callback),
+                new ReductionHistory(Arrays.asList(transition1, transition, place1, place))));
         assertEquals(1, transition.getInputs().size());
         assertEquals(2, transition.getOutputs().size());
         assertEquals(2, place.getInputs().size());
@@ -87,6 +93,7 @@ class FusionOfSelfLoopPlacesTest {
         transition.addOutput(new FromTransitionToPlaceArc(transition, place));
 
         Reduction<Transition, Place> reduction = new FusionOfSelfLoopPlaces();
-        assertFalse(reduction.reduceFrom(transition, TransformCallback.empty()));
+        assertFalse(reduction.reduceFrom(transition, TransformCallback.empty(),
+                new ReductionHistory(Arrays.asList(transition1, transition, place))));
     }
 }

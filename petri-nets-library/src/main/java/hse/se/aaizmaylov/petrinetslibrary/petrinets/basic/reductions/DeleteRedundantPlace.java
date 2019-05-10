@@ -3,6 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.InitializedReduction;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
@@ -49,7 +50,9 @@ public class DeleteRedundantPlace
 
 
     @Override
-    public boolean reduceFrom(@NonNull Place place, @NonNull TransformCallback<Place, Transition> callback) {
+    public boolean reduceFrom(@NonNull Place place,
+                              @NonNull TransformCallback<Place, Transition> callback,
+                              @NonNull ReductionHistory history) {
         if (!initialized)
             return false;
 
@@ -68,6 +71,7 @@ public class DeleteRedundantPlace
         }
 
         callback.onDeleteTarget(place);
+        history.delete(place);
 
         for (Arc<Long, Long, Place, Transition> arc : new ArrayList<>(place.getOutputs())) {
             arc.getToEndpoint().removeInput(arc);

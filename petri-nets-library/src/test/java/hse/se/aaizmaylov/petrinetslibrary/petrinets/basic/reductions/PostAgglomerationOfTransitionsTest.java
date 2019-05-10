@@ -3,6 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.Arc;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.Reduction;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +11,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class PostAgglomerationOfTransitionsTest {
 
@@ -52,7 +52,8 @@ class PostAgglomerationOfTransitionsTest {
 
         Reduction<Place, Transition> reduction = new PostAgglomerationOfTransitions();
 
-        assertTrue(reduction.reduceFrom(petriNet.getPlacesMap().get("pRed"), callback));
+        ReductionHistory history = new ReductionHistory(petriNet.getPlaces(), petriNet.getTransitions());
+        assertTrue(reduction.reduceFrom(petriNet.getPlacesMap().get("pRed"), callback, history));
 
         assertEquals(1, callback.getPlaces());
         assertEquals(4, callback.getTransitions());
@@ -103,6 +104,16 @@ class PostAgglomerationOfTransitionsTest {
         assertTrue(ts.stream().anyMatch(t -> t.label().equals("h1.f2")));
         assertTrue(ts.stream().anyMatch(t -> t.label().equals("h2.f2")));
         assertEquals(2, ts.size());
+
+        Transition transition = ts.stream()
+                .filter(t -> t.label().equals("h1.f2"))
+                .findAny()
+                .orElseThrow(() -> new AssertionError("Doesn't contains h1.f2"));
+
+        List<String> associated = assertDoesNotThrow(() -> history.getAssociated(transition));
+
+        assertTrue(associated.contains("h1"));
+        assertTrue(associated.contains("f2"));
     }
 
 }

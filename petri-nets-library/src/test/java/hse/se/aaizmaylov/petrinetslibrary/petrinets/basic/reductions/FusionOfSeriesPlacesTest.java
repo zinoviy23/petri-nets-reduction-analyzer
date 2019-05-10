@@ -1,7 +1,10 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -24,7 +27,8 @@ class FusionOfSeriesPlacesTest {
 
         TransformCallbackImpl callback = new TransformCallbackImpl();
 
-        assertTrue(reduction.reduceFrom(place1, callback));
+        assertTrue(reduction.reduceFrom(place1, callback,
+                new ReductionHistory(Arrays.asList(transition1, transition, place1, place2))));
 
         assertEquals(1, place1.getInputs().size());
         assertEquals(0, place1.getOutputs().size());

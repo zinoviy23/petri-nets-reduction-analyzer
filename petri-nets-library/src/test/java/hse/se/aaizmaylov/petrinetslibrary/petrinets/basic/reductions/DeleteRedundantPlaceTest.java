@@ -2,11 +2,13 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.InitializedReduction;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.TransformCallback;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis.DefaultReductionInitializationData;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 import static hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.SomePetriNets.fromDiazWithRedundantPlace;
@@ -23,7 +25,8 @@ class DeleteRedundantPlaceTest {
 
         reduction.initialize(new DefaultReductionInitializationData(petriNet));
 
-        assertTrue(reduction.reduceFrom(petriNet.getPlacesMap().get("p"), callback));
+        assertTrue(reduction.reduceFrom(petriNet.getPlacesMap().get("p"), callback,
+                new ReductionHistory(petriNet.getTransitions(), petriNet.getPlaces())));
 
         assertTrue(petriNet.getTransitionsMap().get("t1").getOutputs()
                 .stream()
@@ -49,7 +52,7 @@ class DeleteRedundantPlaceTest {
 
         reduction.initialize(new DefaultReductionInitializationData(petriNet));
 
-        assertTrue(reduction.reduceFrom(p, TransformCallback.empty()));
+        assertTrue(reduction.reduceFrom(p, TransformCallback.empty(), new ReductionHistory(Arrays.asList(p, t))));
     }
 
     @Test
@@ -67,6 +70,6 @@ class DeleteRedundantPlaceTest {
 
         reduction.initialize(new DefaultReductionInitializationData(petriNet));
 
-        assertFalse(reduction.reduceFrom(p, TransformCallback.empty()));
+        assertFalse(reduction.reduceFrom(p, TransformCallback.empty(), new ReductionHistory(Arrays.asList(p, t))));
     }
 }

@@ -1,9 +1,11 @@
 package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.analysis;
 
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.PetriNet;
+import hse.se.aaizmaylov.petrinetslibrary.petrinets.analysis.ReductionHistory;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.reductions.*;
 import hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils;
+import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -12,6 +14,8 @@ import java.util.Collections;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ReducerTest {
+
+    private static final Logger LOGGER = Logger.getLogger(ReducerTest.class);
 
     // 17d from Murata
     PetriNet<Place, Transition> createPetriNetWithoutMarks() {
@@ -68,7 +72,8 @@ class ReducerTest {
 
             Reducer reducer = new Reducer(petriNet);
 
-            reducer.reduce(Arrays.asList(new FusionOfSeriesPlaces(), new FusionOfSelfLoopTransitions()),
+            ReductionHistory history =
+                    reducer.reduce(Arrays.asList(new FusionOfSeriesPlaces(), new FusionOfSelfLoopTransitions()),
                     Arrays.asList(new FusionOfSeriesTransitions(), new FusionOfSelfLoopPlaces()));
 
             assertEquals(1, petriNet.getPlaces().size());
@@ -80,8 +85,14 @@ class ReducerTest {
             assertEquals(1, place.getOutputs().size());
             assertTrue(place.getInputs().isEmpty());
 
+            assertTrue(history.contains(place));
+            assertTrue(history.contains(transition));
+
             assertEquals(1, transition.getInputs().size());
             assertTrue(transition.getOutputs().isEmpty());
+
+            LOGGER.debug(history.getAssociated(place));
+            LOGGER.debug(history.getAssociated(transition));
 
             System.out.println("=========");
         }
@@ -94,19 +105,26 @@ class ReducerTest {
 
         Reducer reducer = new Reducer(petriNet);
 
-        reducer.reduce(Arrays.asList(new FusionOfSeriesPlaces(), new FusionOfSelfLoopTransitions()),
+        ReductionHistory history =
+                reducer.reduce(Arrays.asList(new FusionOfSeriesPlaces(), new FusionOfSelfLoopTransitions()),
                 Arrays.asList(new FusionOfSeriesTransitions(), new FusionOfSelfLoopPlaces()));
 
         assertTrue(petriNet.getPlaces().isEmpty() ^ petriNet.getTransitions().isEmpty());
         if (petriNet.getPlaces().isEmpty()) {
             Transition transition = CollectionsUtils.first(petriNet.getTransitions());
+            assertTrue(history.contains(transition));
             assertTrue(transition.getInputs().isEmpty());
             assertTrue(transition.getOutputs().isEmpty());
+
+            LOGGER.debug(history.getAssociated(transition));
         } else {
             Place place = CollectionsUtils.first(petriNet.getPlaces());
+            assertTrue(history.contains(place));
             assertTrue(place.getInputs().isEmpty());
             assertTrue(place.getOutputs().isEmpty());
             assertEquals(1, place.getMarks());
+
+            LOGGER.debug(history.getAssociated(place));
         }
     }
 
@@ -115,10 +133,14 @@ class ReducerTest {
         PetriNet<Place, Transition> petriNet = SomePetriNets.fromDiazWithRedundantPlace();
 
         Reducer reducer = new Reducer(petriNet);
+        Place p = petriNet.getPlacesMap().get("p");
 
-        reducer.reduce(Collections.singletonList(new DeleteRedundantPlace()), Collections.emptyList());
+        ReductionHistory history =  reducer.reduce(Collections.singletonList(new DeleteRedundantPlace()),
+                Collections.emptyList());
 
         assertFalse(petriNet.getPlacesMap().containsKey("p"));
         assertEquals(2, petriNet.getPlaces().size());
+
+        assertFalse(history.contains(p));
     }
 }

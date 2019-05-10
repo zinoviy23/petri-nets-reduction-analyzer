@@ -22,7 +22,8 @@ public abstract class AbstractFusionOfSeries<
     private final static Logger LOGGER = Logger.getLogger(AbstractFusionOfSeries.class);
 
     @Override
-    public boolean reduceFrom(@NonNull TTarget target, @NonNull TransformCallback<TTarget, TNeighbour> callback) {
+    public boolean reduceFrom(@NonNull TTarget target, @NonNull TransformCallback<TTarget, TNeighbour> callback,
+                              @NonNull ReductionHistory history) {
         if (!check(target))
             return false;
 
@@ -43,7 +44,7 @@ public abstract class AbstractFusionOfSeries<
         if (reducedArc == null)
             return false;
 
-        mergeVertexConnectedByNeighbourVertex(reducedArc, callback);
+        mergeVertexConnectedByNeighbourVertex(reducedArc, callback, history);
 
         LOGGER.debug("Series! " + target);
         return true;
@@ -51,12 +52,14 @@ public abstract class AbstractFusionOfSeries<
 
     private void mergeVertexConnectedByNeighbourVertex(
             Arc<TTokenContainer, TWeight, TTarget, TNeighbour> arcToConnectingNeighbour,
-            TransformCallback<TTarget, TNeighbour> callback) {
+            TransformCallback<TTarget, TNeighbour> callback,
+            ReductionHistory history) {
 
         TTarget firstVertex = arcToConnectingNeighbour.getFromEndpoint();
         TTarget secondVertex = first(arcToConnectingNeighbour.getToEndpoint().getOutputs()).getToEndpoint();
 
         callback.onDeleteNeighbour(arcToConnectingNeighbour.getToEndpoint());
+        history.delete(arcToConnectingNeighbour.getToEndpoint());
 
         firstVertex.removeOutput(arcToConnectingNeighbour);
         secondVertex.removeInput(first(arcToConnectingNeighbour.getToEndpoint().getOutputs()));
@@ -67,6 +70,7 @@ public abstract class AbstractFusionOfSeries<
         secondVertex.getOutputs().forEach(firstVertex::addOutput);
 
         callback.onDeleteTarget(secondVertex);
+        history.merge(firstVertex, secondVertex);
     }
 
     protected abstract boolean check(@NotNull TTarget target);
