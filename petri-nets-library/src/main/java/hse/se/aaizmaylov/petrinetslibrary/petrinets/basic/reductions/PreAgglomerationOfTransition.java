@@ -8,6 +8,7 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.FromPlaceToTransitionA
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -18,6 +19,8 @@ import java.util.stream.Collectors;
 import static hse.se.aaizmaylov.petrinetslibrary.utils.CollectionsUtils.first;
 
 public class PreAgglomerationOfTransition implements Reduction<Place, Transition> {
+
+    private final static Logger LOGGER = Logger.getLogger(PreAgglomerationOfTransition.class);
 
     @Override
     public boolean reduceFrom(@NonNull Place place,
@@ -53,6 +56,9 @@ public class PreAgglomerationOfTransition implements Reduction<Place, Transition
         reductionHistory.delete(h);
 
         new ArrayList<>(h.getInputs()).forEach(arc -> arc.getFromEndpoint().removeOutput(arc));
+        new ArrayList<>(place.getOutputs()).forEach(arc -> arc.getToEndpoint().removeInput(arc));
+
+        LOGGER.debug("Pre agglomeration of transitions around " + place + "!!");
 
         return true;
     }

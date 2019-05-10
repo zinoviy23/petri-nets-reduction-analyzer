@@ -31,7 +31,7 @@ public class PostAgglomerationOfTransitions implements Reduction<Place, Transiti
         if (postPreTransitions == null)
             return false;
 
-        LOGGER.debug("Post agglomeration of transitions!!");
+        LOGGER.debug("Post agglomeration of transitions around " + place + "!!");
 
         Set<Transition> postTransitions = postPreTransitions.getLeft();
         Set<Transition> preTransitions = postPreTransitions.getRight();
