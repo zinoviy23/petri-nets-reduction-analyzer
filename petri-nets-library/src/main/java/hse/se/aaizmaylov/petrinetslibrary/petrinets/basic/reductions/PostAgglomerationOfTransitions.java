@@ -90,6 +90,13 @@ public class PostAgglomerationOfTransitions implements Reduction<Place, Transiti
         if (place.getMarks() != 0)
             return null;
 
+        // all weights should be 1
+        if (place.getInputs().stream().anyMatch(arc -> arc.weight() != 1))
+            return null;
+
+        if (place.getOutputs().stream().anyMatch(arc -> arc.weight() != 1))
+            return null;
+
         Set<Transition> postTransitions = place.getInputs()
                 .stream()
                 .map(Arc::getFromEndpoint)
