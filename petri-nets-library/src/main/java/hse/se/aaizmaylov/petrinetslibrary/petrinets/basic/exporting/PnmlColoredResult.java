@@ -3,6 +3,7 @@ package hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.exporting;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Place;
 import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.Transition;
 import lombok.NonNull;
+import org.apache.log4j.Logger;
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -28,6 +29,8 @@ public class PnmlColoredResult {
     private static final String PLACE_TAG = "place";
     private static final String TRANSITION_TAG = "transition";
     private static final String COLOR_ATTR = "color";
+
+    private static final Logger LOGGER = Logger.getLogger(PnmlColoredResult.class);
 
     private Document pnmlDocument;
 
@@ -56,13 +59,23 @@ public class PnmlColoredResult {
     }
 
     public PnmlColoredResult markPlaceUnbounded(@NonNull Place place) {
-        addColorToVertex(PLACE_TAG, place.label(), VertexColor.UNBOUND);
+        return markPlaceUnbounded(place.label());
+    }
+
+    public PnmlColoredResult markPlaceUnbounded(@NonNull String placeId) {
+        addColorToVertex(PLACE_TAG, placeId, VertexColor.UNBOUND);
+        LOGGER.info("Place " + placeId + " marked as unbounded");
 
         return this;
     }
 
     public PnmlColoredResult markTransitionDead(@NonNull Transition transition) {
-        addColorToVertex(TRANSITION_TAG, transition.label(), VertexColor.DEAD);
+        return markTransitionDead(transition.label());
+    }
+
+    public PnmlColoredResult markTransitionDead(@NonNull String transitionId) {
+        addColorToVertex(TRANSITION_TAG, transitionId, VertexColor.DEAD);
+        LOGGER.info("Transition " + transitionId + " marked as dead");
 
         return this;
     }
@@ -79,6 +92,8 @@ public class PnmlColoredResult {
         StreamResult result = new StreamResult(writer);
 
         transformer.transform(source, result);
+
+        LOGGER.info("Saved to " + fileName);
     }
 
     private void addColorToVertex(String tag, String id, VertexColor color) {
