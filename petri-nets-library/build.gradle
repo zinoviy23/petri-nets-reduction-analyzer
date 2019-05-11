@@ -12,8 +12,8 @@ ext {
 }
 
 dependencies {
-    implementation "fr.lip6.pnml:fr.lip6.pnml.framework.ptnet:$pnmlVersion"
-    implementation "fr.lip6.pnml:fr.lip6.pnml.framework.utils:$pnmlVersion"
+    api "fr.lip6.pnml:fr.lip6.pnml.framework.ptnet:$pnmlVersion"
+    api "fr.lip6.pnml:fr.lip6.pnml.framework.utils:$pnmlVersion"
 
     implementation 'org.jetbrains:annotations:17.0.0'
     
@@ -34,4 +34,8 @@ dependencies {
 
 test {
     useJUnitPlatform()
+}
+
+compileJava {
+    options.compilerArgs << '-Xlint:unchecked'
 }

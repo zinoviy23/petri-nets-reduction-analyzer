@@ -126,6 +126,7 @@ public final class Reducer {
         boolean reducedSmth = false;
         for (Reduction<Place, Transition> reduction : reductionsOnPlaces) {
             if (!reducedSmth && reduction instanceof InitializedReduction) {
+                @SuppressWarnings("unchecked")
                 InitializedReduction<DefaultReductionInitializationData, Place, Transition> initializedReduction =
                         (InitializedReduction<DefaultReductionInitializationData, Place, Transition>) reduction;
 
@@ -148,6 +149,7 @@ public final class Reducer {
         boolean reducedSmth = false;
         for (Reduction<Transition, Place> reduction : reductionsOnTransitions) {
             if (!reducedSmth && reduction instanceof InitializedReduction) {
+                @SuppressWarnings("unchecked")
                 InitializedReduction<DefaultReductionInitializationData, Transition, Place> initializedReduction =
                         (InitializedReduction<DefaultReductionInitializationData, Transition, Place>) reduction;
 
