@@ -10,6 +10,7 @@ import hse.se.aaizmaylov.petrinetslibrary.petrinets.basic.*;
 import lombok.NonNull;
 import org.jetbrains.annotations.NotNull;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -39,6 +40,8 @@ public class PnmlReader implements PetriNetReader<Place, Transition> {
                 InnerBuildException | OCLValidationFailed | OtherException | AssociatedPluginNotFound |
                 InvalidIDException | VoidRepositoryException e) {
             throw new PetriNetReadingException(e);
+        } finally {
+            new File(newPath).deleteOnExit();
         }
 
         if (!(hlapiClass instanceof PetriNetDocHLAPI)) {
