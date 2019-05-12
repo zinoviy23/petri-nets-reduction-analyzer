@@ -39,6 +39,7 @@ public class Main {
         options.addOption("f", "file", true, "specify file with PNML");
         options.addOption("o", "output", true, "output file");
         options.addOption("h", "help", false, "help message");
+        options.addOption("w", "without-reduction", false, "do not reduce the net");
 
         CommandLine commandLine;
         try {
@@ -58,6 +59,14 @@ public class Main {
         String filepath;
         String ouputFilepath;
         boolean analyze = commandLine.hasOption("a");
+        boolean reduce = !commandLine.hasOption("w");
+
+        if (!reduce && !analyze) {
+            TerminalPrinter.println(TerminalColors.RED_BOLD, "Cannot nor analyse, nor reduce");
+            System.exit(-1);
+            return;
+        }
+
         Pair<List<Reduction<Place, Transition>>, List<Reduction<Transition, Place>>> reductions;
 
         if (!commandLine.hasOption("f")) {
@@ -96,8 +105,14 @@ public class Main {
             return;
         }
 
-        Reducer reducer = new Reducer(petriNet);
-        ReductionHistory history = reducer.reduce(reductions.getLeft(), reductions.getRight());
+        ReductionHistory history;
+
+        if (reduce) {
+            Reducer reducer = new Reducer(petriNet);
+            history = reducer.reduce(reductions.getLeft(), reductions.getRight());
+        }  else {
+            history = new ReductionHistory(petriNet.getPlaces(), petriNet.getTransitions());
+        }
 
         if (!analyze) {
             try {
