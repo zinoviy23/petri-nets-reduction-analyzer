@@ -72,6 +72,7 @@ public final class CoverabilityGraph {
         }
 
         LOGGER.info("Building finished");
+        LOGGER.info("Graph size: " + allMarkings.size());
     }
 
     @SuppressWarnings("WeakerAccess")
