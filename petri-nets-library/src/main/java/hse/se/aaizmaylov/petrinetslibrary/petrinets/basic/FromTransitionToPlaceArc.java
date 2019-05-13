@@ -66,9 +66,4 @@ public class FromTransitionToPlaceArc implements Arc<Long, Long, Transition, Pla
         return Objects.equals(fromEndpoint, that.fromEndpoint) &&
                 Objects.equals(toEndpoint, that.toEndpoint);
     }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(fromEndpoint, toEndpoint);
-    }
 }

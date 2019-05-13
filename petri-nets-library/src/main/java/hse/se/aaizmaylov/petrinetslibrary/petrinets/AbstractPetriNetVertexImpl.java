@@ -45,6 +45,9 @@ public abstract class AbstractPetriNetVertexImpl<
         if (outputArc.getFromEndpoint() != this)
             throw new ForeignArcException("Try to add output arc, which doesn't go from this. " + outputArc);
 
+        if (outputs.stream().anyMatch(a -> a.equals(outputArc)))
+            return false;
+
         boolean insertionResult = outputs.add(outputArc);
 
         if (insertionResult) {
@@ -86,6 +89,9 @@ public abstract class AbstractPetriNetVertexImpl<
     public boolean addInput(@NonNull TInput inputArc) {
         if (inputArc.getToEndpoint() != this)
             throw new ForeignArcException("Try to add input arc, which doesn't go to this. " + inputArc);
+
+        if (inputs.stream().anyMatch(a -> a.equals(inputArc)))
+            return false;
 
         boolean insertionResult = inputs.add(inputArc);
 
