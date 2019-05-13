@@ -122,6 +122,10 @@ public class PostAgglomerationOfTransitions implements Reduction<Place, Transiti
                 .map(Arc::getToEndpoint)
                 .collect(Collectors.toSet());
 
+        // post cannot be empty
+        if (postTransitions.isEmpty())
+            return null;
+
         // not disjoint
         if (postTransitions.stream().anyMatch(preTransitions::contains))
             return null;
