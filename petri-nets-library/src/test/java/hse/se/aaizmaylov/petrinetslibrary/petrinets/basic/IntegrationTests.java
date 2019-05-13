@@ -133,5 +133,46 @@ class IntegrationTests {
         assertEquals(1, analyser.getUnboundedPlaces().size());
         assertEquals(0, analyser.getDeadTransitions().size());
     }
+
+    @Test
+    void checkFullAnalysisWithUnboundedPlaceNPE() throws PetriNetReader.PetriNetReadingException, IOException,
+            SAXException, ParserConfigurationException, TransformerException {
+
+        String path = getPath("integration/BigNet.pnml", getClass());
+
+        PnmlReader reader = new PnmlReader();
+
+        PetriNet<Place, Transition> petriNet = reader.read(path);
+
+        Reducer reducer = new Reducer(petriNet);
+
+        ReductionHistory history = reducer.reduce(Arrays.asList(
+                new PostAgglomerationOfTransitions(),
+                new PreAgglomerationOfTransition(),
+                new DeleteRedundantPlace()),
+                Collections.emptyList());
+
+
+        PnmlColoredResult result = new PnmlColoredResult(path);
+        CoverabilityAnalyser analyser = new CoverabilityAnalyser(petriNet);
+
+        for (Place p : analyser.getUnboundedPlaces()) {
+            for (String pId : history.getAssociated(p)) {
+                result.markPlaceUnbounded(pId);
+            }
+        }
+
+        for (Transition t : analyser.getDeadTransitions()) {
+            for (String tId : history.getAssociated(t)) {
+                result.markTransitionDead(tId);
+            }
+        }
+
+        Path path1 = Paths.get(path);
+        Path res = path1.resolveSibling(path1.getFileName() + "_res");
+        result.saveToFile(res.toString());
+
+        LOGGER.info(readAllFromFileAndDelete(res.toString()));
+    }
 }
 

@@ -187,6 +187,6 @@ public final class Reducer {
         }
 
         placesToAdd.clear();
-        placesToDelete.clear();
+        transitionsToAdd.clear();
     }
 }

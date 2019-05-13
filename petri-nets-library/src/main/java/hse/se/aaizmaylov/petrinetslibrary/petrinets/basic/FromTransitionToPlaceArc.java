@@ -6,6 +6,8 @@ import lombok.NonNull;
 import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class FromTransitionToPlaceArc implements Arc<Long, Long, Transition, Place> {
 
     @Getter
@@ -54,5 +56,19 @@ public class FromTransitionToPlaceArc implements Arc<Long, Long, Transition, Pla
     @Override
     public Long weight() {
         return weight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof FromTransitionToPlaceArc)) return false;
+        FromTransitionToPlaceArc that = (FromTransitionToPlaceArc) o;
+        return Objects.equals(fromEndpoint, that.fromEndpoint) &&
+                Objects.equals(toEndpoint, that.toEndpoint);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(fromEndpoint, toEndpoint);
     }
 }

@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pnml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:notation="http://www.eclipse.org/gmf/runtime/1.0.2/notation" xmlns="http://www.pnml.org/version-2009/grammar/pnml">
+  <net type="http://www.pnml.org/version-2009/grammar/ptnet" id="net">
+    <page id="page">
+      <toolspecific tool="org.pnml.tools.epnk.diagraminfo" version="0.9.2">
+        <diagram visible="true" type="PNMLCoreModel" element="page" name="Page null" measurementUnit="Pixel">
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p2" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="280" y="166" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t3" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="280" y="287" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p4" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="280" y="378" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t5" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="193" y="448" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t6" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="280" y="448" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t7" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="371" y="448" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p6" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="441" y="357" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p3" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="105" y="357" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p8" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="231" y="560" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t11" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="77" y="616" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t10" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="175" y="756" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t9" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="357" y="742" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t8" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="532" y="546" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t4" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="567" y="301" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p7" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="637" y="441" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p10" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="458" y="681" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p9" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="56" y="714" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t2" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="399" y="112" width="43" height="36"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2003" element="t1" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="169" y="165" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p1" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="287" y="91" width="-1" height="-1"/>
+          </children>
+          <children xsi:type="notation:Shape" visible="true" type="2001" element="p5" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false" description="" fillColor="16777215" transparency="-1" lineColor="11579568" lineWidth="-1" roundedBendpointsRadius="0">
+            <layoutConstraint xsi:type="notation:Bounds" x="481" y="232" width="-1" height="-1"/>
+          </children>
+          <children visible="true" type="2009" element="//@net.0/@page.0/@labelproxy.0">
+            <children xsi:type="notation:DecorationNode" visible="true" type="5004"/>
+            <styles xsi:type="notation:DescriptionStyle" description=""/>
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <styles xsi:type="notation:FillStyle" fillColor="16777215" transparency="-1"/>
+            <layoutConstraint xsi:type="notation:Bounds" x="735" y="420" width="-1" height="-1"/>
+          </children>
+          <children visible="true" type="2009" element="//@net.0/@page.0/@labelproxy.1">
+            <children xsi:type="notation:DecorationNode" visible="true" type="5004"/>
+            <styles xsi:type="notation:DescriptionStyle" description=""/>
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <styles xsi:type="notation:FillStyle" fillColor="16777215" transparency="-1"/>
+            <layoutConstraint xsi:type="notation:Bounds" x="476" y="315" width="-1" height="-1"/>
+          </children>
+          <styles xsi:type="notation:DiagramStyle" pageX="0" pageY="0" pageWidth="100" pageHeight="100" description=""/>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a7" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.1" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.0" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[11, -20, 11, 101]$[36, -62, 36, 59]$[10, -104, 10, 17]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a9" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.2" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.1" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-1, -6, -4, 71]$[-1, -57, -4, 20]"/>
+            <sourceAnchor xsi:type="notation:IdentityAnchor" id="(0.425,0.15)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a16" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.3" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.2" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[20, -16, -79, 60]$[104, -79, 5, -3]"/>
+            <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.8,0.35)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a15" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.4" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.2" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[1, -20, 1, 50]$[1, -90, 1, -20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a14" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.5" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.2" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-12, -9, 75, 50]$[-86, -79, 1, -20]"/>
+            <sourceAnchor xsi:type="notation:IdentityAnchor" id="(0.4,0.225)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a13" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.5" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.6" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[20, -7, -50, 84]$[85, -27, 15, 64]$[74, -72, 4, 19]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a12" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.6" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.5" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-19, 8, 51, -83]$[-76, 8, -6, -83]$[-76, 71, -6, -20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a10" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.3" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.7" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-7, -9, 68, 76]$[-76, -105, -1, -20]"/>
+            <sourceAnchor xsi:type="notation:IdentityAnchor" id="(0.175,0.35)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a30" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.8" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.3" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-7, -19, 31, 93]$[-35, -92, 3, 20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a8" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.7" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.1" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[18, -8, -157, 62]$[180, -90, 5, -20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a31" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.8" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.4" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[8, -19, -48, 105]$[60, -132, 4, -8]"/>
+            <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.675,0.2)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a18" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.13" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.8" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-13, 20, 323, -239]$[-126, 199, 210, -60]$[-317, 253, 19, -6]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a22" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.12" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.8" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-20, 1, 281, -13]$[-301, 34, 0, 20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a25" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.11" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.8" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-16, -20, 110, 162]$[-135, -165, -9, 17]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a26" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.10" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.8" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[6, -19, -61, 176]$[65, -176, -2, 19]"/>
+            <sourceAnchor xsi:type="notation:IdentityAnchor" id="(0.225,0.475)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a29" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.9" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.8" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[20, -8, -134, 48]$[134, -56, -20, 0]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a19" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.14" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.13" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-9, -19, 61, 121]$[-64, -120, 6, 20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a21" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.14" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.12" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-14, 14, 101, -106]$[-119, 125, -4, 5]"/>
+            <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.25,0.875)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a20" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.14" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.5" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-19, 8, 247, 1]$[-268, 27, -2, 20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a24" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.15" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.11" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-17, 10, 84, -51]$[-104, 81, -3, 20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a23" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.4" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.15" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[15, 20, -163, -213]$[197, 237, 19, 4]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a27" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.10" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.16" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-20, -7, 99, 35]$[-119, -22, 0, 20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a28" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.16" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.9" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[3, -20, -18, 78]$[16, -118, -5, -20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a3" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.17" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.0" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-8, 4, 99, -52]$[-100, 37, 7, -19]"/>
+            <sourceAnchor xsi:type="notation:IdentityAnchor" id="(0.18604651162790697,0.5)"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a4" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.0" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.18" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-17, -11, 283, 175]$[-300, -186, 0, 0]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a2" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.17" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.19" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-21, -7, 399, 123]$[-420, -130, 0, 0]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a1" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.18" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.19" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[20, -14, -98, 60]$[117, -94, -1, -20]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a5" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.18" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.7" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-7, 20, 57, -172]$[-66, 211, -2, 19]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a11" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.13" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.20" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-20, -16, 66, 53]$[-106, -73, -20, -4]"/>
+          </edges>
+          <edges xsi:type="notation:Connector" visible="true" type="4001" element="a6" source="//@net.0/@page.0/@toolspecific.0/@diagram/@children.20" target="//@net.0/@page.0/@toolspecific.0/@diagram/@children.17" roundedBendpointsRadius="0" routing="Manual" smoothness="None" avoidObstructions="false" closestDistance="false" jumpLinkStatus="None" jumpLinkType="Semicircle" jumpLinksReverse="false" lineColor="11579568" lineWidth="-1">
+            <styles xsi:type="notation:FontStyle" fontColor="0" fontName="Ubuntu" fontHeight="9" bold="false" italic="false" underline="false" strikeThrough="false"/>
+            <bendpoints xsi:type="notation:RelativeBendpoints" points="[-12, -17, 77, 116]$[-95, -140, -6, -7]"/>
+            <targetAnchor xsi:type="notation:IdentityAnchor" id="(0.3023255813953488,0.19444444444444445)"/>
+          </edges>
+        </diagram>
+        <labelProxy label="//@net.0/@page.0/@object.30/@initialMarking"/>
+        <labelProxy label="//@net.0/@page.0/@object.11/@initialMarking"/>
+      </toolspecific>
+      <place id="p2">
+        <graphics>
+          <position x="300.0" y="186.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <transition id="t3">
+        <graphics>
+          <position x="300.0" y="307.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <arc id="a7" source="t3" target="p2">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="311.0" y="287.0"/>
+          <position x="336.0" y="245.0"/>
+          <position x="310.0" y="203.0"/>
+        </graphics>
+      </arc>
+      <place id="p4">
+        <graphics>
+          <position x="300.0" y="398.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <arc id="a9" source="p4" target="t3">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="299.0" y="392.0"/>
+          <position x="299.0" y="341.0"/>
+        </graphics>
+      </arc>
+      <transition id="t5">
+        <graphics>
+          <position x="213.0" y="468.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <transition id="t6">
+        <graphics>
+          <position x="300.0" y="468.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <transition id="t7">
+        <graphics>
+          <position x="391.0" y="468.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <arc id="a16" source="t5" target="p4">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="233.0" y="452.0"/>
+          <position x="317.0" y="389.0"/>
+        </graphics>
+      </arc>
+      <arc id="a15" source="t6" target="p4">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="301.0" y="448.0"/>
+          <position x="301.0" y="378.0"/>
+        </graphics>
+      </arc>
+      <arc id="a14" source="t7" target="p4">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="379.0" y="459.0"/>
+          <position x="305.0" y="389.0"/>
+        </graphics>
+      </arc>
+      <place id="p6">
+        <graphics>
+          <position x="461.0" y="377.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+        <initialMarking>
+          <graphics>
+            <fill color="#ffffff"/>
+            <line shape="line" color="#000000" width="1.0"/>
+            <offset x="15.0" y="-62.0"/>
+            <font family="Ubuntu" size="9pt"/>
+          </graphics>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <arc id="a13" source="t7" target="p6">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="411.0" y="461.0"/>
+          <position x="476.0" y="441.0"/>
+          <position x="465.0" y="396.0"/>
+        </graphics>
+      </arc>
+      <arc id="a12" source="p6" target="t7">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="442.0" y="385.0"/>
+          <position x="385.0" y="385.0"/>
+          <position x="385.0" y="448.0"/>
+        </graphics>
+      </arc>
+      <place id="p3">
+        <graphics>
+          <position x="125.0" y="377.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <arc id="a10" source="t5" target="p3">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="206.0" y="459.0"/>
+          <position x="137.0" y="363.0"/>
+        </graphics>
+      </arc>
+      <place id="p8">
+        <graphics>
+          <position x="251.0" y="580.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <arc id="a30" source="p8" target="t5">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="244.0" y="561.0"/>
+          <position x="216.0" y="488.0"/>
+        </graphics>
+      </arc>
+      <arc id="a8" source="p3" target="t3">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="143.0" y="369.0"/>
+          <position x="305.0" y="287.0"/>
+        </graphics>
+      </arc>
+      <arc id="a31" source="p8" target="t6">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="259.0" y="561.0"/>
+          <position x="311.0" y="448.0"/>
+        </graphics>
+      </arc>
+      <transition id="t11">
+        <graphics>
+          <position x="97.0" y="636.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <transition id="t10">
+        <graphics>
+          <position x="195.0" y="776.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <transition id="t9">
+        <graphics>
+          <position x="377.0" y="762.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <transition id="t8">
+        <graphics>
+          <position x="552.0" y="566.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <transition id="t4">
+        <graphics>
+          <position x="587.0" y="321.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <arc id="a18" source="t4" target="p8">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="574.0" y="341.0"/>
+          <position x="461.0" y="520.0"/>
+          <position x="270.0" y="574.0"/>
+        </graphics>
+      </arc>
+      <arc id="a22" source="t8" target="p8">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="532.0" y="567.0"/>
+          <position x="251.0" y="600.0"/>
+        </graphics>
+      </arc>
+      <arc id="a25" source="t9" target="p8">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="361.0" y="742.0"/>
+          <position x="242.0" y="597.0"/>
+        </graphics>
+      </arc>
+      <arc id="a26" source="t10" target="p8">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="201.0" y="757.0"/>
+          <position x="260.0" y="600.0"/>
+        </graphics>
+      </arc>
+      <arc id="a29" source="t11" target="p8">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="117.0" y="628.0"/>
+          <position x="231.0" y="580.0"/>
+        </graphics>
+      </arc>
+      <place id="p7">
+        <graphics>
+          <position x="657.0" y="461.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+        <initialMarking>
+          <graphics>
+            <fill color="#ffffff"/>
+            <line shape="line" color="#000000" width="1.0"/>
+            <offset x="78.0" y="-41.0"/>
+            <font family="Ubuntu" size="9pt"/>
+          </graphics>
+          <text>1</text>
+        </initialMarking>
+      </place>
+      <arc id="a19" source="p7" target="t4">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="648.0" y="442.0"/>
+          <position x="593.0" y="341.0"/>
+        </graphics>
+      </arc>
+      <arc id="a21" source="p7" target="t8">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="643.0" y="475.0"/>
+          <position x="538.0" y="586.0"/>
+        </graphics>
+      </arc>
+      <arc id="a20" source="p7" target="t7">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="638.0" y="469.0"/>
+          <position x="389.0" y="488.0"/>
+        </graphics>
+      </arc>
+      <place id="p10">
+        <graphics>
+          <position x="478.0" y="701.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <arc id="a24" source="p10" target="t9">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="461.0" y="711.0"/>
+          <position x="374.0" y="782.0"/>
+        </graphics>
+      </arc>
+      <arc id="a23" source="t6" target="p10">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="315.0" y="488.0"/>
+          <position x="497.0" y="705.0"/>
+        </graphics>
+      </arc>
+      <place id="p9">
+        <graphics>
+          <position x="76.0" y="734.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <arc id="a27" source="t10" target="p9">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="175.0" y="769.0"/>
+          <position x="76.0" y="754.0"/>
+        </graphics>
+      </arc>
+      <arc id="a28" source="p9" target="t11">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="79.0" y="714.0"/>
+          <position x="92.0" y="616.0"/>
+        </graphics>
+      </arc>
+      <transition id="t2">
+        <graphics>
+          <position x="420.5" y="130.0"/>
+          <dimension x="43.0" y="36.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <arc id="a3" source="t2" target="p2">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="412.0" y="134.0"/>
+          <position x="320.0" y="167.0"/>
+        </graphics>
+      </arc>
+      <transition id="t1">
+        <graphics>
+          <position x="189.0" y="185.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </transition>
+      <arc id="a4" source="p2" target="t1">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="283.0" y="175.0"/>
+          <position x="0.0" y="0.0"/>
+        </graphics>
+      </arc>
+      <place id="p1">
+        <graphics>
+          <position x="307.0" y="111.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <arc id="a2" source="t2" target="p1">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="399.0" y="123.0"/>
+          <position x="0.0" y="0.0"/>
+        </graphics>
+      </arc>
+      <arc id="a1" source="t1" target="p1">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="209.0" y="171.0"/>
+          <position x="306.0" y="91.0"/>
+        </graphics>
+      </arc>
+      <arc id="a5" source="t1" target="p3">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="182.0" y="205.0"/>
+          <position x="123.0" y="396.0"/>
+        </graphics>
+      </arc>
+      <place id="p5">
+        <graphics>
+          <position x="501.0" y="252.0"/>
+          <dimension x="40.0" y="40.0"/>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <fill color="#ffffff"/>
+        </graphics>
+      </place>
+      <arc id="a11" source="t4" target="p5">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="567.0" y="305.0"/>
+          <position x="481.0" y="248.0"/>
+        </graphics>
+      </arc>
+      <arc id="a6" source="p5" target="t2">
+        <graphics>
+          <line shape="line" color="#b0b0b0" width="1.0"/>
+          <position x="489.0" y="235.0"/>
+          <position x="406.0" y="112.0"/>
+        </graphics>
+      </arc>
+    </page>
+  </net>
+</pnml>
